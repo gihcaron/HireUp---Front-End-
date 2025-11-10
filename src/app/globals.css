@@ -1,5 +1,12 @@
+:root {
+  --font-montserrat: 'Montserrat', sans-serif;
+  --color-blue: #004AAD;
+  --color-primary: var(--color-blue);
+}
+
 *{ 
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: var(--font-montserrat);
 }
