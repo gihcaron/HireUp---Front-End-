@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -52,7 +51,6 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Contato */}
                 <div className={styles.contactSection}>
                     <h3 className={styles.sectionTitle}>Entre em contato</h3>
                     <div className={styles.contactInfo}>
@@ -68,7 +66,6 @@ export default function Footer() {
                 </div>
             </div>
 
-            {/* Copyright */}
             <div className={styles.copyright}>
                 <p>© HireUp — Todos os direitos reservados.</p>
             </div>

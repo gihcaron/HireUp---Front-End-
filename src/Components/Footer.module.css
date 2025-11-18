@@ -2,7 +2,7 @@
     background: linear-gradient(135deg, #004AAD 0%, #1a5c9c 100%);
     color: #fff;
     padding: 16px 40px;
-    margin-top: 80px;
+    margin-top: 0;
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -17,7 +17,6 @@
     border-bottom: none;
 }
 
-/* Logo Section */
 .logoSection {
     display: flex;
     flex-direction: column;
@@ -44,7 +43,6 @@
     margin: 0;
 }
 
-/* Social Section */
 .socialSection {
     display: flex;
     flex-direction: column;
@@ -93,7 +91,6 @@
     height: 16px;
 }
 
-/* Contact Section */
 .contactSection {
     display: flex;
     flex-direction: column;
@@ -136,7 +133,6 @@
     text-decoration: underline;
 }
 
-/* Copyright */
 .copyright {
     text-align: center;
     padding-top: 16px;
@@ -151,7 +147,6 @@
     font-weight: 500;
 }
 
-/* Responsivo Mobile */
 @media (max-width: 768px) {
     .footer {
         padding: 32px 20px 16px;

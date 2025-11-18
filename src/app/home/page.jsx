@@ -8,6 +8,7 @@ export default function home() {
   return (
     <section className={styles.homeContainer}>
 
+
       <section className={styles.bannerSection}>
         <h1 className={styles.titleBanner}>
           Do primeiro contato à contratação,
