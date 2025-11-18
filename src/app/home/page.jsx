@@ -7,7 +7,6 @@ import Header from "../../Components/Header";
 export default function home() {
   return (
     <section className={styles.homeContainer}>
-      <Header />
 
       <section className={styles.bannerSection}>
         <h1 className={styles.titleBanner}>
