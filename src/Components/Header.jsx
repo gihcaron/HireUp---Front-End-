@@ -42,7 +42,7 @@ export default function Header() {
                   <li className={styles.item}><Link href="/entrevistas">Entrevistas</Link></li>
                   <li className={styles.item}><Link href="/candidaturas">Candidaturas</Link></li>
                   <li className={styles.sobreNos}>
-                    <Link href="/sobre-mim" className={styles.sobreTitle}>Nos Contate</Link>
+                    <Link href="/contato" className={styles.sobreTitle}>Nos Contate</Link>
                   </li>
                 </ul>
               </nav>
@@ -83,8 +83,8 @@ export default function Header() {
                     <li>
                       <Link href="/candidaturas" onClick={closeMenu}>Candidaturas</Link>
                     </li>
-                    <li className={styles.sobreNos}>
-                      <Link href="/sobre-mim" className={styles.sobreTitle} onClick={closeMenu}>
+                    <li className={styles.contato}>
+                      <Link href="/contato" className={styles.sobreTitle} onClick={closeMenu}>
                         Nos Contate
                       </Link>
                     </li>
