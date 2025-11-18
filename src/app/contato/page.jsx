@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Header from "../../Components/Header";
 import styles from "./contato.module.css";
 
 export default function Contato() {
@@ -28,9 +27,7 @@ export default function Contato() {
   };
 
   return (
-    <>
-      <Header />
-      <main className={styles.container}>
+    <main className={styles.container}>
         <div className={styles.content}>
         <h1 className={styles.title}>Contato</h1>
         <h2 className={styles.subtitle}>Somos a HireUp</h2>
@@ -96,6 +93,5 @@ export default function Contato() {
           </form>
         </div>
       </main>
-    </>
   );
 }

@@ -1,14 +1,11 @@
 "use client";
 import React, { useState } from 'react';
-import Header from '@/Components/Header';
 import styles from './candidaturas.module.css';
 
 export default function DetalhesCandidato() {
   const [status, setStatus] = useState('Triagem');
 
   return (
-    <>
-      <Header />
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.menuIcon}>☰</div>
@@ -80,6 +77,5 @@ export default function DetalhesCandidato() {
             </div>
           </div>
         </div>
-        </>
   );
 }
