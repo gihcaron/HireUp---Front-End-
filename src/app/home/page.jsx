@@ -30,7 +30,6 @@ export default function home() {
             className={styles.bannerImage}
           />
         </div>
-
       </section>
       <section className={styles.statsSection}>
         <div className={styles.statsContainer}>
@@ -53,16 +52,51 @@ export default function home() {
           </div>
         </div>
       </section>
-        <section className={styles.callToActionSection}>
-          <div className={styles.callToActionContainer}>
-          <div className={styles.callToActionTitleArea} >
-          <h2 className={styles.callToActionTitle}>
-            Pronto para transformar seu processo de contratação?
-          </h2>
-         <p className={styles.callToActionDescription}> Na HireUp você combina as melhores vagas com seu perfil profissional. Está esperando o que para alavancar sua carreira, como já. Seja HireUP. </p>
+      <section className={styles.callToActionSection}>
+        <div className={styles.callToActionContainer}>
+          <div className={styles.callToActionTitleArea}>
+            <h2 className={styles.callToActionTitle}>
+              Pronto para transformar seu processo de contratação?
+            </h2>
+            <p className={styles.callToActionDescription}>
+              {" "}
+              Na HireUp você combina as melhores vagas com seu perfil
+              profissional. Está esperando o que para alavancar sua carreira,
+              como já. Seja HireUP.{" "}
+            </p>
           </div>
+
+          <div className={styles.imageGrid}>
+            {/* Imagem a esquerda */}
+            <div className={styles.imageCardLeft}>
+              <Image
+                src="/images/workgroup.jpg"
+                alt="Escritório 1"
+                width={600}
+                height={350}
+                className={styles.LeftImage}
+              />
+              <div className={styles.overlayCard}>
+                <h3>laldisal</h3>
+                  <p>alguma coisa</p>
+                  <p>alguma coisa</p>
+              </div>
+            </div>
+
+            {/* Imagem a direita */}
+
+            <div className={styles.imageCardRight}>
+              <Image
+                src="/images/jobWorkGroup.jpg"
+                alt="Escritório 2"
+                width={600}
+                height={350}
+                className={styles.mainImage}
+              />
+            </div>
           </div>
-        </section>
+        </div>
+      </section>
     </section>
   );
 }
