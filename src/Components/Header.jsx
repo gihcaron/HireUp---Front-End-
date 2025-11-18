@@ -35,17 +35,18 @@ export default function Header() {
 
             {/* Menu Desktop */}
             {!isMobile && (
-                <nav className={styles.navigation}>
-                    <ul className={styles.list}>
-                        <li className={styles.item}><a href="/home">Home</a></li>
-                        <li className={styles.item}><a href="/profissionais">Vagas</a></li>
-                        <li className={styles.item}><a href="/entrevistas">Entrevistas</a></li>
-                        <li className={styles.sobreNos}><a href="/sobre-mim" className={styles.sobreTitle}>Nos Contate</a></li>
-                    </ul>
-                </nav>
+              <nav className={styles.navigation}>
+                <ul className={styles.list}>
+                  <li className={styles.item}><Link href="/home">Home</Link></li>
+                  <li className={styles.item}><Link href="/profissionais">Vagas</Link></li>
+                  <li className={styles.item}><Link href="/entrevistas">Entrevistas</Link></li>
+                  <li className={styles.item}><Link href="/candidaturas">Candidaturas</Link></li>
+                  <li className={styles.sobreNos}>
+                    <Link href="/sobre-mim" className={styles.sobreTitle}>Nos Contate</Link>
+                  </li>
+                </ul>
+              </nav>
             )}
-
-            {/* Botão Hamburguer  */}
             {isMobile && !isMenuOpen && (
               <button
                 className={styles.hamburger}
@@ -78,6 +79,9 @@ export default function Header() {
                     </li>
                     <li>
                       <Link href="/entrevistas" onClick={closeMenu}>Entrevistas</Link>
+                    </li>
+                    <li>
+                      <Link href="/candidaturas" onClick={closeMenu}>Candidaturas</Link>
                     </li>
                     <li className={styles.sobreNos}>
                       <Link href="/sobre-mim" className={styles.sobreTitle} onClick={closeMenu}>
