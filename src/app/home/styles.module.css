@@ -178,29 +178,78 @@
 /* Grid de Imagens */
 
 .imageGrid {
+   margin-top: 3%;
    display: flex;
    justify-content: flex-start;
    align-items: flex-start;
-   gap: 6%;
-}
-.LeftImage{
-    z-index: 1;
-    border-radius: 16px;
-    object-fit: cover;
-    width: 100%;
-    height: auto;
+   height: auto;
+   width: 100%;
+   gap: 1%;
 }
 
-.overlayCard {
+.imageCardLeft{
+    z-index: 1;
+    width: 70%;
+    height: 24rem;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+.overlayCard{
     position: absolute;
-    z-index: 1000;
-    bottom: 200px; 
-    background-color: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
+    top: 38rem;
+    left: 7rem;
+    gap: 0.5rem;
+    background-color: #ffff;
+    color: #333;
+    padding:1rem 3rem;
+    border-radius: 20px;
+    max-width: calc(100% - 2rem);
+    z-index: 30;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.LeftImage{
+    width: 100%;
+    height: 24rem;
+    object-fit: cover;
+    border-radius: 40px;
+}
+
+.imageCardRight{
+    width: 30%;
+    height: auto;
+    max-height: 24rem;
+    object-fit: cover;
+    border-radius: 40px;
+}
+
+.rightImage{
+    width: 100%;
+    height: 24rem;
+    object-fit: cover;
+    border-radius: 40px;
+}
+
+.arrowArea{
+    position: absolute;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 60px;
+    z-index: 300;
+    pointer-events: none;
+    background-color: #fff;
+    top: 23rem;
+    right: 35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 
@@ -235,7 +284,26 @@
     .callToActionDescription {
         width: 100%;
     }
+
+    .overlayCard{
+        top: 40rem;
+        left: 7rem;
+    }
 }
+
+@media (max-width: 1220px) {
+    .arrowArea, .arrowIcon {
+        display: none;
+    }
+}
+
+@media (max-width: 1024px) {
+     .overlayCard{
+        top: 44rem;
+        left: 6rem;
+    }
+}
+
 
 @media (max-width: 992px) {
     .statsSection {
@@ -299,5 +367,70 @@
     .callToActionDescription {
         width: 100%;
         text-align: left;
+    }
+
+    .imageGrid {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .imageCardLeft, .LeftImage,
+    .imageCardRight, .rightImage  {   
+        width: 100%;
+        height: 15rem;   
+    }
+
+    .overlayCard{
+        pointer-events: auto;
+        top: 32rem;
+        left: 6rem;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .bannerSection h1 {
+        font-size: 1.25rem;
+    }
+
+    .statCard h2,
+    .statCardBlue h2 {
+        font-size: 1.5rem;
+    }
+
+    .statCard p,
+    .statCardBlue p {
+        font-size: 0.7rem;
+    }
+
+    .overlayCard{
+        top: 45rem;
+        left: 5.5rem;
+        height: auto;
+        padding: 0.5rem 1rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .overlayCard{
+        top: 48rem;
+        left: 5.5rem;
+        font-size: 0.8rem;
+        height: auto;
+        padding: 0.8rem 0.8rem;
+    }
+}
+
+@media (max-width: 320px) {
+
+        .imageCardLeft, .LeftImage,
+    .imageCardRight, .rightImage  {   
+        height: 12rem;   
+        width: 100%;
+        border-radius: 10px;
+
+    }
+    .overlayCard{
+       display: none;
     }
 }

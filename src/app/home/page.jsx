@@ -4,8 +4,11 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 
 import Header from "../../Components/Header";
+
 export default function home() {
   return (
+
+
     <section className={styles.homeContainer}>
 
 
@@ -67,7 +70,6 @@ export default function home() {
           </div>
 
           <div className={styles.imageGrid}>
-            {/* Imagem a esquerda */}
             <div className={styles.imageCardLeft}>
               <Image
                 src="/images/workgroup.jpg"
@@ -77,13 +79,33 @@ export default function home() {
                 className={styles.LeftImage}
               />
               <div className={styles.overlayCard}>
-                <h3>laldisal</h3>
-                  <p>alguma coisa</p>
-                  <p>alguma coisa</p>
+
+                  <h3>
+                    <span style={{ color: "#0052cc" }}>•</span> Cresça com a HireUP
+                  </h3>
+               
+
+                <div>
+                  <p style={{ color: "#4e4e4eff", fontWeight: "500" }}>Alcance o próximo nível</p>
+                </div>
+              </div>
+
+              <div className={styles.arrowArea}>
+                <svg
+                    className={styles.arrowIcon}
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    style={{ flex: "0 0 auto", stroke: "#333333ff" }}
+                  >
+                    <path d="M5 19L19 5" stroke="#333333ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M15 5H19V9" stroke="#333333ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
               </div>
             </div>
-
-            {/* Imagem a direita */}
 
             <div className={styles.imageCardRight}>
               <Image
@@ -91,7 +113,7 @@ export default function home() {
                 alt="Escritório 2"
                 width={600}
                 height={350}
-                className={styles.mainImage}
+                className={styles.rightImage}
               />
             </div>
           </div>
