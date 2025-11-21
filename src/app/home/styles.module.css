@@ -283,8 +283,9 @@
     height: auto;
     margin-top: 4rem;
     margin-bottom: 4rem;
-    padding: 2rem;
+    padding: 5rem 2rem;
     display: flex;
+    border-radius: 35px;
     background-color: #EDEBE3;
     flex-direction: column;
     justify-content: center;
@@ -354,6 +355,8 @@
     color: var(--color-primary);
 }
 
+/* List of job vacancies */
+
 .jobVacancyList {
     margin-top: 2rem;
     display: grid;
@@ -361,6 +364,7 @@
     gap: 1.4rem;
 }
 
+/* Responsiviness */
 
 
 @media (max-width: 1200px) {
@@ -399,6 +403,67 @@
         top: 40rem;
         left: 7rem;
     }
+
+    .jobVacancyList {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .jobCategorySection {
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    .opportunityTitle {
+        font-size: 2rem;
+    }
+
+    .opportunityCards {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .opportunityCards > * {
+        flex: 1 1 calc(25% - 1rem);
+        max-width: calc(25% - 1rem);
+    }
+
+    .jobSearchSection {
+        padding: 1.5rem;
+    }
+
+    .jobVacancySearch {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 100%;
+        gap: 0.5rem;
+    }
+
+    .jobSearchInput {
+        padding: 0.9rem 10rem;
+        font-size: 0.95rem;
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .jobSearchButton {
+        padding: 0.9rem 1.5rem;
+        flex: 0 0 auto;
+    }
+
+    .buttonJobArea {
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .button {
+        padding: 8px 14px;
+    }
 }
 
 @media (max-width: 1220px) {
@@ -413,6 +478,38 @@
     .overlayCard {
         top: 44rem;
         left: 6rem;
+    }
+
+    .jobVacancyList {
+        grid-template-columns: 1fr;
+    }
+
+    .opportunityTitle {
+        font-size: 1.9rem;
+    }
+
+    .opportunityCards > * {
+        flex: 1 1 calc(33.333% - 1rem);
+        max-width: calc(33.333% - 1rem);
+    }
+
+    .jobVacancySearch {
+        max-width: 900px;
+    }
+
+    .jobSearchInput {
+        padding: 0.85rem 8rem;
+    }
+
+    .jobSearchButton {
+        padding: 0.85rem 1.25rem;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .jobVacancyList {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.2rem;
     }
 }
 
@@ -434,6 +531,23 @@
     .callToActionSection {
         min-height: 40rem;
         margin-top: -2rem;
+    }
+
+    .opportunityTitle {
+        font-size: 1.75rem;
+    }
+
+    .opportunityCards > * {
+        flex: 1 1 calc(33% - 1rem);
+        max-width: calc(33% - 1rem);
+    }
+
+    .jobSearchInput {
+        padding: 0.8rem 6.5rem;
+    }
+
+    .jobSearchButton {
+        padding: 0.8rem 1.1rem;
     }
 }
 
@@ -500,6 +614,69 @@
         left: 6rem;
     }
 
+    .jobCategorySection {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .opportunityTitle {
+        font-size: 1.6rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .opportunityCards {
+        width: 100%;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .opportunityCards > * {
+        flex: 1 1 calc(50% - 0.75rem);
+        max-width: calc(50% - 0.75rem);
+    }
+
+    .jobVacancySearch {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        width: 100%;
+        max-width: 720px;
+        flex-wrap: nowrap;
+    }
+
+    .jobSearchInput {
+        padding: 0.85rem 1rem;
+        border-radius: 10px;
+        width: auto;
+        box-sizing: border-box;
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .jobSearchButton {
+        width: auto;
+        padding: 0.85rem;
+        border-radius: 10px;
+        flex: 0 0 auto;
+    }
+
+    .buttonJobArea {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .button {
+        flex: 1 1 auto;
+        padding: 8px 12px;
+        min-width: 40%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -523,6 +700,30 @@
         height: auto;
         padding: 0.5rem 1rem;
     }
+
+    .opportunityTitle {
+        font-size: 1.35rem;
+    }
+
+    .opportunityCards > * {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .jobSearchInput {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.95rem;
+    }
+
+    .jobSearchButton {
+        padding: 0.7rem;
+        font-size: 0.95rem;
+    }
+
+    .button {
+        padding: 7px 10px;
+        font-size: 0.95rem;
+    }
 }
 
 @media (max-width: 380px) {
@@ -532,6 +733,20 @@
         font-size: 0.8rem;
         height: auto;
         padding: 0.8rem 0.8rem;
+    }
+
+    .jobVacancySearch,
+    .jobSearchSection {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .jobSearchInput {
+        padding: 0.65rem 0.6rem;
+    }
+
+    .jobSearchButton {
+        padding: 0.65rem;
     }
 }
 
@@ -549,5 +764,34 @@
 
     .overlayCard {
         display: none;
+    }
+
+    .opportunityTitle {
+        font-size: 1.15rem;
+        line-height: 1.2;
+    }
+
+    .opportunityCards {
+        gap: 0.5rem;
+    }
+
+    .opportunityCards > * {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .jobSearchInput {
+        padding: 0.6rem 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    .jobSearchButton {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    .button {
+        padding: 6px 8px;
+        font-size: 0.85rem;
     }
 }
