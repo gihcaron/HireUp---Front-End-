@@ -1,0 +1,102 @@
+/* Job Category Card */
+
+.jobCategoryCard {
+    padding: 18px;
+    border-radius: 16px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    transition: 0.2s ease;
+    cursor: pointer;
+    height: 10rem;
+    width: 14rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+.jobCategoryCard:hover {
+    border-color: #2563eb;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    transform: translateY(-4px);
+}
+
+.iconWrapper {
+    background: #e8f0fe;
+    width: 55px;
+    height: 55px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px auto;
+}
+
+.icon {
+    font-size: 28px;
+    color: #2563eb;
+}
+
+.title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.count {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+
+/* Responsividade */
+
+@media (max-width: 480px) {
+    .jobCategoryCard {
+        width: 100%;
+        height: auto;
+        padding: 12px;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        gap: 12px;
+    }
+    .iconWrapper {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        margin: 0;
+    }
+    .icon { font-size: 20px; }
+    .title { font-size: 0.95rem; margin-bottom: 0; }
+    .count { font-size: 0.8rem; }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .jobCategoryCard {
+        width: calc(50% - 12px);
+        height: 9rem;
+        padding: 14px;
+    }
+    .iconWrapper { width: 48px; height: 48px; }
+    .icon { font-size: 24px; }
+    .title { font-size: 0.98rem; }
+    .count { font-size: 0.85rem; }
+}
+
+@media (min-width: 1024px) {
+    .jobCategoryCard {
+        width: 16rem;
+        height: 10.5rem;
+        padding: 20px;
+    }
+    .iconWrapper { width: 60px; height: 60px; border-radius: 14px; }
+    .icon { font-size: 30px; }
+    .title { font-size: 1.05rem; }
+    .count { font-size: 0.9rem; }
+}
