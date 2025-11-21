@@ -285,7 +285,7 @@
     margin-bottom: 4rem;
     padding: 2rem;
     display: flex;
-    background-color: #EDEBE3 ;
+    background-color: #EDEBE3;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -310,8 +310,8 @@
 .jobSearchInput {
     padding: 1rem 17rem;
     border-radius: 10px 0 0 10px;
+    background-color: #EDEBE3;
     border: 2px solid var(--color-primary);
-    
     font-size: 1rem;
     outline: none;
     transition: 0.2s ease;
@@ -343,7 +343,6 @@
     background: var(--color-primary);
     color: #fff;
     border: 2px solid var(--color-primary);
-
     font-weight: 500;
     cursor: pointer;
     transition: 0.2s ease;
@@ -355,43 +354,11 @@
     color: var(--color-primary);
 }
 
-
-/* Card - Emprego */
-
-.jobCard {
-    width: 100%;
-    max-width: 380px;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.042);
-    margin-bottom: 1.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #fff;
-    cursor: pointer;
-}
-
-.jobCard:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    color: #ffff;
-    background-color: var(--color-primary);
-}
-
-.jobCardHeader {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.logoArea {
-    width: 60px;
-    height: 60px;
-    border-radius: 60px;
-    background-color:#EDEBE3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.jobVacancyList {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
 }
 
 

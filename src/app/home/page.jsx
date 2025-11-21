@@ -10,6 +10,7 @@ import { FaLaptopCode, FaBullhorn, FaUsers, FaCogs } from "react-icons/fa";
 // Components
 import Header from "../../Components/Header";
 import JobCategoryCard from "../../Components/JobCategoryCard";
+import JobCard from "../../Components/JobCard";
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -172,6 +173,7 @@ export default function Home() {
             placeholder="Pesquisar vagas..."
             className={styles.jobSearchInput}
             value={search}
+
             onChange={(e) => setSearch(e.target.value)}
           />
 
@@ -203,29 +205,12 @@ export default function Home() {
         </div>
 
         <div className={styles.jobVacancyList}>
-          <Card className={styles.jobCard}>
-            <div className={styles.jobCardHeader}>
-              <div className={styles.logoArea}>
-                <Image
-                  src="/images/logoPreto.png"
-                  alt="Company Logo"
-                  width={50}
-                  height={50}
-                  className={styles.companyLogo}
-                />
-              </div>
-              <div className={styles.jobHeader}>
-                <h3 className={styles.jobTitle}>
-                  Desenvolvedor Front-End - Junior{" "}
-                </h3>
-                <p className={styles.jobCompany}>Tech Solutions</p>
-              </div>
-            </div>
-            <p className={styles.jobLocation}>São Paulo, SP</p>
-            <p className={styles.jobType}>CLT</p>
-            <p className={styles.jobSalary}> R$ 5.000,00</p>
-            <button className={styles.applyButton}>Ver mais </button>
-          </Card>
+          <JobCard /> 
+          <JobCard /> 
+          <JobCard /> 
+          <JobCard /> 
+          <JobCard /> 
+          <JobCard /> 
         </div>
       </section>
     </section>
