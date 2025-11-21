@@ -11,6 +11,8 @@ import { FaLaptopCode, FaBullhorn, FaUsers, FaCogs } from "react-icons/fa";
 import Header from "../../Components/Header";
 import JobCategoryCard from "../../Components/JobCategoryCard";
 import JobCard from "../../Components/JobCard";
+import Testimonials from "../../Components/Testimonials";
+
 
 export default function Home() {
   const [search, setSearch] = useState("");
@@ -213,6 +215,14 @@ export default function Home() {
           <JobCard /> 
         </div>
       </section>
+
+
+      <section className={styles.finalCallToActionSection}>
+
+      </section>
+
+        <Testimonials />
+
     </section>
   );
 }
