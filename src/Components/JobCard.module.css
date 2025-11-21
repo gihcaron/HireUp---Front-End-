@@ -1,0 +1,185 @@
+.jobCard {
+  width: 100%;
+  max-width: 380px;
+  padding: 1.8rem;
+  border-radius: 28px;
+  background: #ffffff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+  transition: .3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.jobCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 12px 26px rgba(0, 0, 0, 0.15);
+}
+
+/* Header */
+.jobCardHeader {
+  display: flex;
+  align-items: flex-start;
+  text-align: left;
+  gap: 1rem;
+  margin-bottom: .5rem;
+}
+
+/* Logo area */
+.logoArea {
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  background: #f5f6f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .3s ease;
+}
+
+.jobCard:hover .logoArea {
+  background: #e9ecff;
+  display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.jobDescription {
+  display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+
+}
+
+/* Textos */
+.jobTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.jobCompany {
+  color: #7a7a7a;
+  font-size: .9rem;
+}
+
+.jobLocation,
+.jobType,
+.jobSalary {
+  color: #555;
+  font-size: .95rem;
+  margin: 2px 0;
+}
+
+/* Botão "Ver mais" */
+.applyButton {
+  margin-top: .8rem;
+  background: transparent;
+  border: none;
+  color: #1e63ff;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.applyButton:hover {
+  transform: translateX(4px);
+  color: #174fcc;
+}
+
+/* Responsividade */
+
+@media (min-width: 1200px) {
+  .jobCard {
+    max-width: 420px;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .jobCard {
+    max-width: 340px;
+    padding: 1.4rem;
+    border-radius: 20px;
+    gap: .5rem;
+  }
+
+  .jobCardHeader {
+    gap: .75rem;
+  }
+
+  .logoArea {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+  }
+
+  .jobTitle {
+    font-size: 1rem;
+  }
+
+  .jobCompany {
+    font-size: .85rem;
+  }
+
+  .jobLocation,
+  .jobType,
+  .jobSalary {
+    font-size: .9rem;
+  }
+
+  .applyButton {
+    font-size: .95rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .jobCard {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    border-radius: 16px;
+    gap: .4rem;
+  }
+
+  .jobCardHeader {
+    align-items: center;
+    gap: .6rem;
+  }
+
+  .logoArea {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #f5f6f8;
+  }
+
+  .jobDescription {
+    width: calc(100% - 56px); 
+  }
+
+  .jobTitle {
+    font-size: 0.98rem;
+    line-height: 1.15;
+  }
+
+  .jobCompany {
+    font-size: .82rem;
+  }
+
+  .jobLocation,
+  .jobType,
+  .jobSalary {
+    font-size: .88rem;
+  }
+
+  .applyButton {
+    margin-top: .6rem;
+    font-size: .95rem;
+  }
+}
