@@ -63,11 +63,63 @@ export default function DetalhesVaga() {
 			</section>
 
 			<section className={styles.company}>
-				<h3>Empresa e Cultura</h3>
-				<p className={styles.companyText}>
-					Aqui você pode colocar informações sobre a empresa, missão, valores e
-					cultura. Use este espaço para destacar o que torna a empresa única.
-				</p>
+				<h3 className={styles.companyTitle}>Empresa e Cultura</h3>
+				
+				<div className={styles.missionCards}>
+					<div className={styles.missionCard}>
+						<div className={styles.missionIcon} style={{backgroundColor: '#22d3ee'}}>
+							<div className={styles.iconText}>MISSÃO</div>
+						</div>
+						<h4 className={styles.missionLabel}>MISSÃO</h4>
+						<p className={styles.missionText}>
+							Lorem Ipsum is simply dummy text of the
+						</p>
+					</div>
+
+					<div className={styles.missionCard}>
+						<div className={styles.missionIcon} style={{backgroundColor: '#3b82f6'}}>
+							<div className={styles.iconText}>Visão</div>
+						</div>
+						<h4 className={styles.missionLabel}>MISSÃO</h4>
+						<p className={styles.missionText}>
+							Lorem Ipsum is simply dummy text of the
+						</p>
+					</div>
+
+					<div className={styles.missionCard}>
+						<div className={styles.missionIcon} style={{backgroundColor: '#1e40af'}}>
+							<div className={styles.iconText}>Valores</div>
+						</div>
+						<h4 className={styles.missionLabel}>MISSÃO</h4>
+						<p className={styles.missionText}>
+							Lorem Ipsum is simply dummy text of the
+						</p>
+					</div>
+				</div>
+
+				<div className={styles.companyContent}>
+					<div className={styles.companyLeft}>
+						<p className={styles.companyDescription}>
+							been the industry's standard dummy text ever since the 1500s, when an unknown 
+							printer took a galley of type and scrambled it to make a type specimen book.
+						</p>
+					</div>
+					
+					<div className={styles.companyRight}>
+						<div className={styles.mapContainer}>
+							<div className={styles.mapPlaceholder}>
+								<div className={styles.mapPin}>📍</div>
+								<div className={styles.mapText}>Localização da Empresa</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className={styles.buttonContainer}>
+					<button className={styles.applyButton}>
+						Quero me Candidatar
+					</button>
+				</div>
 			</section>
 		</main>
 	);

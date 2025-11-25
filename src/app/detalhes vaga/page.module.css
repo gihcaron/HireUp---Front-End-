@@ -136,13 +136,125 @@
 
 .company {
   margin-top: 42px;
-  text-align: center;
 }
 
-.companyText {
-  max-width: 760px;
-  margin: 8px auto 0;
-  color: #4b5563;
+.companyTitle {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e40af;
+  margin-bottom: 32px;
+}
+
+.missionCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.missionCard {
+  text-align: center;
+  padding: 20px;
+}
+
+.missionIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.missionLabel {
+  font-weight: 700;
+  font-size: 14px;
+  margin: 0 0 8px 0;
+  color: #111827;
+}
+
+.missionText {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.companyContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 32px;
+  align-items: start;
+}
+
+.companyLeft {
+  padding-right: 20px;
+}
+
+.companyDescription {
+  color: #374151;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.companyRight {
+  display: flex;
+  justify-content: center;
+}
+
+.mapContainer {
+  width: 100%;
+  max-width: 300px;
+}
+
+.mapPlaceholder {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+}
+
+.mapPin {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.mapText {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.buttonContainer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.applyButton {
+  background: #1e40af;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.applyButton:hover {
+  background: #1e3a8a;
 }
 
 @media (max-width: 880px) {
@@ -159,5 +271,37 @@
   }
   .title {
     font-size: 36px;
+  }
+  .missionCards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .companyContent {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .companyLeft {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 20px 16px;
+  }
+  .title {
+    font-size: 28px;
+  }
+  .companyTitle {
+    font-size: 24px;
+  }
+  .missionIcon {
+    width: 50px;
+    height: 50px;
+    font-size: 10px;
+  }
+  .applyButton {
+    padding: 12px 24px;
+    font-size: 14px;
   }
 }
