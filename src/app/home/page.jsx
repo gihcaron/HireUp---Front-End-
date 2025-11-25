@@ -3,7 +3,8 @@ import React from "react";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import axios from "axios";
-import { Card } from "antd";
+import { Card, Pagination } from "antd";
+import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { FaLaptopCode, FaBullhorn, FaUsers, FaCogs } from "react-icons/fa";
 
@@ -16,6 +17,42 @@ import Testimonials from "../../Components/Testimonials";
 
 export default function Home() {
   const [search, setSearch] = useState("");
+
+  // Job opportunity 
+
+  const [dataJobs, setDataJobs] = useState({
+    jobs: [],
+    loading: true,
+    current: 1,
+    pageSize: 6,
+  })
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const { data: jobs } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/jobs`);
+        setDataJobs({ jobs, loading: false, current: 1, pageSize: 6 });
+      } catch (err) {
+        console.error("Erro ao buscar oportunidades de tabalho", err);
+        toast.error("Erro ao buscar oportunidades de tabalho")
+        setDataJobs((d) => ({ ...d, loading: false }))
+      };
+
+    };
+    fetchJobs();
+  }, []);
+
+  // Jobs - Pagination
+
+  const paginatedJobs = () => {
+    const start = (dataJobs.current - 1) * dataJobs.pageSize;
+    return dataJobs.jobs.slice(start, start + dataJobs.pageSize);
+  };
+
+  const handleFilter = (type) => {
+    console.log("Filtrar por", type);
+
+  };
 
   return (
     <section className={styles.homeContainer}>
@@ -142,13 +179,13 @@ export default function Home() {
 
 
 
-        {/* Oportunidade de Trabalho */}
-        <section className={styles.jobCategorySection}>
-      <h1 className={styles.opportunityTitle}>
-        Oportunidades de <span style={{ color: "#0052cc" }}>trabalho</span>
-      </h1>
+      {/* Oportunidade de Trabalho */}
+      <section className={styles.jobCategorySection}>
+        <h1 className={styles.opportunityTitle}>
+          Oportunidades de <span style={{ color: "#0052cc" }}>trabalho</span>
+        </h1>
 
-      <div className={styles.opportunityCards}></div>
+        <div className={styles.opportunityCards}></div>
         <JobCategoryCard count={12} title="Desenvolvimento" icon={<FaLaptopCode size={40} color="#0052cc" />} />
         <JobCategoryCard count={12} title="Marketing" icon={<FaLaptopCode size={40} color="#0052cc" />} />
         <JobCategoryCard count={12} title="Vendas" icon={<FaLaptopCode size={40} color="#0052cc" />} />
@@ -157,7 +194,7 @@ export default function Home() {
         <JobCategoryCard count={12} title="Finanças" icon={<FaLaptopCode size={40} color="#0052cc" />} />
         <JobCategoryCard count={12} title="Produto" icon={<FaLaptopCode size={40} color="#0052cc" />} />
         <JobCategoryCard count={12} title="Suporte" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        </section>
+      </section>
 
       <section className={styles.jobSearchSection}>
         <h2 className={styles.jobVacancyTitle}>
@@ -207,21 +244,33 @@ export default function Home() {
         </div>
 
         <div className={styles.jobVacancyList}>
-          <JobCard /> 
-          <JobCard /> 
-          <JobCard /> 
-          <JobCard /> 
-          <JobCard /> 
-          <JobCard /> 
+          {paginatedJobs().map((jobs) => (
+            <JobCard
+              key={jobs.id}
+              title={jobs.title}
+              salary={jobs.salary} />
+          ))}
+        </div>
+
+        <div>
+          {dataJobs.jobs?.length > 0 && (
+            <Pagination
+              current={dataJobs.current}
+              pageSize={dataJobs.pageSize}
+              total={dataJobs.jobs?.length || 0}
+              onChange={(page) => setDataJobs((d) => ({ ...d, current: page }))}
+              showSizeChanger={false}
+            />
+          )}
         </div>
       </section>
-
-
       <section className={styles.finalCallToActionSection}>
 
       </section>
 
-        <Testimonials />
+      <ToastContainer />
+
+      <Testimonials />
 
     </section>
   );
