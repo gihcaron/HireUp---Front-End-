@@ -11,6 +11,9 @@ const montserrat = Montserrat({
 export const metadata = {
   title: "Hireup",
   description: "Projeto Hireup",
+  icons: {
+    icon: "/images/logo.png",
+  },
 };
 
 export default function RootLayout({ children }) {
