@@ -54,6 +54,24 @@ export default function Home() {
 
   };
 
+  // Search Jobs  
+
+    const handleSearch = async () => {
+    const title = search.trim();
+    if (title) {
+      try {
+        const { data: jobs } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs?title=${title}`
+        );
+        setDataJobs({ jobs, loading: false, current: 1, pageSize: 4 });
+      } catch (error) {
+        console.error("Erro ao buscar jobs:", error);
+        toast.error("Erro ao buscar jobs");
+        setData((d) => ({ ...d, loading: false }));
+      }
+    }
+  };
+
   return (
     <section className={styles.homeContainer}>
       <section className={styles.bannerSection}>
@@ -216,7 +234,7 @@ export default function Home() {
             onChange={(e) => setSearch(e.target.value)}
           />
 
-          <button className={styles.jobSearchButton}>Pesquisar</button>
+          <button className={styles.jobSearchButton} onClick={handleSearch} >Pesquisar</button>
         </div>
 
         <div className={styles.buttonJobArea}>
@@ -248,6 +266,9 @@ export default function Home() {
             <JobCard
               key={jobs.id}
               title={jobs.title}
+              company={jobs.company}
+              city={jobs.city}
+              type={jobs.type}
               salary={jobs.salary} />
           ))}
         </div>

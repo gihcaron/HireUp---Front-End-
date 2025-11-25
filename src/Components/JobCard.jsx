@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Card } from "antd";
 import styles from "./JobCard.module.css";
 
-export default function JobCard({title,salary}) {
+export default function JobCard({title,salary, company, city, type}) {
     return (
 <Card className={styles.jobCard}>
   <div className={styles.jobCardHeader}>
@@ -21,14 +21,14 @@ export default function JobCard({title,salary}) {
 
     <div className={styles.jobHeader}>
       <h3 className={styles.jobTitle}>{title}</h3>
-      <p className={styles.jobCompany}>Tech Solutions</p>
+      <p className={styles.jobCompany}>{company}</p>
     </div>
   </div>
 
   <div className={styles.jobDescription}>
 
-  <p className={styles.jobLocation}>São Paulo, SP</p>
-  <p className={styles.jobType}>CLT</p>
+  <p className={styles.jobLocation}>{city}</p>
+  <p className={styles.jobType}>{type}</p>
   <p className={styles.jobSalary}>R$ {salary}</p>
   <button className={styles.applyButton}>Ver mais →</button>
 
