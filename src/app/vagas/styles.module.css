@@ -1,0 +1,12 @@
+.jobVacancyContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.jobVacancyList{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

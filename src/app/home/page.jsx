@@ -14,30 +14,30 @@ import JobCategoryCard from "../../Components/JobCategoryCard";
 import JobCard from "../../Components/JobCard";
 import Testimonials from "../../Components/Testimonials";
 
-
 export default function Home() {
   const [search, setSearch] = useState("");
 
-  // Job opportunity 
+  // Job opportunity
 
   const [dataJobs, setDataJobs] = useState({
     jobs: [],
     loading: true,
     current: 1,
     pageSize: 6,
-  })
+  });
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const { data: jobs } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/jobs`);
+        const { data: jobs } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs`
+        );
         setDataJobs({ jobs, loading: false, current: 1, pageSize: 6 });
       } catch (err) {
         console.error("Erro ao buscar oportunidades de tabalho", err);
-        toast.error("Erro ao buscar oportunidades de tabalho")
-        setDataJobs((d) => ({ ...d, loading: false }))
-      };
-
+        toast.error("Erro ao buscar oportunidades de tabalho");
+        setDataJobs((d) => ({ ...d, loading: false }));
+      }
     };
     fetchJobs();
   }, []);
@@ -49,14 +49,9 @@ export default function Home() {
     return dataJobs.jobs.slice(start, start + dataJobs.pageSize);
   };
 
-  const handleFilter = (type) => {
-    console.log("Filtrar por", type);
+  // Search Jobs
 
-  };
-
-  // Search Jobs  
-
-    const handleSearch = async () => {
+  const handleSearch = async () => {
     const title = search.trim();
     if (title) {
       try {
@@ -68,6 +63,21 @@ export default function Home() {
         console.error("Erro ao buscar jobs:", error);
         toast.error("Erro ao buscar jobs");
         setData((d) => ({ ...d, loading: false }));
+      }
+    }
+  };
+
+  const handleFilter = async (type) => {
+    if (type) {
+      try {
+        const { data: jobs } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs?type=${type}`
+        );
+        setDataJobs({ jobs, loading: false, current: 1, pageSize: 4 });
+      } catch (error) {
+        console.error("Erro ao buscar jobs:", error);
+        toast.error("Erro ao buscar jobs");
+        setDataJobs((d) => ({ ...d, loading: false }));
       }
     }
   };
@@ -195,8 +205,6 @@ export default function Home() {
         </div>
       </section>
 
-
-
       {/* Oportunidade de Trabalho */}
       <section className={styles.jobCategorySection}>
         <h1 className={styles.opportunityTitle}>
@@ -204,14 +212,46 @@ export default function Home() {
         </h1>
 
         <div className={styles.opportunityCards}></div>
-        <JobCategoryCard count={12} title="Desenvolvimento" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Marketing" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Vendas" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Design" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Recursos Humanos" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Finanças" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Produto" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Suporte" icon={<FaLaptopCode size={40} color="#0052cc" />} />
+        <JobCategoryCard
+          count={12}
+          title="Desenvolvimento"
+          icon={<FaLaptopCode size={40} color="#0052cc" />}
+        />
+        <JobCategoryCard
+          count={12}
+          title="Marketing"
+          icon={<FaLaptopCode size={40} color="#0052cc" />}
+        />
+        <JobCategoryCard
+          count={12}
+          title="Vendas"
+          icon={<FaLaptopCode size={40} color="#0052cc" />}
+        />
+        <JobCategoryCard
+          count={12}
+          title="Design"
+          icon={<FaLaptopCode size={40} color="#0052cc" />}
+        />
+        <JobCategoryCard
+          count={12}
+          title="Recursos Humanos"
+          icon={<FaLaptopCode size={40} color="#0052cc" />}
+        />
+        <JobCategoryCard
+          count={12}
+          title="Finanças"
+          icon={<FaLaptopCode size={40} color="#0052cc" />}
+        />
+        <JobCategoryCard
+          count={12}
+          title="Produto"
+          icon={<FaLaptopCode size={40} color="#0052cc" />}
+        />
+        <JobCategoryCard
+          count={12}
+          title="Suporte"
+          icon={<FaLaptopCode size={40} color="#0052cc" />}
+        />
       </section>
 
       <section className={styles.jobSearchSection}>
@@ -230,20 +270,21 @@ export default function Home() {
             placeholder="Pesquisar vagas..."
             className={styles.jobSearchInput}
             value={search}
-
             onChange={(e) => setSearch(e.target.value)}
           />
 
-          <button className={styles.jobSearchButton} onClick={handleSearch} >Pesquisar</button>
+          <button className={styles.jobSearchButton} onClick={handleSearch}>
+            Pesquisar
+          </button>
         </div>
 
         <div className={styles.buttonJobArea}>
-          <button onClick={() => handleFilter("clt")} className={styles.button}>
+          <button onClick={() => handleFilter("CLT")} className={styles.button}>
             CLT
           </button>
 
           <button
-            onClick={() => handleFilter("estagio")}
+            onClick={() => handleFilter("Estagio")}
             className={styles.button}
           >
             Estágio
@@ -269,7 +310,8 @@ export default function Home() {
               company={jobs.company}
               city={jobs.city}
               type={jobs.type}
-              salary={jobs.salary} />
+              salary={jobs.salary}
+            />
           ))}
         </div>
 
@@ -285,14 +327,11 @@ export default function Home() {
           )}
         </div>
       </section>
-      <section className={styles.finalCallToActionSection}>
-
-      </section>
+      <section className={styles.finalCallToActionSection}></section>
 
       <ToastContainer />
 
       <Testimonials />
-
     </section>
   );
 }
