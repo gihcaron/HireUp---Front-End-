@@ -152,7 +152,7 @@ export default function Perfil() {
                         </div>
                     ) : (
                         <>
-                            <div className={styles.profileHeader}>
+                            <div className={styles.profileNameContainer}>
                                 <h1 className={styles.profileName}>{userData.name}</h1>
                                 <button
                                     onClick={() => handleEdit('basic')}
