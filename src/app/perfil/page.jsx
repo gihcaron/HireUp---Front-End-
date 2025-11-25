@@ -1,10 +1,12 @@
 "use client";
 import React, { useState, useRef } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import styles from "./perfil.module.css";
 import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaEdit, FaSave, FaTimes, FaLinkedin, FaGithub, FaCamera } from "react-icons/fa";
 
 export default function Perfil() {
+    const router = useRouter();
     const [editingSection, setEditingSection] = useState(null);
     const fileInputRef = useRef(null);
     const [userData, setUserData] = useState({
@@ -88,6 +90,10 @@ export default function Perfil() {
 
     const handleImageClick = () => {
         fileInputRef.current?.click();
+    };
+
+    const handleLogout = () => {
+        router.push('/login');
     };
 
     return (
@@ -306,11 +312,11 @@ export default function Perfil() {
                     <button className={styles.settingsButton}>
                         Privacidade
                     </button>
-                    <button className={styles.settingsButton}>
-                        Notificações
-                    </button>
-                    <button className={`${styles.settingsButton} ${styles.dangerButton}`}>
-                        Excluir Conta
+                    <button
+                        className={`${styles.settingsButton} ${styles.dangerButton}`}
+                        onClick={handleLogout}
+                    >
+                        Sair da Conta
                     </button>
                 </div>
             </section>
