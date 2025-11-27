@@ -1,0 +1,172 @@
+.empresaCulturaSection {
+  padding: 60px 20px;
+  background-color: #ffffff;
+  min-height: 500px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.cardIcon {
+  margin-bottom: 15px;
+}
+
+.iconCircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
+.iconText {
+  font-size: 0.6rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.cardTitle {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin: 10px 0 8px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cardDescription {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.mapSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.textArea {
+  padding: 0;
+}
+
+.companyDescription {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+  text-align: justify;
+}
+
+.mapContainer {
+  position: relative;
+  height: 280px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.buttonContainer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.candidateButton {
+  background: #0052CC;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 32px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+  letter-spacing: 0.3px;
+}
+
+.candidateButton:hover {
+  background: #003a99;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 82, 204, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .empresaCulturaSection {
+    padding: 40px 15px;
+  }
+  
+  .contentGrid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .card {
+    padding: 18px;
+  }
+  
+  .iconCircle {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .mapContainer {
+    height: 250px;
+  }
+  
+  .cardsContainer {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .candidateButton {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+  
+  .card {
+    padding: 15px;
+  }
+  
+  .mapContainer {
+    height: 220px;
+  }
+}
