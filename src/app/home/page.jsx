@@ -206,53 +206,40 @@ export default function Home() {
       </section>
 
       {/* Oportunidade de Trabalho */}
-      <section className={styles.jobCategorySection}>
-        <h1 className={styles.opportunityTitle}>
-          Oportunidades de <span style={{ color: "#0052cc" }}>trabalho</span>
-        </h1>
-
-        <div className={styles.opportunityCards}></div>
-        <JobCategoryCard
-          count={12}
-          title="Desenvolvimento"
-          icon={<FaLaptopCode size={40} color="#0052cc" />}
-        />
-        <JobCategoryCard
-          count={12}
-          title="Marketing"
-          icon={<FaLaptopCode size={40} color="#0052cc" />}
-        />
-        <JobCategoryCard
-          count={12}
-          title="Vendas"
-          icon={<FaLaptopCode size={40} color="#0052cc" />}
-        />
-        <JobCategoryCard
-          count={12}
-          title="Design"
-          icon={<FaLaptopCode size={40} color="#0052cc" />}
-        />
-        <JobCategoryCard
-          count={12}
-          title="Recursos Humanos"
-          icon={<FaLaptopCode size={40} color="#0052cc" />}
-        />
-        <JobCategoryCard
-          count={12}
-          title="Finanças"
-          icon={<FaLaptopCode size={40} color="#0052cc" />}
-        />
-        <JobCategoryCard
-          count={12}
-          title="Produto"
-          icon={<FaLaptopCode size={40} color="#0052cc" />}
-        />
-        <JobCategoryCard
-          count={12}
-          title="Suporte"
-          icon={<FaLaptopCode size={40} color="#0052cc" />}
-        />
-      </section>
+      
+          {/* Categories Section */}
+          <section className={styles.categoriesSection}>
+            <div className={styles.categoriesContent}>
+              <h2 className={styles.categoriesTitle}>Áreas de Atuação</h2>
+              <p className={styles.categoriesSubtitle}>Explore oportunidades em diferentes segmentos</p>
+              <div className={styles.categoriesGrid}>
+                <div className={styles.categoryCard}>
+                  <FaLaptopCode className={styles.categoryIcon} />
+                  <h3>Tecnologia</h3>
+                  <p>Desenvolvedores, designers e especialistas em TI</p>
+                  <div className={styles.categoryCount}>+{dataJobs.jobs.filter(j => j.type === 'Remoto').length} vagas</div>
+                </div>
+                <div className={styles.categoryCard}>
+                  <FaBullhorn className={styles.categoryIcon} />
+                  <h3>Marketing</h3>
+                  <p>Profissionais de marketing digital e criação</p>
+                  <div className={styles.categoryCount}>+{dataJobs.jobs.filter(j => j.type === 'Presencial').length} vagas</div>
+                </div>
+                <div className={styles.categoryCard}>
+                  <FaUsers className={styles.categoryIcon} />
+                  <h3>Recursos Humanos</h3>
+                  <p>Recrutadores e especialistas em RH</p>
+                  <div className={styles.categoryCount}>+{Math.floor(dataJobs.jobs.length / 3)} vagas</div>
+                </div>
+                <div className={styles.categoryCard}>
+                  <FaCogs className={styles.categoryIcon} />
+                  <h3>Operações</h3>
+                  <p>Coordenadores e gerentes de processos</p>
+                  <div className={styles.categoryCount}>+{Math.floor(dataJobs.jobs.length / 4)} vagas</div>
+                </div>
+              </div>
+            </div>
+          </section>
 
       <section className={styles.jobSearchSection}>
         <h2 className={styles.jobVacancyTitle}>

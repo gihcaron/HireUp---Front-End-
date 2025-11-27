@@ -255,26 +255,128 @@
 
 /* Job Category Section */
 
-.jobCategorySection {
+.categoriesSection {
     width: 100%;
-    height: auto;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
-    padding: 2rem 4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
+    padding: 5rem 2rem;
+    margin: 4rem 0;
+    background-color: #fff;
 }
 
-.opportunityTitle {
-    font-size: 2.5rem;
+.categoriesContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.categoriesTitle {
+    font-size: 2rem;
     font-weight: 700;
     color: #111;
+    margin-bottom: 0.5rem;
+}
+
+.categoriesSubtitle {
+    font-size: 1.2rem;
+    color: #444;
+    font-weight: 400;
+    margin-bottom: 3rem;
+}
+
+.categoriesGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.categoryCard {
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 16px;
+    padding: 2rem;
     text-align: center;
-    width: 100%;
-    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.categoryCard:hover {
+    border-color: #0052cc;
+    box-shadow: 0 8px 20px rgba(0, 82, 204, 0.15);
+    transform: translateY(-5px);
+}
+
+.categoryIcon {
+    font-size: 2.5rem;
+    color: #0052cc;
+    margin-bottom: 1rem;
+}
+
+.categoryCard h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 0.5rem;
+}
+
+.categoryCard p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.categoryCount {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0052cc;
+}
+
+@media (max-width: 1200px) {
+    .categoriesGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .categoriesTitle {
+        font-size: 1.6rem;
+    }
+
+    .categoriesSubtitle {
+        font-size: 1rem;
+    }
+
+    .categoriesGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .categoryCard {
+        padding: 1.5rem;
+    }
+
+    .categoryIcon {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .categoriesSection {
+        padding: 2rem 1rem;
+    }
+
+    .categoriesTitle {
+        font-size: 1.35rem;
+    }
+
+    .categoryCard h3 {
+        font-size: 1.1rem;
+    }
+
+    .categoryCard p {
+        font-size: 0.85rem;
+    }
 }
 
 /* Job Vacancy search section  */
