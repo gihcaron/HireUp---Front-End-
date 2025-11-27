@@ -1,0 +1,339 @@
+.container {
+  min-height: 100vh;
+  background: #EDEBE3;
+  padding: 3rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  max-width: 900px;
+  width: 100%;
+}
+
+.mainTitle {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #1e1e1e;
+  margin-bottom: 2rem;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.subtitle h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0052cc;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle p {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 400;
+}
+
+.etapasContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 3rem;
+}
+
+.etapa {
+  position: relative;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+  border-left: 5px solid transparent;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 82, 204, 0.1);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.etapa.completo {
+  border-left-color: #0052cc;
+  background: linear-gradient(135deg, rgba(0, 82, 204, 0.05) 0%, rgba(255, 255, 255, 0.7) 100%);
+}
+
+.etapa.em-progresso {
+  border-left-color: #ff9800;
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.05) 0%, rgba(255, 255, 255, 0.7) 100%);
+  box-shadow: 0 4px 20px rgba(255, 152, 0, 0.2);
+}
+
+.etapa.pendente {
+  border-left-color: #ccc;
+  opacity: 0.7;
+}
+
+.etapaContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.etapaInfo {
+  flex: 1;
+}
+
+.etapaTitulo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0052cc;
+  margin-bottom: 0.5rem;
+}
+
+.etapaDescricao {
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 400;
+}
+
+.etapaIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+}
+
+.icon {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progressContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 100px;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #0052cc 0%, #004AAD 100%);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 82, 204, 0.4);
+}
+
+.progressText {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0052cc;
+}
+
+.linha {
+  position: absolute;
+  left: 2.4%;
+  top: 100%;
+  width: 2px;
+  height: 1rem;
+  background: #e0e0e0;
+  transform: translateX(-50%);
+}
+
+.linha.completa {
+  background: #0052cc;
+}
+
+.info {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(0, 82, 204, 0.05);
+  border-radius: 8px;
+  border-left: 4px solid #0052cc;
+  margin-bottom: 2rem;
+}
+
+.info p {
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 400;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.button {
+  background: linear-gradient(135deg, #0052cc 0%, #004AAD 100%);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 82, 204, 0.3);
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.button:hover::before {
+  left: 100%;
+}
+
+.button:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 82, 204, 0.5);
+}
+
+.buttonText {
+  position: relative;
+  z-index: 1;
+}
+
+.buttonIcon {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+  font-size: 1.2rem;
+}
+
+.button:hover .buttonIcon {
+  transform: translateX(5px);
+}
+
+.loading,
+.error {
+  font-size: 1.1rem;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.loading {
+  color: #0052cc;
+  background: rgba(0, 82, 204, 0.1);
+}
+
+.error {
+  color: #d32f2f;
+  background: rgba(211, 47, 47, 0.1);
+}
+
+.candidatoInfo {
+  background: linear-gradient(135deg, rgba(0, 82, 204, 0.05) 0%, rgba(255, 255, 255, 0.7) 100%);
+  border-left: 4px solid #0052cc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 82, 204, 0.1);
+}
+
+.candidatoInfo p {
+  font-size: 1rem;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.candidatoInfo strong {
+  color: #0052cc;
+  font-weight: 600;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1rem;
+  }
+
+  .mainTitle {
+    font-size: 2rem;
+  }
+
+  .subtitle h2 {
+    font-size: 1.25rem;
+  }
+
+  .etapaContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .etapaIcon {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .progressContainer {
+    width: 100%;
+    flex-direction: row;
+    min-width: auto;
+  }
+
+  .progressBar {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .etapa {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainTitle {
+    font-size: 1.5rem;
+  }
+
+  .subtitle h2 {
+    font-size: 1.1rem;
+  }
+
+  .etapaTitulo {
+    font-size: 1.1rem;
+  }
+
+  .etapaDescricao {
+    font-size: 0.9rem;
+  }
+
+  .etapa {
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .progressContainer {
+    gap: 0.5rem;
+  }
+}
