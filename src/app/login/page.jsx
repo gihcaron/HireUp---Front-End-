@@ -14,6 +14,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [userType, setUserType] = useState('candidato'); // 'candidato' ou 'recrutador'
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // Impede o recarregamento padrão do formulário
@@ -36,6 +37,7 @@ export default function Login() {
                 // 1. Salva o Token e o Role
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('userRole', data.role);
+                localStorage.setItem('userType', userType); // Salva se é candidato ou recrutador
                 
                 // 2. FORÇA O REDIRECIONAMENTO (Isso resolve o problema de não mudar de tela)
                 router.push('/home') 
@@ -73,6 +75,34 @@ export default function Login() {
                     <div className={styles.loginForm}>
                         <h1 className={styles.welcomeTitle}>Welcome Back!</h1>
                         <p className={styles.welcomeSubtitle}>Log in to your account</p>
+
+                        {/* Seletor de Tipo de Usuário */}
+                        <div className={styles.userTypeSelector}>
+                            <button
+                                type="button"
+                                className={`${styles.userTypeButton} ${userType === 'candidato' ? styles.active : ''}`}
+                                onClick={() => setUserType('candidato')}
+                            >
+                                <svg className={styles.userTypeIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                Candidato
+                            </button>
+                            <button
+                                type="button"
+                                className={`${styles.userTypeButton} ${userType === 'recrutador' ? styles.active : ''}`}
+                                onClick={() => setUserType('recrutador')}
+                            >
+                                <svg className={styles.userTypeIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                                Recrutador
+                            </button>
+                        </div>
 
                         {/* Mensagem de Erro (Aparece se falhar) */}
                         {error && (
