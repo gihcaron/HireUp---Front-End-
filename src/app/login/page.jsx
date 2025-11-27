@@ -1,8 +1,57 @@
+"use client";
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './login.module.css';
 
 export default function Login() {
+    const router = useRouter();
+    
+    // Estados para guardar os dados
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // Impede o recarregamento padrão do formulário
+        setError('');
+        setLoading(true);
+
+        try {
+            // Faz a chamada ao seu Backend
+            const response = await fetch('http://localhost:3000/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // 1. Salva o Token e o Role
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('userRole', data.role);
+                
+                // 2. FORÇA O REDIRECIONAMENTO (Isso resolve o problema de não mudar de tela)
+                router.push('/home') 
+            } else {
+                // Se errou a senha
+                setError(data.message || 'Email ou senha incorretos.');
+            }
+
+        } catch (err) {
+            console.error(err);
+            setError('Erro ao conectar com o servidor. O backend está rodando?');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.videoSection}>
@@ -11,9 +60,7 @@ export default function Login() {
                         <Image src="/images/logo.png" alt="HireUp Logo" className={styles.logo} width={100} height={100} />
                     </div>
 
-                    {/* Área reservada para o vídeo */}
                     <div className={styles.videoPlaceholder}>
-                        {/* Aqui será colocado o vídeo da mão e animações */}
                         <div className={styles.videoContent}>
                             <p>Video placeholder - Conectando talentos, criando oportunidades</p>
                         </div>
@@ -27,7 +74,14 @@ export default function Login() {
                         <h1 className={styles.welcomeTitle}>Welcome Back!</h1>
                         <p className={styles.welcomeSubtitle}>Log in to your account</p>
 
-                        <form className={styles.form}>
+                        {/* Mensagem de Erro (Aparece se falhar) */}
+                        {error && (
+                            <div style={{ color: 'red', textAlign: 'center', marginBottom: '1rem', padding: '10px', backgroundColor: '#ffe6e6', borderRadius: '5px' }}>
+                                {error}
+                            </div>
+                        )}
+
+                        <form className={styles.form} onSubmit={handleSubmit}>
                             <div className={styles.inputGroup}>
                                 <div className={styles.inputWrapper}>
                                     <svg className={styles.inputIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -35,9 +89,12 @@ export default function Login() {
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
                                     <input
-                                        type="text"
-                                        placeholder="Username"
+                                        type="email"
+                                        placeholder="Email Address"
                                         className={styles.input}
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
                                     />
                                 </div>
                             </div>
@@ -53,6 +110,9 @@ export default function Login() {
                                         type="password"
                                         placeholder="Password"
                                         className={styles.input}
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
                                     />
                                 </div>
                             </div>
@@ -67,15 +127,15 @@ export default function Login() {
                                 </Link>
                             </div>
 
-                            <button type="submit" className={styles.loginButton}>
-                                Log In
+                            <button type="submit" className={styles.loginButton} disabled={loading}>
+                                {loading ? 'Carregando...' : 'Log In'}
                             </button>
                         </form>
 
                         <div className={styles.signupSection}>
                             <p className={styles.signupText}>
                                 Don&apos;t have an account?
-                                <Link href="/signup" className={styles.signupLink}> Sign Up</Link>
+                                <Link href="/sign" className={styles.signupLink}> Sign Up</Link>
                             </p>
                         </div>
 
@@ -84,10 +144,10 @@ export default function Login() {
                         </div>
 
                         <div className={styles.socialLogin}>
-                            <button className={styles.socialButton}>
+                            <button className={styles.socialButton} type="button">
                                 <Image src="/images/google-icon.png" alt="Google" className={styles.socialIcon} width={24} height={24} />
                             </button>
-                            <button className={styles.socialButton}>
+                            <button className={styles.socialButton} type="button">
                                 <Image src="/images/apple-icon.png" alt="Apple" className={styles.socialIcon} width={24} height={24} />
                             </button>
                         </div>
