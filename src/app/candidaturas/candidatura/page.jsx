@@ -1,10 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import styles from "./candidatura.module.css";
 
 export default function Candidatura() {
     const searchParams = useSearchParams();
+    const router = useRouter();
     const [cargo, setCargo] = useState("Carregando...");
     const [formData, setFormData] = useState({
         nome: "",
@@ -24,10 +25,6 @@ export default function Candidatura() {
         if (cargoParam) {
             setCargo(cargoParam);
         } else {
-            // Fazer uma chamada ao backend aqui
-            // const response = await fetch('/api/cargo');
-            // const data = await response.json();
-            // setCargo(data.cargo);
             setCargo("Vaga de Emprego");
         }
     }, [searchParams]);
@@ -62,6 +59,8 @@ export default function Candidatura() {
         setLoading(true);
         setError("");
 
+        router.push('/candidaturas/candidatura/enviado');
+
         try {
             const form = new FormData();
             form.append("nome", formData.nome);
@@ -84,7 +83,7 @@ export default function Candidatura() {
 
             const data = await response.json();
             setSuccess(true);
-            
+
             setFormData({
                 nome: "",
                 email: "",
@@ -93,9 +92,6 @@ export default function Candidatura() {
                 concordancia: false,
             });
             setFileName("Nenhum arquivo selecionado");
-
-            // Mensagem de sucesso
-            alert("Candidatura enviada com sucesso!");
             console.log("Resposta do servidor:", data);
         } catch (err) {
             setError(err.message || "Erro ao enviar candidatura. Tente novamente.");
