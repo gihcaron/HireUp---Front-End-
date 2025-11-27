@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import styles from "./page.module.css";
+import EmpresaCultura from "../../Components/EmpresaCultura";
 
 export default function DetalhesVaga() {
 	return (
@@ -45,7 +46,7 @@ export default function DetalhesVaga() {
 
 				<div className={styles.right}>
 					<img
-						src="/images/workGroup.png"
+						src="/images/detalhes.png"
 						alt="Pessoa segurando tablet"
 						className={styles.person}
 					/>
@@ -62,13 +63,7 @@ export default function DetalhesVaga() {
 				</p>
 			</section>
 
-			<section className={styles.company}>
-				<h3>Empresa e Cultura</h3>
-				<p className={styles.companyText}>
-					Aqui você pode colocar informações sobre a empresa, missão, valores e
-					cultura. Use este espaço para destacar o que torna a empresa única.
-				</p>
-			</section>
+			<EmpresaCultura />
 		</main>
 	);
 }

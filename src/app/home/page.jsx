@@ -17,6 +17,11 @@ import Testimonials from "../../Components/Testimonials";
 export default function Home() {
   const [search, setSearch] = useState("");
 
+  const handleFilter = (type) => {
+    console.log("Filtro aplicado:", type);
+    // Implementar lógica de filtro aqui
+  };
+
   return (
     <section className={styles.homeContainer}>
       <section className={styles.bannerSection}>
