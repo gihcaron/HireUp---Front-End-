@@ -6,11 +6,12 @@ import Footer from "@/Components/Footer";
 export default function LayoutWrapper({ children }) {
     const pathname = usePathname();
     const isLoginPage = pathname === '/login';
+    const isSignPage = pathname === '/sign';
     // Não mostrar header e footer nas páginas de confirmação (enviado)
     const isContatoEnviado = pathname === '/contato/enviado';
     const isCandidaturaEnviado = pathname === '/candidaturas/candidatura/enviado';
     const isEnviadoPage = isContatoEnviado || isCandidaturaEnviado;
-    const hideHeaderAndFooter = isLoginPage || isEnviadoPage;
+    const hideHeaderAndFooter = isLoginPage || isSignPage || isEnviadoPage;
 
     return (
         <>
