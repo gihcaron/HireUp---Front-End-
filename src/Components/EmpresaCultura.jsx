@@ -12,42 +12,47 @@ const EmpresaCultura = () => {
   return (
     <section className={styles.empresaCulturaSection}>
       <div className={styles.container}>
+        <h2 className={styles.sectionTitle}>🏢 Empresa e Cultura</h2>
+        
         <div className={styles.contentGrid}>
           {/* Cards de Missão, Visão e Valores */}
           <div className={styles.cardsContainer}>
             <div className={styles.card}>
               <div className={styles.cardIcon}>
                 <div className={styles.iconCircle} style={{backgroundColor: '#4ECDC4'}}>
-                  <span className={styles.iconText}>MISSÃO</span>
+                  <span className={styles.iconText}>⭐</span>
                 </div>
               </div>
               <h3 className={styles.cardTitle}>MISSÃO</h3>
               <p className={styles.cardDescription}>
-                Lorem Ipsum is simply dummy text of the
+                Nossa missão é produzir soluções com qualidade e eficiência, valorizando nossos colaboradores e promovendo um ambiente seguro e inovador.
               </p>
             </div>
 
             <div className={styles.card}>
               <div className={styles.cardIcon}>
                 <div className={styles.iconCircle} style={{backgroundColor: '#4A90E2'}}>
-                  <span className={styles.iconText}>VISÃO</span>
+                  <span className={styles.iconText}>👁️</span>
                 </div>
               </div>
-              <h3 className={styles.cardTitle}>MISSÃO</h3>
+              <h3 className={styles.cardTitle}>VISÃO</h3>
               <p className={styles.cardDescription}>
-                Lorem Ipsum is simply dummy text of the
+                Ser referência no setor, oferecendo produtos confiáveis e contribuindo para o crescimento da indústria brasileira.
               </p>
             </div>
 
             <div className={styles.card}>
               <div className={styles.cardIcon}>
                 <div className={styles.iconCircle} style={{backgroundColor: '#0052CC'}}>
-                  <span className={styles.iconText}>Valores</span>
+                  <span className={styles.iconText}>❤️</span>
                 </div>
               </div>
-              <h3 className={styles.cardTitle}>MISSÃO</h3>
+              <h3 className={styles.cardTitle}>VALORES</h3>
               <p className={styles.cardDescription}>
-                Lorem Ipsum is simply dummy text of the
+                • Respeito e ética<br/>
+                • Qualidade acima de tudo<br/>
+                • Trabalho em equipe<br/>
+                • Inovação contínua
               </p>
             </div>
           </div>
@@ -55,10 +60,9 @@ const EmpresaCultura = () => {
           {/* Área do Mapa e Texto */}
           <div className={styles.mapSection}>
             <div className={styles.textArea}>
+              <h4 className={styles.locationTitle}>📍 Localização</h4>
               <p className={styles.companyDescription}>
-                been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it 
-                to make a type specimen book.
+                Estamos localizados em uma região de fácil acesso, próxima a linhas de transporte e com estrutura adequada para proporcionar um ambiente de trabalho seguro e confortável.
               </p>
             </div>
             
@@ -78,11 +82,14 @@ const EmpresaCultura = () => {
         </div>
 
         <div className={styles.buttonContainer}>
+          <p className={styles.callToAction}>
+            🎯 Interessado na vaga? Clique em "Candidatar-se" e envie seu currículo!
+          </p>
           <button 
             className={styles.candidateButton}
             onClick={handleCandidateClick}
           >
-            Quero me Candidatar
+            Candidatar-se
           </button>
         </div>
       </div>

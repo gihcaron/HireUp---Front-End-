@@ -8,37 +8,39 @@ export default function DetalhesVaga() {
 		<main className={styles.page}>
 			<header className={styles.header}>
 				<h1 className={styles.title}>Auxiliar de Produção</h1>
-				<h2 className={styles.subtitle}>Veja mais detalhes!</h2>
+				<h2 className={styles.subtitle}>Veja mais detalhes da oportunidade!</h2>
 			</header>
 
 			<section className={styles.hero}>
 				<div className={styles.left}>
 					<p className={styles.lead}>
-						Lorem Ipsum is simply dummy text of the printing and typesetting
-						industry. Lorem Ipsum ha
+						O Auxiliar de Produção será responsável por apoiar as etapas de fabricação, organização do ambiente de trabalho e controle de qualidade dos produtos. Procuramos alguém ágil, comprometido e com vontade de aprender.
 					</p>
 
 					<div className={styles.salaryCard}>
-						<div className={styles.salaryLabel}>Lorem</div>
-						<div className={styles.salaryValue}>2.500$</div>
+						<div className={styles.salaryLabel}>💰 Faixa Salarial</div>
+						<div className={styles.salaryValue}>R$ 2.500,00</div>
+						<div className={styles.salaryValue}>Salário compatível com o mercado + benefícios</div>
 					</div>
 
 					<div className={styles.insights}>
 						<div className={styles.insightCard}>
-							<div className={styles.insightHeader}>Insigths Overview</div>
+							<div className={styles.insightHeader}>Responsabilidades Principais</div>
 							<div className={styles.insightRows}>
-								<div>HireUp</div>
-								<div> Lorem Ipsum ha</div>
-								<div> Lorem Ipsum ha</div>
+								<div>• Auxiliar nas etapas de montagem, embalagem e separação de produtos</div>
+								<div>• Realizar inspeções básicas de qualidade dos materiais</div>
+								<div>• Manter organização e segurança do ambiente de trabalho</div>
 							</div>
 						</div>
 
-						<div className={styles.insightCardLight}>
-							<div className={styles.insightHeader}>Insigths Overview</div>
-							<div className={styles.tags}>
-								<span className={styles.tag}>been the industry's</span>
-								<span className={styles.tagOutline}>2.400</span>
-								<span className={styles.tag}>been the industry's</span>
+						<div className={styles.insightCard}>
+							<div className={styles.insightHeader}>Requisitos e Diferenciais</div>
+							<div className={styles.insightRows}>
+								<div>Ensino médio completo</div>
+								<div>Boa comunicação e trabalho em equipe</div>
+								<div>Disponibilidade para horários flexíveis</div>
+								<div>Experiência prévia em produção</div>
+								<div>Conhecimento básico em máquinas e equipamentos industriais</div>
 							</div>
 						</div>
 					</div>
@@ -55,12 +57,9 @@ export default function DetalhesVaga() {
 
 			<section className={styles.description}>
 				<p>
-					been the industry's standard dummy text ever since the 1500s, when an
-					unknown printer took a galley of type and scrambled it to make a type
-					specimen book. It has survived not only five centuries, but also the
-					leap into electronic typesetting, remaining essentially unchanged.
-					It was popula
+					A empresa busca um profissional dedicado para integrar sua equipe de produção. Entre as atividades estão o apoio no processo de fabricação, organização do ambiente, registro de informações no sistema e garantia de que as etapas sigam os padrões estabelecidos.
 				</p>
+				<p>O colaborador trabalhará diretamente com a equipe de produção e terá oportunidade de aprender novas funções dentro do setor. A empresa valoriza pessoas responsáveis, proativas e que gostem de trabalhar em equipe.</p>
 			</section>
 
 			<EmpresaCultura />
