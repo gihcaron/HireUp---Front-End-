@@ -9,11 +9,20 @@
   margin: 0 auto;
 }
 
+.sectionTitle {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #0052CC;
+  margin-bottom: 50px;
+  margin-top: 0;
+}
+
 .contentGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 .cardsContainer {
@@ -79,10 +88,18 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  height: 100%;
 }
 
 .textArea {
   padding: 0;
+}
+
+.locationTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #0052CC;
+  margin: 0 0 15px 0;
 }
 
 .companyDescription {
@@ -95,7 +112,8 @@
 
 .mapContainer {
   position: relative;
-  height: 280px;
+  flex: 1;
+  min-height: 300px;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -105,6 +123,13 @@
 .buttonContainer {
   text-align: center;
   margin-top: 40px;
+}
+
+.callToAction {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 500;
 }
 
 .candidateButton {
