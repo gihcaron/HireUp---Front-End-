@@ -41,6 +41,7 @@ export default function Header() {
                   <li className={styles.item}><Link href="/profissionais">Vagas</Link></li>
                   <li className={styles.item}><Link href="/entrevistas">Entrevistas</Link></li>
                   <li className={styles.item}><Link href="/candidaturas">Candidaturas</Link></li>
+                  <li className={styles.item}><Link href="/perfil">Perfil</Link></li>
                   <li className={styles.sobreNos}>
                     <Link href="/contato" className={styles.sobreTitle}>Nos Contate</Link>
                   </li>

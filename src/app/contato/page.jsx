@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./contato.module.css";
 
 export default function Contato() {
@@ -8,6 +9,7 @@ export default function Contato() {
     mensagem: "",
     concordancia: false,
   });
+  const router = useRouter();
 
     const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -23,7 +25,13 @@ export default function Contato() {
     alert("Por favor, aceite a concordância de termos");
     return;
     }
-    console.log("Formulário enviado:", formData);
+    router.push('/contato/enviado');
+
+    try {
+      console.log("Formulário enviado (em background):", formData);
+    } catch (err) {
+      console.error('Erro ao enviar contato:', err);
+    }
   };
 
   return (

@@ -1,0 +1,453 @@
+.container {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    padding: 2rem 1rem;
+    margin-top: 0;
+}
+
+.profileHeader {
+    background: linear-gradient(135deg, #0052cc, #004AAD);
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 82, 204, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+}
+
+.profileImageContainer {
+    position: relative;
+}
+
+.profileImage {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.profileImage:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.profileImage:hover .imageUploadOverlay {
+    opacity: 1;
+}
+
+.profileIcon {
+    font-size: 3rem;
+    color: white;
+}
+
+.profileImagePreview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.imageUploadOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cameraIcon {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.hiddenFileInput {
+    display: none;
+}
+
+.profileInfo {
+    flex: 1;
+    color: white;
+}
+
+.profileNameContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.profileName {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.profileTitle {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.profileBio {
+    font-size: 1rem;
+    line-height: 1.6;
+    opacity: 0.85;
+    max-width: 600px;
+}
+
+.section {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e9ecef;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f1f3f5;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.editButton {
+    background: #0052cc;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.editButton:hover {
+    background: #004AAD;
+    transform: translateY(-2px);
+}
+
+.editForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.editInput {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.editInput:focus {
+    outline: none;
+    border-color: #0052cc;
+}
+
+.editTextarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 0.3s ease;
+}
+
+.editTextarea:focus {
+    outline: none;
+    border-color: #0052cc;
+}
+
+.editButtons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.saveButton {
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.saveButton:hover {
+    background: #218838;
+}
+
+.cancelButton {
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.cancelButton:hover {
+    background: #5a6268;
+}
+
+.contactInfo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.contactItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 0.5rem;
+    border-left: 4px solid #0052cc;
+}
+
+.contactIcon {
+    color: #0052cc;
+    font-size: 1.2rem;
+}
+
+.inputGroup {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.inputIcon {
+    color: #0052cc;
+    font-size: 1.2rem;
+    position: absolute;
+    left: 1rem;
+    z-index: 1;
+}
+
+.inputGroup .editInput {
+    padding-left: 3rem;
+}
+
+.experienceList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.experienceItem {
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 0.75rem;
+    border-left: 4px solid #0052cc;
+}
+
+.experiencePosition {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.experienceCompany {
+    font-size: 1.1rem;
+    color: #0052cc;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.experiencePeriod {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.experienceDescription {
+    color: #495057;
+    line-height: 1.6;
+}
+
+.skillsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.skillTag {
+    background: linear-gradient(135deg, #0052cc, #004AAD);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+}
+
+.skillTag:hover {
+    transform: translateY(-2px);
+}
+
+.settingsButtons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.settingsButton {
+    background: white;
+    color: #0052cc;
+    border: 2px solid #0052cc;
+    border-radius: 0.5rem;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.settingsButton:hover {
+    background: #0052cc;
+    color: white;
+    transform: translateY(-2px);
+}
+
+.dangerButton {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+.dangerButton:hover {
+    background: #dc3545;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem 0.5rem;
+    }
+
+    .profileHeader {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+    }
+
+    .profileName {
+        font-size: 1.8rem;
+        justify-content: center;
+    }
+
+    .section {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .sectionHeader {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+
+    .sectionTitle {
+        font-size: 1.3rem;
+    }
+
+    .contactInfo {
+        grid-template-columns: 1fr;
+    }
+
+    .settingsButtons {
+        grid-template-columns: 1fr;
+    }
+
+    .editButtons {
+        flex-direction: column;
+    }
+
+    .profileImage {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profileIcon {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profileHeader {
+        padding: 1.5rem 1rem;
+    }
+
+    .section {
+        padding: 1rem;
+    }
+
+    .profileName {
+        font-size: 1.5rem;
+    }
+
+    .profileTitle {
+        font-size: 1.1rem;
+    }
+
+    .experienceItem {
+        padding: 1rem;
+    }
+
+    .profileImage {
+        width: 80px;
+        height: 80px;
+    }
+
+    .profileIcon {
+        font-size: 2rem;
+    }
+}
