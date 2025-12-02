@@ -38,8 +38,7 @@ export default function Header() {
               <nav className={styles.navigation}>
                 <ul className={styles.list}>
                   <li className={styles.item}><Link href="/home">Home</Link></li>
-                  <li className={styles.item}><Link href="/profissionais">Vagas</Link></li>
-                  <li className={styles.item}><Link href="/entrevistas">Entrevistas</Link></li>
+                  <li className={styles.item}><Link href="/vagas">Vagas</Link></li>
                   <li className={styles.item}><Link href="/candidaturas">Candidaturas</Link></li>
                   <li className={styles.item}><Link href="/perfil">Perfil</Link></li>
                   <li className={styles.sobreNos}>
