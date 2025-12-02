@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './EmpresaCultura.module.css';
 
@@ -15,12 +16,12 @@ const EmpresaCultura = () => {
         <h2 className={styles.sectionTitle}>🏢 Empresa e Cultura</h2>
         
         <div className={styles.contentGrid}>
-          {/* Cards de Missão, Visão e Valores */}
+
           <div className={styles.cardsContainer}>
             <div className={styles.card}>
               <div className={styles.cardIcon}>
                 <div className={styles.iconCircle} style={{backgroundColor: '#4ECDC4'}}>
-                  <span className={styles.iconText}>⭐</span>
+                  <Image src="/images/estrela.png" alt="Estrela" width={24} height={24} className={styles.iconImage} />
                 </div>
               </div>
               <h3 className={styles.cardTitle}>MISSÃO</h3>
@@ -32,7 +33,7 @@ const EmpresaCultura = () => {
             <div className={styles.card}>
               <div className={styles.cardIcon}>
                 <div className={styles.iconCircle} style={{backgroundColor: '#4A90E2'}}>
-                  <span className={styles.iconText}>👁️</span>
+                  <Image src="/images/olho.png" alt="Olho" width={24} height={24} className={styles.iconImage} />
                 </div>
               </div>
               <h3 className={styles.cardTitle}>VISÃO</h3>
@@ -44,20 +45,16 @@ const EmpresaCultura = () => {
             <div className={styles.card}>
               <div className={styles.cardIcon}>
                 <div className={styles.iconCircle} style={{backgroundColor: '#0052CC'}}>
-                  <span className={styles.iconText}>❤️</span>
+                  <Image src="/images/like.png" alt="Like" width={24} height={24} className={styles.iconImage} />
                 </div>
               </div>
               <h3 className={styles.cardTitle}>VALORES</h3>
               <p className={styles.cardDescription}>
-                • Respeito e ética<br/>
-                • Qualidade acima de tudo<br/>
-                • Trabalho em equipe<br/>
-                • Inovação contínua
+                Respeito e ética, qualidade acima de tudo, trabalho em equipe e inovação contínua.
               </p>
             </div>
           </div>
 
-          {/* Área do Mapa e Texto */}
           <div className={styles.mapSection}>
             <div className={styles.textArea}>
               <h4 className={styles.locationTitle}>📍 Localização</h4>
@@ -83,7 +80,7 @@ const EmpresaCultura = () => {
 
         <div className={styles.buttonContainer}>
           <p className={styles.callToAction}>
-            🎯 Interessado na vaga? Clique em "Candidatar-se" e envie seu currículo!
+             Interessado na vaga? Clique em "Candidatar-se" e envie seu currículo!
           </p>
           <button 
             className={styles.candidateButton}
