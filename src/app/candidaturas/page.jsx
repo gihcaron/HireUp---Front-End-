@@ -3,107 +3,110 @@
 import styles from './triagem.module.css';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 export default function TriagemPage() {
-  // TODO: Substituir por chamada real à API
-  // Endpoint sugerido: GET /api/candidaturas
-  const [candidatos] = useState({
-    triagem: [
-      {
-        id: 1,
-        nome: 'Julia Neves',
-        status: 'Jovem Aprendiz',
-        vaga: 'Assistente Administrativo',
-        departamento: 'Administração'
-      },
-      {
-        id: 2,
-        nome: 'Flavia Mendes',
-        status: 'Trainee',
-        vaga: 'Assistente Administrativo',
-        departamento: 'Administração'
-      },
-      {
-        id: 3,
-        nome: 'André Lucca',
-        status: 'Jovem Aprendiz',
-        vaga: 'Assistente Administrativo',
-        departamento: 'Administração'
-      }
-    ],
-    entrevista: [
-      {
-        id: 4,
-        nome: 'Larrisa Alves',
-        status: 'Efetivo',
-        vaga: 'Criador de Conteúdo',
-        departamento: 'Marketing e Propaganda',
-        data: '29/11/2025',
-        horario: '14:00 - 14h40'
-      },
-      {
-        id: 5,
-        nome: 'Larrisa Alves',
-        status: 'Jovem Aprendiz',
-        vaga: 'Analista de Recursos Humanos Pleno',
-        departamento: 'Recursos Humanos',
-        data: '29/11/2025',
-        horario: '16:00 - 16h40'
-      },
-      {
-        id: 6,
-        nome: 'Larrisa Alves',
-        status: 'Efetivo',
-        vaga: '',
-        departamento: '',
-        data: '',
-        horario: ''
-      }
-    ],
-    proposta: [
-      {
-        id: 7,
-        nome: 'Beatriz Soares',
-        status: 'Jovem Aprendiz',
-        vaga: 'Torneira Mecânica',
-        departamento: 'Engenharia de Produção'
-      },
-      {
-        id: 8,
-        nome: 'Daniel Rodrigues',
-        status: 'Efetivo',
-
-        vaga: 'Engenharia Ambiental',
-        departamento: 'Sustentabilidade e ESG'
-      }
-    ]
+  const router = useRouter();
+  const [candidatos, setCandidatos] = useState({
+    triagem: [],
+    entrevista: [],
+    proposta: []
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  
-
-  // Exemplo de chamada real (usar quando tiver backend):
-  /*
   useEffect(() => {
-    fetch('/api/candidaturas')
-      .then(res => res.json())
-      .then(data => setCandidatos(data))
-      .catch(error => console.error('Erro ao buscar candidatos:', error));
+    const fetchCandidatos = async () => {
+      try {
+        setLoading(true);
+        
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+        console.log('Buscando candidatos de:', `${apiUrl}/candidates`);
+        
+        const response = await axios.get(`${apiUrl}/candidates`);
+        console.log('Candidatos recebidos:', response.data);
+        
+        const data = response.data;
+        
+        // Organizar candidatos por status
+        const organizados = {
+          triagem: data.filter(c => c.status === 'Triagem'),
+          entrevista: data.filter(c => c.status === 'Entrevista'),
+          proposta: data.filter(c => c.status === 'Aprovado' || c.status === 'Proposta')
+        };
+        
+        console.log('Candidatos organizados:', organizados);
+        
+        setCandidatos(organizados);
+        setLoading(false);
+      } catch (error) {
+        console.error('Erro ao buscar candidatos:', error);
+        setError(`Erro ao carregar candidatos: ${error.message}`);
+        setLoading(false);
+      }
+    };
+
+    fetchCandidatos();
   }, []);
-  */
+
+  const handleVerMais = (id) => {
+    router.push(`/candidaturas/${id}`);
+  };
+
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: '100vh',
+          fontSize: '1.2rem'
+        }}>
+          Carregando candidatos...
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.container}>
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'column',
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: '100vh',
+          fontSize: '1.2rem',
+          color: 'red',
+          padding: '20px'
+        }}>
+          <p>{error}</p>
+          <button 
+            onClick={() => window.location.reload()}
+            style={{
+              marginTop: '20px',
+              padding: '10px 20px',
+              fontSize: '1rem',
+              cursor: 'pointer',
+              backgroundColor: '#007bff',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px'
+            }}
+          >
+            Tentar Novamente
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
-      {/* Sidebar */}
       <aside className={styles.sidebar}>
-        <div className={styles.logo}>
-          <Image 
-            src="/images/logo.png" 
-            alt="HireUp Logo"
-            width={120}
-            height={40}
-          />
-        </div>
-
         <div className={styles.userProfile}>
           <div className={styles.avatar}>
             <span>GC</span>
@@ -118,15 +121,9 @@ export default function TriagemPage() {
           <button className={`${styles.menuItem} ${styles.active}`}>
             Acompanhar Triagem
           </button>
-          <button className={styles.menuItem}>
-            Gestão de Vagas
-          </button>
-          <button className={styles.menuItem}>
-            Publicar Nova Vaga
-          </button>
-          <button className={styles.menuItem}>
-            Sair
-          </button>
+          <button className={styles.menuItem}>Gestão de Vagas</button>
+          <button className={styles.menuItem}>Publicar Nova Vaga</button>
+          <button className={styles.menuItem}>Sair</button>
         </nav>
       </aside>
 
@@ -145,98 +142,115 @@ export default function TriagemPage() {
           </div>
         </header>
 
-        
         <div className={styles.cardsContainer}>
-
-          <div className={styles.column}>
-            <h2 className={styles.columnTitle}>Triagem</h2>
+          <div className={styles.bigCard}>
+            <h2 className={styles.bigCardTitle}>Triagem</h2>
             <div className={styles.cardsList}>
-              {candidatos.triagem.map((candidato) => (
-                <div key={candidato.id} className={styles.card}>
-                  <div className={styles.cardHeader}>
-                    <h3 className={styles.candidatoNome}>{candidato.nome}</h3>
-                    <span className={`${styles.badge} ${styles[candidato.status.replace(' ', '')]}`}>
-                      {candidato.status}
-                    </span>
-                  </div>
-                  <div className={styles.cardBody}>
-                    <div className={styles.infoGroup}>
-                      <span className={styles.label}>Vaga:</span>
-                      <span className={styles.value}>{candidato.vaga}</span>
+              {candidatos.triagem.length === 0 ? (
+                <p style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
+                  Nenhum candidato em triagem
+                </p>
+              ) : (
+                candidatos.triagem.map((candidato) => (
+                  <div key={candidato.id} className={styles.smallCard}>
+                    <div className={styles.cardHeader}>
+                      <h3 className={styles.candidatoNome}>{candidato.name}</h3>
+                      <span className={styles.badge}>Efetivo</span>
                     </div>
-                    <div className={styles.infoGroup}>
-                      <span className={styles.label}>Departamento</span>
-                      <span className={styles.value}>{candidato.departamento}</span>
+                    <div className={styles.cardBody}>
+                      <div className={styles.infoGroup}>
+                        <span className={styles.label}>Email:</span>
+                        <span className={styles.value}>{candidato.email}</span>
+                      </div>
+                      <div className={styles.infoGroup}>
+                        <span className={styles.label}>Telefone:</span>
+                        <span className={styles.value}>{candidato.phone}</span>
+                      </div>
                     </div>
+                    <button 
+                      type="button"
+                      className={styles.verMais} 
+                      onClick={() => handleVerMais(candidato.id)}
+                    >
+                      Ver Mais
+                    </button>
                   </div>
-                  <button className={styles.verMais}>Ver Mais</button>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
 
-          <div className={styles.column}>
-            <h2 className={styles.columnTitle}>Entrevista</h2>
+          <div className={styles.bigCard}>
+            <h2 className={styles.bigCardTitle}>Entrevista</h2>
             <div className={styles.cardsList}>
-              {candidatos.entrevista.map((candidato) => (
-                <div key={candidato.id} className={styles.card}>
-                  <div className={styles.cardHeader}>
-                    <h3 className={styles.candidatoNome}>{candidato.nome}</h3>
-                    <span className={`${styles.badge} ${styles[candidato.status.replace(' ', '')]}`}>
-                      {candidato.status}
-                    </span>
+              {candidatos.entrevista.length === 0 ? (
+                <p style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
+                  Nenhum candidato em entrevista
+                </p>
+              ) : (
+                candidatos.entrevista.map((candidato) => (
+                  <div key={candidato.id} className={styles.smallCard}>
+                    <div className={styles.cardHeader}>
+                      <h3 className={styles.candidatoNome}>{candidato.name}</h3>
+                      <span className={styles.badge}>Efetivo</span>
+                    </div>
+                    <div className={styles.cardBody}>
+                      <div className={styles.infoGroup}>
+                        <span className={styles.label}>Email:</span>
+                        <span className={styles.value}>{candidato.email}</span>
+                      </div>
+                      <div className={styles.infoGroup}>
+                        <span className={styles.label}>Telefone:</span>
+                        <span className={styles.value}>{candidato.phone}</span>
+                      </div>
+                    </div>
+                    <button 
+                      type="button"
+                      className={styles.verMais} 
+                      onClick={() => handleVerMais(candidato.id)}
+                    >
+                      Ver Mais
+                    </button>
                   </div>
-                  <div className={styles.cardBody}>
-                    {candidato.vaga && (
-                      <>
-                        <div className={styles.infoGroup}>
-                          <span className={styles.label}>Vaga:</span>
-                          <span className={styles.value}>{candidato.vaga}</span>
-                        </div>
-                        <div className={styles.infoGroup}>
-                          <span className={styles.label}>Departamento</span>
-                          <span className={styles.value}>{candidato.departamento}</span>
-                        </div>
-                        <div className={styles.infoGroup}>
-                          <span className={styles.label}>Data:</span>
-                          <span className={styles.value}>
-                            {candidato.data}<br />
-                            {candidato.horario}
-                          </span>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  <button className={styles.verMais}>Ver Mais</button>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
 
-          <div className={styles.column}>
-            <h2 className={styles.columnTitle}>Proposta</h2>
+          <div className={styles.bigCard}>
+            <h2 className={styles.bigCardTitle}>Proposta</h2>
             <div className={styles.cardsList}>
-              {candidatos.proposta.map((candidato) => (
-                <div key={candidato.id} className={styles.card}>
-                  <div className={styles.cardHeader}>
-                    <h3 className={styles.candidatoNome}>{candidato.nome}</h3>
-                    <span className={`${styles.badge} ${styles[candidato.status.replace(' ', '')]}`}>
-                      {candidato.status}
-                    </span>
-                  </div>
-                  <div className={styles.cardBody}>
-                    <div className={styles.infoGroup}>
-                      <span className={styles.label}>Vaga:</span>
-                      <span className={styles.value}>{candidato.vaga}</span>
+              {candidatos.proposta.length === 0 ? (
+                <p style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
+                  Nenhum candidato aprovado
+                </p>
+              ) : (
+                candidatos.proposta.map((candidato) => (
+                  <div key={candidato.id} className={styles.smallCard}>
+                    <div className={styles.cardHeader}>
+                      <h3 className={styles.candidatoNome}>{candidato.name}</h3>
+                      <span className={styles.badge}>Efetivo</span>
                     </div>
-                    <div className={styles.infoGroup}>
-                      <span className={styles.label}>Departamento</span>
-                      <span className={styles.value}>{candidato.departamento}</span>
+                    <div className={styles.cardBody}>
+                      <div className={styles.infoGroup}>
+                        <span className={styles.label}>Email:</span>
+                        <span className={styles.value}>{candidato.email}</span>
+                      </div>
+                      <div className={styles.infoGroup}>
+                        <span className={styles.label}>Telefone:</span>
+                        <span className={styles.value}>{candidato.phone}</span>
+                      </div>
                     </div>
+                    <button 
+                      type="button"
+                      className={styles.verMais} 
+                      onClick={() => handleVerMais(candidato.id)}
+                    >
+                      Ver Mais
+                    </button>
                   </div>
-                  <button className={styles.verMais}>Ver Mais</button>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>
