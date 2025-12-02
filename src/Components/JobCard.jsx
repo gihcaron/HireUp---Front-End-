@@ -9,15 +9,7 @@ export default function JobCard({title,salary, company, city, type}) {
     return (
 <Card className={styles.jobCard}>
   <div className={styles.jobCardHeader}>
-    <div className={styles.logoArea}>
-      <Image
-        src="/images/logoPreto.png"
-        alt="Company Logo"
-        width={40}
-        height={40}
-        className={styles.companyLogo}
-      />
-    </div>
+  
 
     <div className={styles.jobHeader}>
       <h3 className={styles.jobTitle}>{title}</h3>
