@@ -11,7 +11,7 @@ export default function Signup() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [terms, setTerms] = useState(false);
-    const [userType, setUserType] = useState('candidato'); // 'candidato' ou 'recrutador'
+    const [userType, setUserType] = useState('candidato'); 
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -35,7 +35,7 @@ export default function Signup() {
         setLoading(true);
 
         try {
-            const response = await fetch("http://localhost:3000/api/users/register", {
+            const response = await fetch("http://localhost:3000/auth/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -87,7 +87,6 @@ export default function Signup() {
                         <h1 className={styles.welcomeTitle}>Create Your Account</h1>
                         <p className={styles.welcomeSubtitle}>Sign up to get started</p>
 
-                        {/* Seletor de Tipo de Usuário */}
                         <div className={styles.userTypeSelector}>
                             <button
                                 type="button"
@@ -115,13 +114,11 @@ export default function Signup() {
                             </button>
                         </div>
 
-                        {/* MENSAGENS */}
                         {error && <p className={styles.errorMessage}>{error}</p>}
                         {success && <p className={styles.successMessage}>{success}</p>}
 
                         <form className={styles.form} onSubmit={handleSubmit}>
 
-                            {/* FULL NAME */}
                             <div className={styles.inputGroup}>
                                 <div className={styles.inputWrapper}>
                                     <svg className={styles.inputIcon} viewBox="0 0 24 24">
@@ -139,7 +136,6 @@ export default function Signup() {
                                 </div>
                             </div>
 
-                            {/* EMAIL */}
                             <div className={styles.inputGroup}>
                                 <div className={styles.inputWrapper}>
                                     <svg className={styles.inputIcon} viewBox="0 0 24 24">
@@ -157,7 +153,6 @@ export default function Signup() {
                                 </div>
                             </div>
 
-                            {/* PASSWORD */}
                             <div className={styles.inputGroup}>
                                 <div className={styles.inputWrapper}>
                                     <svg className={styles.inputIcon} viewBox="0 0 24 24">
@@ -176,7 +171,6 @@ export default function Signup() {
                                 </div>
                             </div>
 
-                            {/* CONFIRM PASSWORD */}
                             <div className={styles.inputGroup}>
                                 <div className={styles.inputWrapper}>
                                     <svg className={styles.inputIcon} viewBox="0 0 24 24">
@@ -195,7 +189,6 @@ export default function Signup() {
                                 </div>
                             </div>
 
-                            {/* TERMS */}
                             <div className={styles.checkboxContainer}>
                                 <label className={styles.checkboxLabel}>
                                     <input
@@ -210,7 +203,6 @@ export default function Signup() {
                                 </label>
                             </div>
 
-                            {/* SUBMIT BUTTON */}
                             <button type="submit" className={styles.signupButton} disabled={loading}>
                                 {loading ? "Creating Account..." : "Sign Up"}
                             </button>

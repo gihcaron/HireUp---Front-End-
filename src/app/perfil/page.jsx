@@ -1,25 +1,20 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styles from "./perfil.module.css";
-import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaEdit, FaSave, FaTimes, FaLinkedin, FaGithub, FaCamera } from "react-icons/fa";
+import {
+    FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaEdit, FaSave, FaTimes,
+    FaLinkedin, FaGithub, FaCamera
+} from "react-icons/fa";
 
 export default function Perfil() {
     const router = useRouter();
     const [editingSection, setEditingSection] = useState(null);
     const fileInputRef = useRef(null);
-    const [userData, setUserData] = useState({
-        name: "Maria Silva",
-        email: "maria.silva@email.com",
-        phone: "(11) 99999-9999",
-        location: "São Paulo, SP",
-        title: "Desenvolvedora Frontend",
-        bio: "Desenvolvedora Frontend com 3 anos de experiência em React, Next.js e TypeScript. Apaixonada por criar interfaces de usuário intuitivas e acessíveis.",
-        linkedin: "linkedin.com/in/mariasilva",
-        github: "github.com/mariasilva",
-        profileImage: null
-    });
+
+    const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const [experiences] = useState([
         {
@@ -43,62 +38,83 @@ export default function Perfil() {
         "Tailwind CSS", "Git", "Figma", "Node.js"
     ]);
 
-    const handleEdit = (section) => {
-        setEditingSection(section);
-    };
+    useEffect(() => {
+    async function loadUser() {
+        const token = localStorage.getItem("token");
+        const userId = localStorage.getItem("userId");
 
-    const handleSave = () => {
-        setEditingSection(null);
-    };
+        if (!token || !userId) {
+            router.push("/login");
+            return;
+        }
 
-    const handleCancel = () => {
-        setEditingSection(null);
-    };
+        try {
+            const res = await fetch(`http://localhost:3000/api/users/${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if (!res.ok) {
+                throw new Error("Erro ao carregar usuário");
+            }
+
+            const data = await res.json();
+
+            setUserData(prev => ({
+                ...prev,
+                name: data.name,
+                email: data.email,
+                phone: data.phone || "",
+                location: data.location || "",
+                title: data.title || "",
+                bio: data.bio || "",
+                linkedin: data.linkedin || "",
+                github: data.github || "",
+                profileImage: data.avatar_url || null
+            }));
+
+            setLoading(false);
+
+        } catch (error) {
+            console.error(error);
+            router.push("/login");
+        }
+    }
+
+    loadUser();
+}, []);
+
+    if (loading || !userData) {
+        return <p style={{ textAlign: "center", marginTop: 50 }}>Carregando...</p>;
+    }
+
+    const handleEdit = (section) => setEditingSection(section);
+    const handleSave = () => setEditingSection(null);
+    const handleCancel = () => setEditingSection(null);
 
     const handleInputChange = (field, value) => {
-        setUserData(prev => ({
-            ...prev,
-            [field]: value
-        }));
+        setUserData(prev => ({ ...prev, [field]: value }));
     };
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
-            // Validar tipo de arquivo
-            const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-            if (!validTypes.includes(file.type)) {
-                alert('Por favor, selecione uma imagem válida (JPEG, PNG, GIF ou WebP)');
-                return;
-            }
-
-            // Validar tamanho do arquivo (máximo 5MB)
-            const maxSize = 5 * 1024 * 1024; // 5MB em bytes
-            if (file.size > maxSize) {
-                alert('A imagem deve ter no máximo 5MB');
-                return;
-            }
-
-            // Criar URL temporária para preview
             const imageUrl = URL.createObjectURL(file);
-            setUserData(prev => ({
-                ...prev,
-                profileImage: imageUrl
-            }));
+            setUserData(prev => ({ ...prev, profileImage: imageUrl }));
         }
     };
 
-    const handleImageClick = () => {
-        fileInputRef.current?.click();
-    };
+    const handleImageClick = () => fileInputRef.current?.click();
 
     const handleLogout = () => {
-        router.push('/login');
+        localStorage.removeItem("token");
+        router.push("/login");
     };
 
     return (
         <main className={styles.container}>
-            {/* Header do Perfil */}
+
             <section className={styles.profileHeader}>
                 <div className={styles.profileImageContainer}>
                     <div className={styles.profileImage} onClick={handleImageClick}>
@@ -174,14 +190,12 @@ export default function Perfil() {
                 </div>
             </section>
 
+            {/* CONTATO */}
             <section className={styles.section}>
                 <div className={styles.sectionHeader}>
                     <h2 className={styles.sectionTitle}>Informações de Contato</h2>
                     {editingSection !== 'contact' && (
-                        <button
-                            onClick={() => handleEdit('contact')}
-                            className={styles.editButton}
-                        >
+                        <button onClick={() => handleEdit('contact')} className={styles.editButton}>
                             <FaEdit />
                         </button>
                     )}
@@ -198,6 +212,7 @@ export default function Perfil() {
                                 className={styles.editInput}
                             />
                         </div>
+
                         <div className={styles.inputGroup}>
                             <FaPhone className={styles.inputIcon} />
                             <input
@@ -207,6 +222,7 @@ export default function Perfil() {
                                 className={styles.editInput}
                             />
                         </div>
+
                         <div className={styles.inputGroup}>
                             <FaMapMarkerAlt className={styles.inputIcon} />
                             <input
@@ -216,6 +232,7 @@ export default function Perfil() {
                                 className={styles.editInput}
                             />
                         </div>
+
                         <div className={styles.inputGroup}>
                             <FaLinkedin className={styles.inputIcon} />
                             <input
@@ -225,6 +242,7 @@ export default function Perfil() {
                                 className={styles.editInput}
                             />
                         </div>
+
                         <div className={styles.inputGroup}>
                             <FaGithub className={styles.inputIcon} />
                             <input
@@ -234,6 +252,7 @@ export default function Perfil() {
                                 className={styles.editInput}
                             />
                         </div>
+
                         <div className={styles.editButtons}>
                             <button onClick={handleSave} className={styles.saveButton}>
                                 <FaSave /> Salvar
@@ -306,12 +325,7 @@ export default function Perfil() {
                 </div>
 
                 <div className={styles.settingsButtons}>
-                    <button className={styles.settingsButton}>
-                        Alterar Senha
-                    </button>
-                    <button className={styles.settingsButton}>
-                        Privacidade
-                    </button>
+                    <button className={styles.settingsButton}>Privacidade</button>
                     <button
                         className={`${styles.settingsButton} ${styles.dangerButton}`}
                         onClick={handleLogout}
