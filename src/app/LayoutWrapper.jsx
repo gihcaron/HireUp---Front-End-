@@ -12,13 +12,17 @@ export default function LayoutWrapper({ children }) {
     const isContatoEnviado = pathname === '/contato/enviado';
     const isCandidaturaEnviado = pathname === '/candidaturas/candidatura/enviado';
     const isEnviadoPage = isContatoEnviado || isCandidaturaEnviado;
-    const hideHeaderAndFooter = isLoginPage || isSignPage || isEnviadoPage || isCandidaturasPage;
+    // Esconder header apenas na página /gestao (manter footer)
+    const isGestaoPage = pathname === '/gestao';
+
+    const hideHeader = isLoginPage || isSignPage || isEnviadoPage || isCandidaturasPage || isGestaoPage;
+    const hideFooter = isLoginPage || isSignPage || isEnviadoPage || isCandidaturasPage;
 
     return (
         <>
-            {!hideHeaderAndFooter && <Header />}
+            {!hideHeader && <Header />}
             {children}
-            {!hideHeaderAndFooter && <Footer />}
+            {!hideFooter && <Footer />}
         </>
     );
 }

@@ -73,7 +73,7 @@ export default function GestaoVagas() {
         <div className={styles.header}>
           <div className={styles.heroImage}>
             <Image
-              src="/images/jobWorkGroup.jpg"
+              src="/images/corporativa.webp"
               alt="Equipe trabalhando"
               width={600}
               height={200}
@@ -106,7 +106,7 @@ export default function GestaoVagas() {
           
           <div className={styles.statCard}>
             <div className={styles.statIcon}>
-              <Image src="/images/folder.png" alt="Vagas em aberto" width={32} height={32} />
+              <Image src="/images/opened-door-aperture.png" alt="Vagas em aberto" width={32} height={32} />
             </div>
             <div className={styles.statNumber}>15</div>
             <div className={styles.statLabel}>Vagas em aberto</div>
