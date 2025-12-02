@@ -8,22 +8,20 @@ import styles from './login.module.css';
 
 export default function Login() {
     const router = useRouter();
-    
-    // Estados para guardar os dados
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const [userType, setUserType] = useState('candidato'); // 'candidato' ou 'recrutador'
+    const [userType, setUserType] = useState('candidato'); 
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Impede o recarregamento padrão do formulário
+        e.preventDefault(); 
         setError('');
         setLoading(true);
 
         try {
-            // Faz a chamada ao seu Backend
-            const response = await fetch('http://localhost:3000/api/users/login', {
+            const response = await fetch('http://localhost:3000/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,15 +32,14 @@ export default function Login() {
             const data = await response.json();
 
             if (response.ok) {
-                // 1. Salva o Token e o Role
+
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('userRole', data.role);
-                localStorage.setItem('userType', userType); // Salva se é candidato ou recrutador
-                
-                // 2. FORÇA O REDIRECIONAMENTO (Isso resolve o problema de não mudar de tela)
+                localStorage.setItem('userType', userType); 
+                localStorage.getItem("userId")
+
                 router.push('/home') 
             } else {
-                // Se errou a senha
                 setError(data.message || 'Email ou senha incorretos.');
             }
 
@@ -76,7 +73,6 @@ export default function Login() {
                         <h1 className={styles.welcomeTitle}>Welcome Back!</h1>
                         <p className={styles.welcomeSubtitle}>Log in to your account</p>
 
-                        {/* Seletor de Tipo de Usuário */}
                         <div className={styles.userTypeSelector}>
                             <button
                                 type="button"
@@ -104,7 +100,6 @@ export default function Login() {
                             </button>
                         </div>
 
-                        {/* Mensagem de Erro (Aparece se falhar) */}
                         {error && (
                             <div style={{ color: 'red', textAlign: 'center', marginBottom: '1rem', padding: '10px', backgroundColor: '#ffe6e6', borderRadius: '5px' }}>
                                 {error}
