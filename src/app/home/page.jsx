@@ -17,6 +17,7 @@ import Testimonials from "../../Components/Testimonials";
 export default function Home() {
   const [search, setSearch] = useState("");
 
+
   // Job opportunity
 
   const [dataJobs, setDataJobs] = useState({
@@ -80,6 +81,7 @@ export default function Home() {
         setDataJobs((d) => ({ ...d, loading: false }));
       }
     }
+
   };
 
   // Filtro area
