@@ -204,6 +204,42 @@
   color: #004AAD !important;
 }
 
+
+/* CTA section */
+
+.ctaSection {
+  background: #eeeded;
+  padding: 50px 20px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-top: 40px;
+}
+
+.ctaTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #004AAD;
+}
+
+.ctaDescription {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  color: #333;
+}
+.ctaButton {
+  padding: 14px 30px;
+  background: linear-gradient(135deg, #004AAD 0%, #003580 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 74, 173, 0.3);
+}
 /* Responsive Design */
 @media (max-width: 1024px) {
   .filtersSection {
