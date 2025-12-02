@@ -82,8 +82,13 @@ export default function GestaoVagas() {
           </div>
           <div className={styles.welcomeCard}>
             <div className={styles.welcomeContent}>
-              <span className={styles.welcomeTitle}>HireUp</span>
-              <span className={styles.welcomeSubtitle}>Agência de Recrutamento</span>
+              <Image
+                src="/images/logoPreto.png"
+                alt="HireUp Logo"
+                width={150}
+                height={45}
+                className={styles.logoImage}
+              />
               <p className={styles.welcomeText}>Bem vindo de volta</p>
               <p className={styles.welcomeUser}>HireUp ADM</p>
             </div>
@@ -140,6 +145,52 @@ export default function GestaoVagas() {
                 className={styles.searchInput}
               />
               <button className={styles.searchButton}>Pesquisar</button>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.jobsSection}>
+          <div className={styles.jobCard}>
+            <div className={styles.jobHeader}>
+              <h3 className={styles.jobTitle}>Desenvolvedor Full Stack</h3>
+              <span className={styles.jobDepartment}>Tecnologia</span>
+            </div>
+            <div className={styles.jobDetails}>
+              <span className={styles.jobSalary}>R$ 8.000 - R$ 12.000</span>
+              <span className={styles.jobLocation}>São Paulo - SP</span>
+            </div>
+          </div>
+
+          <div className={styles.jobCard}>
+            <div className={styles.jobHeader}>
+              <h3 className={styles.jobTitle}>Designer UX/UI</h3>
+              <span className={styles.jobDepartment}>Design</span>
+            </div>
+            <div className={styles.jobDetails}>
+              <span className={styles.jobSalary}>R$ 6.000 - R$ 9.000</span>
+              <span className={styles.jobLocation}>São Paulo - SP</span>
+            </div>
+          </div>
+
+          <div className={styles.jobCard}>
+            <div className={styles.jobHeader}>
+              <h3 className={styles.jobTitle}>Analista de Marketing</h3>
+              <span className={styles.jobDepartment}>Marketing</span>
+            </div>
+            <div className={styles.jobDetails}>
+              <span className={styles.jobSalary}>R$ 5.000 - R$ 7.500</span>
+              <span className={styles.jobLocation}>Rio de Janeiro - RJ</span>
+            </div>
+          </div>
+
+          <div className={styles.jobCard}>
+            <div className={styles.jobHeader}>
+              <h3 className={styles.jobTitle}>Gerente de Vendas</h3>
+              <span className={styles.jobDepartment}>Comercial</span>
+            </div>
+            <div className={styles.jobDetails}>
+              <span className={styles.jobSalary}>R$ 7.000 - R$ 10.000</span>
+              <span className={styles.jobLocation}>Belo Horizonte - MG</span>
             </div>
           </div>
         </div>

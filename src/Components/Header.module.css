@@ -172,6 +172,7 @@
 /* Perfil do usuário */
 .userProfile {
   display: flex;
+  flex-direction: column;
   align-items: center;
   padding: 24px 20px;
   width: 100%;
@@ -181,7 +182,7 @@
 }
 
 .userAvatar {
-  margin-right: 12px;
+  margin-bottom: 12px;
 }
 
 .avatarImage {
@@ -191,6 +192,7 @@
 
 .userInfo {
   color: white;
+  text-align: center;
 }
 
 .userName {
