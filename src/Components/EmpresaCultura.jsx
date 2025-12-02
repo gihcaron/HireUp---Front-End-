@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './EmpresaCultura.module.css';
 
-const EmpresaCultura = () => {
+const EmpresaCultura = ({company_mission, company_vision, company_values, address }) => {
   const router = useRouter();
 
   const handleCandidateClick = () => {
@@ -26,7 +26,7 @@ const EmpresaCultura = () => {
               </div>
               <h3 className={styles.cardTitle}>MISSÃO</h3>
               <p className={styles.cardDescription}>
-                Nossa missão é produzir soluções com qualidade e eficiência, valorizando nossos colaboradores e promovendo um ambiente seguro e inovador.
+               {company_mission}
               </p>
             </div>
 
@@ -38,7 +38,7 @@ const EmpresaCultura = () => {
               </div>
               <h3 className={styles.cardTitle}>VISÃO</h3>
               <p className={styles.cardDescription}>
-                Ser referência no setor, oferecendo produtos confiáveis e contribuindo para o crescimento da indústria brasileira.
+                {company_vision}
               </p>
             </div>
 
@@ -50,7 +50,7 @@ const EmpresaCultura = () => {
               </div>
               <h3 className={styles.cardTitle}>VALORES</h3>
               <p className={styles.cardDescription}>
-                Respeito e ética, qualidade acima de tudo, trabalho em equipe e inovação contínua.
+                {company_values}
               </p>
             </div>
           </div>
@@ -60,6 +60,9 @@ const EmpresaCultura = () => {
               <h4 className={styles.locationTitle}>📍 Localização</h4>
               <p className={styles.companyDescription}>
                 Estamos localizados em uma região de fácil acesso, próxima a linhas de transporte e com estrutura adequada para proporcionar um ambiente de trabalho seguro e confortável.
+              </p>
+              <p className={styles.companyDescription}>
+               {address}
               </p>
             </div>
             

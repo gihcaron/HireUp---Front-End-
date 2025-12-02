@@ -3,10 +3,13 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Card } from "antd";
+import { useRouter } from 'next/navigation';
 import styles from "./JobCard.module.css";
 
-export default function JobCard({title,salary, company, city, type}) {
-    return (
+export default function JobCard({title,salary, company, city, type, link}) {
+  const router = useRouter();
+      
+return (
 <Card className={styles.jobCard}>
   <div className={styles.jobCardHeader}>
   
@@ -22,7 +25,7 @@ export default function JobCard({title,salary, company, city, type}) {
   <p className={styles.jobLocation}>{city}</p>
   <p className={styles.jobType}>{type}</p>
   <p className={styles.jobSalary}>R$ {salary}</p>
-  <button className={styles.applyButton}>Ver mais →</button>
+  {link && <button className={styles.applyButton} onClick={() => router.push(link)}>Ver mais →</button>}
 
   </div>
 
