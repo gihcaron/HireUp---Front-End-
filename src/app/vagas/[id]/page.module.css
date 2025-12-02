@@ -8,26 +8,26 @@
 
 .header {
   text-align: center;
-  margin-bottom: 18px;
+  margin-bottom: 30px;
 }
 
 .title {
   font-size: 44px;
   line-height: 1;
   font-weight: 800;
-  margin: 6px 0;
+  margin: 6px 0 15px 0;
 }
 
 .subtitle {
   color: #0b63c7; 
   font-weight: 700;
-  margin-top: 6px;
+  margin: 6px 0 25px 0;
 }
 
 .hero {
   display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 24px;
+  grid-template-columns: 3fr 1fr;
+  gap: 40px;
   align-items: start;
   margin-top: 18px;
 }
@@ -40,7 +40,9 @@
 
 .lead {
   color: #374151;
-  max-width: 560px;
+  width: 100%;
+  text-align: justify;
+  line-height: 1.6;
 }
 
 .salaryCard {
@@ -78,7 +80,7 @@
 
 .insightHeader {
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 
 .insightRows {
@@ -124,7 +126,8 @@
 }
 
 .person {
-  width: 280px;
+  width: 100%;
+  max-width: 300px;
   object-fit: contain;
   border-radius: 8px;
 }
@@ -132,6 +135,14 @@
 .description {
   margin-top: 36px;
   color: #374151;
+}
+
+.description p {
+  margin-bottom: 20px;
+}
+
+.description p:last-child {
+  margin-bottom: 0;
 }
 
 .company {
@@ -260,6 +271,7 @@
 @media (max-width: 880px) {
   .hero {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
   .right {
     order: -1;
@@ -267,10 +279,14 @@
     margin-bottom: 8px;
   }
   .person {
-    width: 220px;
+    width: 200px;
+    max-width: 250px;
   }
   .title {
     font-size: 36px;
+  }
+  .lead {
+    text-align: left;
   }
   .missionCards {
     grid-template-columns: 1fr;

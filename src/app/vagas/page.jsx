@@ -166,6 +166,7 @@ export default function Vagas() {
                       city={jobs.city}
                       type={jobs.type}
                       salary={jobs.salary}
+                      link={`/vagas/${jobs.id}`}
                     />
                   ))}
                 </div>

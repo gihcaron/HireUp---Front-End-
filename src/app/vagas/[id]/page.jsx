@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
 import styles from "./page.module.css";
-import EmpresaCultura from "../../Components/EmpresaCultura";
+import EmpresaCultura from "../../../Components/EmpresaCultura";
+import Image from "next/image";
 
 export default function DetalhesVaga() {
 	return (
@@ -47,10 +48,12 @@ export default function DetalhesVaga() {
 				</div>
 
 				<div className={styles.right}>
-					<img
+					<Image
 						src="/images/detalhes.png"
 						alt="Pessoa segurando tablet"
 						className={styles.person}
+						width={500}
+						height={400}
 					/>
 				</div>
 			</section>
