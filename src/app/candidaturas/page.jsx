@@ -3,10 +3,10 @@
 import styles from './triagem.module.css';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function TriagemPage() {
-  // TODO: Substituir por chamada real à API
-  // Endpoint sugerido: GET /api/candidaturas
+  const router = useRouter();
   const [candidatos] = useState({
     triagem: [
       {
@@ -91,19 +91,16 @@ export default function TriagemPage() {
   }, []);
   */
 
+  // Função para navegar para a página de detalhes do candidato
+  const handleVerMais = (id) => {
+    console.log('Navegando para candidato ID:', id);
+    router.push(`/candidaturas/${id}`);
+  };
+
   return (
     <div className={styles.container}>
       {/* Sidebar */}
       <aside className={styles.sidebar}>
-        <div className={styles.logo}>
-          <Image 
-            src="/images/logo.png" 
-            alt="HireUp Logo"
-            width={120}
-            height={40}
-          />
-        </div>
-
         <div className={styles.userProfile}>
           <div className={styles.avatar}>
             <span>GC</span>
@@ -147,12 +144,12 @@ export default function TriagemPage() {
 
         
         <div className={styles.cardsContainer}>
-
-          <div className={styles.column}>
-            <h2 className={styles.columnTitle}>Triagem</h2>
+          {/* Card Grande - Triagem */}
+          <div className={styles.bigCard}>
+            <h2 className={styles.bigCardTitle}>Triagem</h2>
             <div className={styles.cardsList}>
               {candidatos.triagem.map((candidato) => (
-                <div key={candidato.id} className={styles.card}>
+                <div key={candidato.id} className={styles.smallCard}>
                   <div className={styles.cardHeader}>
                     <h3 className={styles.candidatoNome}>{candidato.nome}</h3>
                     <span className={`${styles.badge} ${styles[candidato.status.replace(' ', '')]}`}>
@@ -169,17 +166,23 @@ export default function TriagemPage() {
                       <span className={styles.value}>{candidato.departamento}</span>
                     </div>
                   </div>
-                  <button className={styles.verMais}>Ver Mais</button>
+                  <button 
+                    type="button"
+                    className={styles.verMais} 
+                    onClick={() => handleVerMais(candidato.id)}
+                  >
+                    Ver Mais
+                  </button>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className={styles.column}>
-            <h2 className={styles.columnTitle}>Entrevista</h2>
+          <div className={styles.bigCard}>
+            <h2 className={styles.bigCardTitle}>Entrevista</h2>
             <div className={styles.cardsList}>
               {candidatos.entrevista.map((candidato) => (
-                <div key={candidato.id} className={styles.card}>
+                <div key={candidato.id} className={styles.smallCard}>
                   <div className={styles.cardHeader}>
                     <h3 className={styles.candidatoNome}>{candidato.nome}</h3>
                     <span className={`${styles.badge} ${styles[candidato.status.replace(' ', '')]}`}>
@@ -207,17 +210,24 @@ export default function TriagemPage() {
                       </>
                     )}
                   </div>
-                  <button className={styles.verMais}>Ver Mais</button>
+                  <button 
+                    type="button"
+                    className={styles.verMais} 
+                    onClick={() => handleVerMais(candidato.id)}
+                  >
+                    Ver Mais
+                  </button>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className={styles.column}>
-            <h2 className={styles.columnTitle}>Proposta</h2>
+          {/* Card Grande - Proposta */}
+          <div className={styles.bigCard}>
+            <h2 className={styles.bigCardTitle}>Proposta</h2>
             <div className={styles.cardsList}>
               {candidatos.proposta.map((candidato) => (
-                <div key={candidato.id} className={styles.card}>
+                <div key={candidato.id} className={styles.smallCard}>
                   <div className={styles.cardHeader}>
                     <h3 className={styles.candidatoNome}>{candidato.nome}</h3>
                     <span className={`${styles.badge} ${styles[candidato.status.replace(' ', '')]}`}>
@@ -234,7 +244,13 @@ export default function TriagemPage() {
                       <span className={styles.value}>{candidato.departamento}</span>
                     </div>
                   </div>
-                  <button className={styles.verMais}>Ver Mais</button>
+                  <button 
+                    type="button"
+                    className={styles.verMais} 
+                    onClick={() => handleVerMais(candidato.id)}
+                  >
+                    Ver Mais
+                  </button>
                 </div>
               ))}
             </div>
