@@ -3,7 +3,8 @@ import React from "react";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import axios from "axios";
-import { Card } from "antd";
+import { Card, Pagination } from "antd";
+import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { FaLaptopCode, FaBullhorn, FaUsers, FaCogs } from "react-icons/fa";
 
@@ -13,13 +14,74 @@ import JobCategoryCard from "../../Components/JobCategoryCard";
 import JobCard from "../../Components/JobCard";
 import Testimonials from "../../Components/Testimonials";
 
-
 export default function Home() {
   const [search, setSearch] = useState("");
 
-  const handleFilter = (type) => {
-    console.log("Filtro aplicado:", type);
-    // Implementar lógica de filtro aqui
+
+  // Job opportunity
+
+  const [dataJobs, setDataJobs] = useState({
+    jobs: [],
+    loading: true,
+    current: 1,
+    pageSize: 6,
+  });
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const { data: jobs } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs`
+        );
+        setDataJobs({ jobs, loading: false, current: 1, pageSize: 6 });
+      } catch (err) {
+        console.error("Erro ao buscar oportunidades de tabalho", err);
+        toast.error("Erro ao buscar oportunidades de tabalho");
+        setDataJobs((d) => ({ ...d, loading: false }));
+      }
+    };
+    fetchJobs();
+  }, []);
+
+  // Jobs - Pagination
+
+  const paginatedJobs = () => {
+    const start = (dataJobs.current - 1) * dataJobs.pageSize;
+    return dataJobs.jobs.slice(start, start + dataJobs.pageSize);
+  };
+
+  // Search Jobs
+
+  const handleSearch = async () => {
+    const title = search.trim();
+    if (title) {
+      try {
+        const { data: jobs } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs?title=${title}`
+        );
+        setDataJobs({ jobs, loading: false, current: 1, pageSize: 4 });
+      } catch (error) {
+        console.error("Erro ao buscar jobs:", error);
+        toast.error("Erro ao buscar jobs");
+        setData((d) => ({ ...d, loading: false }));
+      }
+    }
+  };
+
+  const handleFilter = async (type) => {
+    if (type) {
+      try {
+        const { data: jobs } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs?type=${type}`
+        );
+        setDataJobs({ jobs, loading: false, current: 1, pageSize: 4 });
+      } catch (error) {
+        console.error("Erro ao buscar jobs:", error);
+        toast.error("Erro ao buscar jobs");
+        setDataJobs((d) => ({ ...d, loading: false }));
+      }
+    }
+
   };
 
   return (
@@ -145,24 +207,41 @@ export default function Home() {
         </div>
       </section>
 
-
-
-        {/* Oportunidade de Trabalho */}
-        <section className={styles.jobCategorySection}>
-      <h1 className={styles.opportunityTitle}>
-        Oportunidades de <span style={{ color: "#0052cc" }}>trabalho</span>
-      </h1>
-
-      <div className={styles.opportunityCards}></div>
-        <JobCategoryCard count={12} title="Desenvolvimento" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Marketing" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Vendas" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Design" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Recursos Humanos" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Finanças" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Produto" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        <JobCategoryCard count={12} title="Suporte" icon={<FaLaptopCode size={40} color="#0052cc" />} />
-        </section>
+      {/* Oportunidade de Trabalho */}
+      
+          {/* Categories Section */}
+          <section className={styles.categoriesSection}>
+            <div className={styles.categoriesContent}>
+              <h2 className={styles.categoriesTitle}>Áreas de Atuação</h2>
+              <p className={styles.categoriesSubtitle}>Explore oportunidades em diferentes segmentos</p>
+              <div className={styles.categoriesGrid}>
+                <div className={styles.categoryCard}>
+                  <FaLaptopCode className={styles.categoryIcon} />
+                  <h3>Tecnologia</h3>
+                  <p>Desenvolvedores, designers e especialistas em TI</p>
+                  <div className={styles.categoryCount}>+{dataJobs.jobs.filter(j => j.type === 'Remoto').length} vagas</div>
+                </div>
+                <div className={styles.categoryCard}>
+                  <FaBullhorn className={styles.categoryIcon} />
+                  <h3>Marketing</h3>
+                  <p>Profissionais de marketing digital e criação</p>
+                  <div className={styles.categoryCount}>+{dataJobs.jobs.filter(j => j.type === 'Presencial').length} vagas</div>
+                </div>
+                <div className={styles.categoryCard}>
+                  <FaUsers className={styles.categoryIcon} />
+                  <h3>Recursos Humanos</h3>
+                  <p>Recrutadores e especialistas em RH</p>
+                  <div className={styles.categoryCount}>+{Math.floor(dataJobs.jobs.length / 3)} vagas</div>
+                </div>
+                <div className={styles.categoryCard}>
+                  <FaCogs className={styles.categoryIcon} />
+                  <h3>Operações</h3>
+                  <p>Coordenadores e gerentes de processos</p>
+                  <div className={styles.categoryCount}>+{Math.floor(dataJobs.jobs.length / 4)} vagas</div>
+                </div>
+              </div>
+            </div>
+          </section>
 
       <section className={styles.jobSearchSection}>
         <h2 className={styles.jobVacancyTitle}>
@@ -180,20 +259,21 @@ export default function Home() {
             placeholder="Pesquisar vagas..."
             className={styles.jobSearchInput}
             value={search}
-
             onChange={(e) => setSearch(e.target.value)}
           />
 
-          <button className={styles.jobSearchButton}>Pesquisar</button>
+          <button className={styles.jobSearchButton} onClick={handleSearch}>
+            Pesquisar
+          </button>
         </div>
 
         <div className={styles.buttonJobArea}>
-          <button onClick={() => handleFilter("clt")} className={styles.button}>
+          <button onClick={() => handleFilter("CLT")} className={styles.button}>
             CLT
           </button>
 
           <button
-            onClick={() => handleFilter("estagio")}
+            onClick={() => handleFilter("Estagio")}
             className={styles.button}
           >
             Estágio
@@ -212,22 +292,35 @@ export default function Home() {
         </div>
 
         <div className={styles.jobVacancyList}>
-          <JobCard /> 
-          <JobCard /> 
-          <JobCard /> 
-          <JobCard /> 
-          <JobCard /> 
-          <JobCard /> 
+          {paginatedJobs().map((jobs) => (
+            <JobCard
+              key={jobs.id}
+              title={jobs.title}
+              company={jobs.company}
+              city={jobs.city}
+              type={jobs.type}
+              salary={jobs.salary}
+            />
+          ))}
+        </div>
+
+        <div>
+          {dataJobs.jobs?.length > 0 && (
+            <Pagination
+              current={dataJobs.current}
+              pageSize={dataJobs.pageSize}
+              total={dataJobs.jobs?.length || 0}
+              onChange={(page) => setDataJobs((d) => ({ ...d, current: page }))}
+              showSizeChanger={false}
+            />
+          )}
         </div>
       </section>
+      <section className={styles.finalCallToActionSection}></section>
 
+      <ToastContainer />
 
-      <section className={styles.finalCallToActionSection}>
-
-      </section>
-
-        <Testimonials />
-
+      <Testimonials />
     </section>
   );
 }
