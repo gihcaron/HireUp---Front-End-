@@ -2,46 +2,88 @@
 import React from "react";
 import styles from "./page.module.css";
 import EmpresaCultura from "../../../Components/EmpresaCultura";
+import { useEffect, useState } from "react";
+import { Card } from "antd";
+import { useParams } from "next/navigation";
 import Image from "next/image";
+import axios from "axios";
 
 export default function DetalhesVaga() {
+	    const { id } = useParams();
+    const [data, setData] = useState(null);
+    const [activeTab, setActiveTab] = useState('job');
+
+	console.log("ID da vaga:", id);
+
+	
+    useEffect(() => {
+        const fetchJobs = async () => {
+            try {
+                const { data: job } = await axios.get(
+                    `${process.env.NEXT_PUBLIC_API_URL}/jobs/${id}`
+                );
+                setData(job);
+            } catch (error) {
+                console.error("Erro ao buscar vagas:", error);
+                setData((d) => ({ ...d, loading: false }));
+            }
+        };
+        fetchJobs();
+    }, []);
+
+
+	const renderParagraphs = (value) => {
+		if (!value) return null;
+		if (Array.isArray(value)) {
+			return value.map((v, i) => <p key={i}>{v}</p>);
+		}
+		return value
+			.split(/\r?\n/)
+			.map((line) => line.trim())
+			.filter(Boolean)
+			.map((line, i) => <p key={i}>{line}</p>);
+	};
+
 	return (
 		<main className={styles.page}>
 			<header className={styles.header}>
-				<h1 className={styles.title}>Auxiliar de Produção</h1>
+				<h1 className={styles.title}>{data?.title}</h1>
 				<h2 className={styles.subtitle}>Veja mais detalhes da oportunidade!</h2>
 			</header>
 
 			<section className={styles.hero}>
 				<div className={styles.left}>
 					<p className={styles.lead}>
-						O Auxiliar de Produção será responsável por apoiar as etapas de fabricação, organização do ambiente de trabalho e controle de qualidade dos produtos. Procuramos alguém ágil, comprometido e com vontade de aprender.
+						{data?.description}
 					</p>
 
 					<div className={styles.salaryCard}>
 						<div className={styles.salaryLabel}>💰 Faixa Salarial</div>
-						<div className={styles.salaryValue}>R$ 2.500,00</div>
-						<div className={styles.salaryValue}>Salário compatível com o mercado + benefícios</div>
+						<div className={styles.salaryValue}>R$ {data?.salary}</div>
+						<div className={styles.salaryValue}>{data?.salary_description}</div>
 					</div>
 
 					<div className={styles.insights}>
 						<div className={styles.insightCard}>
 							<div className={styles.insightHeader}>Responsabilidades Principais</div>
 							<div className={styles.insightRows}>
-								<div>• Auxiliar nas etapas de montagem, embalagem e separação de produtos</div>
-								<div>• Realizar inspeções básicas de qualidade dos materiais</div>
-								<div>• Manter organização e segurança do ambiente de trabalho</div>
+								<div>{data?.responsibilities[0]}</div>
+								<div>{data?.responsibilities[1]}</div>
+								<div>{data?.responsibilities[2]}</div>
+								<div>{data?.responsibilities[3]}</div>
+								<div>{data?.responsibilities[4]}</div>
+								<div>{data?.responsibilities[5]}</div>		
 							</div>
 						</div>
 
 						<div className={styles.insightCard}>
 							<div className={styles.insightHeader}>Requisitos e Diferenciais</div>
 							<div className={styles.insightRows}>
-								<div>Ensino médio completo</div>
-								<div>Boa comunicação e trabalho em equipe</div>
-								<div>Disponibilidade para horários flexíveis</div>
-								<div>Experiência prévia em produção</div>
-								<div>Conhecimento básico em máquinas e equipamentos industriais</div>
+								<div>{data?.requirements[0]}</div>
+								<div>{data?.requirements[1]}</div>
+								<div>{data?.requirements[2]}</div>
+								<div>{data?.requirements[3]}</div>
+								<div>{data?.requirements[4]}</div>
 							</div>
 						</div>
 					</div>
@@ -59,13 +101,16 @@ export default function DetalhesVaga() {
 			</section>
 
 			<section className={styles.description}>
-				<p>
-					A empresa busca um profissional dedicado para integrar sua equipe de produção. Entre as atividades estão o apoio no processo de fabricação, organização do ambiente, registro de informações no sistema e garantia de que as etapas sigam os padrões estabelecidos.
-				</p>
-				<p>O colaborador trabalhará diretamente com a equipe de produção e terá oportunidade de aprender novas funções dentro do setor. A empresa valoriza pessoas responsáveis, proativas e que gostem de trabalhar em equipe.</p>
+				{renderParagraphs(data?.company_description)}
+				{renderParagraphs(data?.company_overview)}
 			</section>
 
-			<EmpresaCultura />
+			<EmpresaCultura
+				company_mission={data?.company_mission}
+				company_vision={data?.company_vision}
+				company_values={data?.company_values}
+				address={data?.address}
+			/>
 		</main>
 	);
 }
