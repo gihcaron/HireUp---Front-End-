@@ -29,8 +29,7 @@ export default function TriagemPage() {
         console.log('Candidatos recebidos:', response.data);
         
         const data = response.data;
-        
-        // Organizar candidatos por status
+      
         const organizados = {
           triagem: data.filter(c => c.status === 'Triagem'),
           entrevista: data.filter(c => c.status === 'Entrevista'),
