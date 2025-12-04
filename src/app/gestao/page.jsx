@@ -1,14 +1,58 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Pagination } from "antd";
+import JobManagementCard from "@/Components/JobManagementCard";
 import styles from "./gestao.module.css";
 
 export default function GestaoVagas() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const { data } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs`
+        );
+        setJobs(data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Erro ao buscar oportunidades de trabalho", err);
+        toast.error("Erro ao buscar oportunidades de trabalho");
+        setLoading(false);
+      }
+    };
+    fetchJobs();
+  }, []);
+
+  const filteredJobs = jobs.filter((job) => 
+    job.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    job.company?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const currentJobs = filteredJobs.slice(startIndex, endIndex);
+
+  const handlePageChange = (page, newPageSize) => {
+    setCurrentPage(page);
+    if (newPageSize !== pageSize) {
+      setPageSize(newPageSize);
+      setCurrentPage(1); 
+    }
+  };
 
   return (
     <main className={styles.page}>
@@ -143,6 +187,8 @@ export default function GestaoVagas() {
                 type="text"
                 placeholder="Vagas"
                 className={styles.searchInput}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
               <button className={styles.searchButton}>Pesquisar</button>
             </div>
@@ -150,52 +196,43 @@ export default function GestaoVagas() {
         </div>
 
         <div className={styles.jobsSection}>
-          <div className={styles.jobCard}>
-            <div className={styles.jobHeader}>
-              <h3 className={styles.jobTitle}>Desenvolvedor Full Stack</h3>
-              <span className={styles.jobDepartment}>Tecnologia</span>
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: '40px' }}>
+              <p>Carregando vagas...</p>
             </div>
-            <div className={styles.jobDetails}>
-              <span className={styles.jobSalary}>R$ 8.000 - R$ 12.000</span>
-              <span className={styles.jobLocation}>São Paulo - SP</span>
+          ) : filteredJobs.length > 0 ? (
+            currentJobs.map((job) => (
+              <JobManagementCard
+                key={job.id}
+                title={job.title}
+                salary={job.salary || "A combinar"}
+                location={`${job.city || ""} - ${job.state || ""}`.trim()}
+                link={`/gestao/${job.id}`}
+              />
+            ))
+          ) : (
+            <div style={{ textAlign: 'center', padding: '40px' }}>
+              <p>Nenhuma vaga encontrada</p>
             </div>
-          </div>
-
-          <div className={styles.jobCard}>
-            <div className={styles.jobHeader}>
-              <h3 className={styles.jobTitle}>Designer UX/UI</h3>
-              <span className={styles.jobDepartment}>Design</span>
-            </div>
-            <div className={styles.jobDetails}>
-              <span className={styles.jobSalary}>R$ 6.000 - R$ 9.000</span>
-              <span className={styles.jobLocation}>São Paulo - SP</span>
-            </div>
-          </div>
-
-          <div className={styles.jobCard}>
-            <div className={styles.jobHeader}>
-              <h3 className={styles.jobTitle}>Analista de Marketing</h3>
-              <span className={styles.jobDepartment}>Marketing</span>
-            </div>
-            <div className={styles.jobDetails}>
-              <span className={styles.jobSalary}>R$ 5.000 - R$ 7.500</span>
-              <span className={styles.jobLocation}>Rio de Janeiro - RJ</span>
-            </div>
-          </div>
-
-          <div className={styles.jobCard}>
-            <div className={styles.jobHeader}>
-              <h3 className={styles.jobTitle}>Gerente de Vendas</h3>
-              <span className={styles.jobDepartment}>Comercial</span>
-            </div>
-            <div className={styles.jobDetails}>
-              <span className={styles.jobSalary}>R$ 7.000 - R$ 10.000</span>
-              <span className={styles.jobLocation}>Belo Horizonte - MG</span>
-            </div>
-          </div>
+          )}
         </div>
 
+        {!loading && filteredJobs.length > 0 && (
+          <div className={styles.paginationContainer}>
+            <Pagination
+              current={currentPage}
+              total={filteredJobs.length}
+              pageSize={pageSize}
+              onChange={handlePageChange}
+              showSizeChanger
+              pageSizeOptions={['6', '12', '18', '24']}
+              showTotal={(total, range) => `${range[0]}-${range[1]} de ${total} vagas`}
+            />
           </div>
+        )}
+
+          </div>
+      <ToastContainer />
     </main>
   );
 }
