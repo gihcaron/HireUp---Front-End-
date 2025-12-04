@@ -3,11 +3,12 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './EmpresaCultura.module.css';
 
-const EmpresaCultura = ({company_mission, company_vision, company_values, address }) => {
+const EmpresaCultura = ({company_mission, company_vision, company_values, address, jobTitle }) => {
   const router = useRouter();
 
   const handleCandidateClick = () => {
-    router.push('/candidaturas/candidatura');
+    const cargo = jobTitle || 'Vaga de Emprego';
+    router.push(`/candidaturas/candidatura?cargo=${encodeURIComponent(cargo)}`);
   };
 
   return (
