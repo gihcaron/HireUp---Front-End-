@@ -106,11 +106,11 @@ export default function DetalhesCandidato() {
               <div className={styles.badges}>
                 <span className={styles.badge}>
                   <span className={styles.badgeIcon}>👤</span>
-                  {candidato.cargo || candidato.position}
+                  {candidato.cargo || candidato.position || 'Auxiliar Administrativo'}
                 </span>
                 <span className={styles.badge}>
                   <span className={styles.badgeIcon}>📊</span>
-                  {candidato.departamento || candidato.department}
+                  {candidato.departamento || candidato.department || 'Administrativo'}
                 </span>
               </div>
             </div>
@@ -118,7 +118,8 @@ export default function DetalhesCandidato() {
             <div className={styles.section}>
               <h3 className={styles.sectionTitle}>Resumo</h3>
               <p className={styles.resumo}>
-                {candidato.resumo || candidato.summary || candidato.description}
+                {candidato.resumo || candidato.summary || candidato.description || 
+                  "Profissional com experiência sólida na área, com habilidades em gestão de documentos, atendimento ao cliente e suporte administrativo. Busco novos desafios para aplicar minhas competências e contribuir para o crescimento da empresa."}
               </p>
             </div>
           </div>

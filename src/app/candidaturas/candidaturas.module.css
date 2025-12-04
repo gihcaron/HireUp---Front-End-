@@ -1,202 +1,196 @@
-/* ===== PÁGINA DE DETALHES DA CANDIDATURA ===== */
+/* ===== PÁGINA DE DETALHES DA CANDIDATURA (ESTILO TIPO FOTO 2) ===== */
+
+:root{
+  --brand-blue: #1565C0;
+  --muted-bg: #f3f6fb;
+  --chip-border: #d9e6ff;
+  --chip-text: #123a6b;
+  --card-bg: #ffffff;
+}
+
 .container {
   min-height: 100vh;
-  background-color: #f5f5f5;
-  padding: 40px 20px;
+  background-color: #ffffff;
+  padding: 28px 20px 60px 20px;
 }
 
-.content {
+.header{
   max-width: 1200px;
-  margin: 0 auto;
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 40px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.header {
+  margin: 0 auto 18px auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid #f0f0f0;
+  gap: 14px;
 }
 
-.title {
-  font-size: 28px;
-  font-weight: 600;
-  color: #333;
+.menuIcon{
+  font-size: 16px;
+  color: var(--brand-blue);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: transparent;
+  line-height: 1;
+}
+
+.title{
+  font-size: 32px;
+  font-weight: 700;
+  color: #111827;
   margin: 0;
 }
 
-.backButton {
-  background-color: #1565C0;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s;
+.content{
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 8px 20px rgba(16,24,40,0.06);
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
 }
 
-.backButton:hover {
-  background-color: #0d47a1;
+.leftColumn{
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
-.detalhesCard {
-  background-color: #fafafa;
-  border-radius: 8px;
-  padding: 24px;
-  margin-bottom: 24px;
-  border: 1px solid #e8e8e8;
+.rightColumn{
+  width: 320px;
+  flex: 0 0 320px;
 }
 
-.detalhesCard h2 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #1565C0;
-  margin: 0 0 16px 0;
+.section{
+  margin-bottom: 22px;
 }
 
-.infoGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 16px;
+.candidateName{
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 14px 0;
 }
 
-.infoItem {
+.contactInfo{
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
 }
 
-.infoLabel {
-  font-size: 13px;
-  font-weight: 600;
-  color: #666;
-  text-transform: uppercase;
-}
-
-.infoValue {
-  font-size: 16px;
-  color: #333;
-  font-weight: 400;
-}
-
-.statusContainer {
-  display: flex;
+.contactItem{
+  display: inline-flex;
   align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 22px;
+  border: 1px solid var(--chip-border);
+  color: var(--chip-text);
+  background: transparent;
+  width: fit-content;
+}
+
+.icon{ font-size: 16px; }
+
+.sectionTitle{
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 12px 0;
+}
+
+.badges{
+  display: flex;
   gap: 12px;
-  margin-top: 24px;
-  padding-top: 24px;
-  border-top: 1px solid #e8e8e8;
+  align-items: center;
+  background: var(--muted-bg);
+  padding: 10px;
+  border-radius: 8px;
 }
 
-.statusLabel {
+.badge{
+  padding: 8px 14px;
+  border-radius: 999px;
   font-size: 14px;
   font-weight: 600;
-  color: #333;
+  border: 1px solid var(--chip-border);
+  background: transparent;
+  color: var(--chip-text);
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
 }
 
-.statusSelect {
-  padding: 8px 16px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+.badgeIcon{ font-size: 14px; }
+
+.resumo{
+  background: var(--muted-bg);
+  padding: 16px;
+  border-radius: 8px;
+  color: #374151;
+  line-height: 1.5;
   font-size: 14px;
-  background-color: #fff;
+  border: 1px solid rgba(15,23,42,0.03);
+}
+
+.statusSection{
+  background: transparent;
+  padding: 8px 0 0 0;
+}
+
+.statusTitle{
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 12px 0;
+}
+
+.statusSelect{
+  width: 100%;
+  appearance: none;
+  padding: 14px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #eef4fb;
+  color: #243b5a;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.buttonGroup{
+  display: flex;
+  gap: 10px;
+}
+
+.btnReject{
+  background: #e9ecef;
+  color: #8a8f95;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
   cursor: pointer;
-  outline: none;
-  transition: border-color 0.2s;
 }
 
-.statusSelect:focus {
-  border-color: #1565C0;
-}
-
-.badge {
-  padding: 6px 14px;
-  border-radius: 16px;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.badgeTriagem {
-  background-color: #ff9800;
+.btnInterview{
+  background: var(--brand-blue);
   color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
-.badgeEntrevista {
-  background-color: #2196f3;
-  color: #fff;
-}
-
-.badgeProposta {
-  background-color: #4caf50;
-  color: #fff;
-}
-
-.badgeAprovado {
-  background-color: #4caf50;
-  color: #fff;
-}
-
-.badgeReprovado {
-  background-color: #f44336;
-  color: #fff;
-}
-
-.loading {
+.loading, .error{
   text-align: center;
-  padding: 60px 20px;
-  font-size: 18px;
+  padding: 46px 20px;
+  font-size: 16px;
   color: #666;
 }
 
-.error {
-  text-align: center;
-  padding: 60px 20px;
-  font-size: 18px;
-  color: #f44336;
-}
-
-.actionsContainer {
-  display: flex;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.saveButton {
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.saveButton:hover {
-  background-color: #45a049;
-}
-
-.cancelButton {
-  background-color: #f44336;
-  color: #fff;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.cancelButton:hover {
-  background-color: #da190b;
+@media (max-width: 880px){
+  .content{ flex-direction: column; padding: 20px; }
+  .rightColumn{ width: 100%; flex: 1 1 auto; }
 }
