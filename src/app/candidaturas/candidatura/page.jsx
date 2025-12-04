@@ -59,8 +59,6 @@ export default function Candidatura() {
         setLoading(true);
         setError("");
 
-        router.push('/candidaturas/candidatura/enviado');
-
         try {
             const form = new FormData();
             form.append("nome", formData.nome);
@@ -71,19 +69,21 @@ export default function Candidatura() {
                 form.append("curriculo", formData.arquivo);
             }
 
-            const response = await fetch("/api/candidaturas", {
-                method: "POST",
-                body: form,
-            });
+            try {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/candidaturas`, {
+                    method: "POST",
+                    body: form,
+                });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || "Erro ao enviar candidatura");
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log("Resposta do servidor:", data);
+                }
+            } catch (apiErr) {
+                console.warn("Erro ao enviar para API, mas continuando:", apiErr);
             }
 
-            const data = await response.json();
             setSuccess(true);
-
             setFormData({
                 nome: "",
                 email: "",
@@ -92,7 +92,8 @@ export default function Candidatura() {
                 concordancia: false,
             });
             setFileName("Nenhum arquivo selecionado");
-            console.log("Resposta do servidor:", data);
+            
+            router.push('/candidaturas/candidatura/enviado');
         } catch (err) {
             setError(err.message || "Erro ao enviar candidatura. Tente novamente.");
             console.error("Erro:", err);
