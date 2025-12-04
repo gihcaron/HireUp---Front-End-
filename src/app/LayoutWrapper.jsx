@@ -14,9 +14,10 @@ export default function LayoutWrapper({ children }) {
     const isEnviadoPage = isContatoEnviado || isCandidaturaEnviado;
     // Esconder header apenas na página /gestao (manter footer)
     const isGestaoPage = pathname === '/gestao';
+    const isPublicarPage = pathname === '/publicar';
 
-    const hideHeader = isLoginPage || isSignPage || isEnviadoPage || isCandidaturasPage || isGestaoPage;
-    const hideFooter = isLoginPage || isSignPage || isEnviadoPage || isCandidaturasPage;
+    const hideHeader = isLoginPage || isSignPage || isEnviadoPage || isCandidaturasPage || isGestaoPage || isPublicarPage;
+    const hideFooter = isLoginPage || isSignPage || isEnviadoPage || isCandidaturasPage || isPublicarPage;
 
     return (
         <>
