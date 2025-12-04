@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Sidebar from '@/Components/Sidebar';
 
 export default function TriagemPage() {
   const router = useRouter();
@@ -106,26 +107,7 @@ export default function TriagemPage() {
 
   return (
     <div className={styles.container}>
-      <aside className={styles.sidebar}>
-        <div className={styles.userProfile}>
-          <div className={styles.avatar}>
-            <span>GC</span>
-          </div>
-          <div className={styles.userName}>
-            <strong>Giovanna Caron</strong>
-            <span>Administrador</span>
-          </div>
-        </div>
-
-        <nav className={styles.menu}>
-          <button className={`${styles.menuItem} ${styles.active}`}>
-            Acompanhar Triagem
-          </button>
-          <button className={styles.menuItem} onClick={() => router.push('/gestao')}>Gestão de Vagas</button>
-          <button className={styles.menuItem}>Publicar Nova Vaga</button>
-          <button className={styles.menuItem}>Sair</button>
-        </nav>
-      </aside>
+      <Sidebar activeMenu="triagem" />
 
       <main className={styles.mainContent}>
         <header className={styles.header}>
