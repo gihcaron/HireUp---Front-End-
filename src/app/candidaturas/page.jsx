@@ -14,6 +14,12 @@ export default function TriagemPage() {
     entrevista: [],
     proposta: []
   });
+  const [candidatosOriginais, setCandidatosOriginais] = useState({
+    triagem: [],
+    entrevista: [],
+    proposta: []
+  });
+  const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -39,6 +45,7 @@ export default function TriagemPage() {
         console.log('Candidatos organizados:', organizados);
         
         setCandidatos(organizados);
+        setCandidatosOriginais(organizados);
         setLoading(false);
       } catch (error) {
         console.error('Erro ao buscar candidatos:', error);
@@ -52,6 +59,30 @@ export default function TriagemPage() {
 
   const handleVerMais = (id) => {
     router.push(`/candidaturas/${id}`);
+  };
+
+  const handleSearch = (e) => {
+    const termo = e.target.value.toLowerCase();
+    setSearchTerm(termo);
+
+    if (termo === '') {
+      setCandidatos(candidatosOriginais);
+      return;
+    }
+
+    const filtrarCandidatos = (lista) => {
+      return lista.filter(candidato => 
+        candidato.name.toLowerCase().includes(termo) ||
+        candidato.email.toLowerCase().includes(termo) ||
+        (candidato.phone && candidato.phone.toLowerCase().includes(termo))
+      );
+    };
+
+    setCandidatos({
+      triagem: filtrarCandidatos(candidatosOriginais.triagem),
+      entrevista: filtrarCandidatos(candidatosOriginais.entrevista),
+      proposta: filtrarCandidatos(candidatosOriginais.proposta)
+    });
   };
 
   if (loading) {
@@ -119,7 +150,12 @@ export default function TriagemPage() {
           />
           <div className={styles.searchBar}>
             <label>Pesquisar por</label>
-            <input type="text" placeholder="Candidatos" />
+            <input 
+              type="text" 
+              placeholder="Candidatos" 
+              value={searchTerm}
+              onChange={handleSearch}
+            />
           </div>
         </header>
 
