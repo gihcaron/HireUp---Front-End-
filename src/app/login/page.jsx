@@ -34,6 +34,7 @@ export default function Login() {
             if (response.ok) {
 
                 localStorage.setItem('token', data.token);
+                localStorage.setItem("userId", data.userId);
                 localStorage.setItem('userRole', data.role);
                 localStorage.setItem('userType', userType); 
                 localStorage.getItem("userId")

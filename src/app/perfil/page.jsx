@@ -38,51 +38,56 @@ export default function Perfil() {
         "Tailwind CSS", "Git", "Figma", "Node.js"
     ]);
 
-    useEffect(() => {
-    async function loadUser() {
-        const token = localStorage.getItem("token");
-        const userId = localStorage.getItem("userId");
+useEffect(() => {
+  async function loadUser() {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
 
-        if (!token || !userId) {
-            router.push("/login");
-            return;
-        }
+    console.log("TOKEN:", token);
+    console.log("USER ID:", userId);
 
-        try {
-            const res = await fetch(`http://localhost:3000/api/users/${userId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            if (!res.ok) {
-                throw new Error("Erro ao carregar usuário");
-            }
-
-            const data = await res.json();
-
-            setUserData(prev => ({
-                ...prev,
-                name: data.name,
-                email: data.email,
-                phone: data.phone || "",
-                location: data.location || "",
-                title: data.title || "",
-                bio: data.bio || "",
-                linkedin: data.linkedin || "",
-                github: data.github || "",
-                profileImage: data.avatar_url || null
-            }));
-
-            setLoading(false);
-
-        } catch (error) {
-            console.error(error);
-            router.push("/login");
-        }
+    if (!token || !userId) {
+      router.push("/login");
+      return;
     }
 
-    loadUser();
+    try {
+      const res = await fetch(
+        `http://localhost:3000/api/users/${userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error("Erro ao carregar usuário");
+      }
+
+      const data = await res.json();
+      console.log("USER DATA:", data);
+
+      setUserData({
+        name: data.name,
+        email: data.email,
+        phone: data.phone || "",
+        location: data.location || "",
+        title: data.title || "",
+        bio: data.bio || "",
+        linkedin: data.linkedin || "",
+        github: data.github || "",
+        profileImage: data.avatar_url || null,
+      });
+
+      setLoading(false);
+    } catch (error) {
+      console.error("ERRO AO BUSCAR USER:", error);
+      router.push("/login");
+    }
+  }
+
+  loadUser();
 }, []);
 
     if (loading || !userData) {
