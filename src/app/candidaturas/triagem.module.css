@@ -311,33 +311,227 @@
   text-decoration: underline;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   .cardsContainer {
-    flex-direction: column;
-  }
-
-  .column {
-    min-width: 100%;
+    gap: 20px;
+    padding: 24px 30px;
   }
 }
 
-@media (max-width: 768px) {
-  .sidebar {
-    width: 180px;
+@media (max-width: 1200px) {
+  .cardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 20px;
   }
 
   .header {
-    padding: 16px 20px;
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 16px 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  .cardsContainer {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .header {
+    padding: 12px 16px;
+    gap: 16px;
   }
 
   .searchBar {
     max-width: 100%;
+  }
+
+  .bigCard {
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .mainContent {
+    overflow-y: auto;
+  }
+
+  .header {
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .headerLogo {
+    width: 120px;
+    height: 40px;
+    align-self: center;
+  }
+
+  .searchBar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .searchBar label {
+    font-size: 13px;
+  }
+
+  .searchBar input {
     width: 100%;
+    padding: 8px 12px;
+    font-size: 13px;
   }
 
   .cardsContainer {
-    padding: 20px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+    overflow-y: visible;
+  }
+
+  .bigCard {
+    padding: 16px;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .bigCardTitle {
+    font-size: 20px;
+    padding-bottom: 10px;
+  }
+
+  .smallCard {
+    padding: 14px;
+  }
+
+  .candidatoNome {
+    font-size: 15px;
+  }
+
+  .badge {
+    padding: 4px 10px;
+    font-size: 10px;
+  }
+
+  .label {
+    font-size: 12px;
+  }
+
+  .value {
+    font-size: 12px;
+  }
+
+  .verMais {
+    font-size: 12px;
+  }
+}
+
+/* Responsividade para mobile pequeno */
+@media (max-width: 480px) {
+  .header {
+    padding: 10px 12px;
+  }
+
+  .headerLogo {
+    width: 100px;
+    height: 35px;
+  }
+
+  .cardsContainer {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .bigCard {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .bigCardTitle {
+    font-size: 18px;
+  }
+
+  .smallCard {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .candidatoNome {
+    font-size: 14px;
+  }
+
+  .badge {
+    align-self: flex-start;
+  }
+
+  .infoGroup {
+    gap: 2px;
+  }
+
+  .label {
+    font-size: 11px;
+  }
+
+  .value {
+    font-size: 11px;
+    word-break: break-word;
+  }
+
+  .verMais {
+    font-size: 11px;
+    padding: 6px 0;
+  }
+}
+
+/* Melhorias para sidebar responsiva */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu {
+    flex-direction: row;
+    overflow-x: auto;
+    margin-top: 0;
+  }
+
+  .menuItem {
+    white-space: nowrap;
+    padding: 12px 16px;
+    font-size: 12px;
+  }
+
+  .userProfile {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 16px;
+  }
+
+  .userName {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 1200px) {
+  .column {
+    min-width: 100%;
   }
 }
