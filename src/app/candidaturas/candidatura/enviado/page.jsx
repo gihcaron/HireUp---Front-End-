@@ -50,11 +50,7 @@ export default function Enviado() {
         </div>
 
         <div className={styles.actions}>
-          <Link href="/candidaturas/acompanhamento" className={styles.primaryButton}>
-            <span className={styles.buttonText}>Acompanhar Candidatura</span>
-            <span className={styles.buttonIcon}>📋</span>
-          </Link>
-          <Link href="/home" className={styles.secondaryButton}>
+          <Link href="/home" className={styles.primaryButton}>
             <span className={styles.buttonText}>Voltar para a Home</span>
             <span className={styles.buttonIcon}>→</span>
           </Link>
