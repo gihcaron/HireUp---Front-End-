@@ -121,7 +121,7 @@ export default function TriagemPage() {
           <button className={`${styles.menuItem} ${styles.active}`}>
             Acompanhar Triagem
           </button>
-          <button className={styles.menuItem}>Gestão de Vagas</button>
+          <button className={styles.menuItem} onClick={() => router.push('/gestao')}>Gestão de Vagas</button>
           <button className={styles.menuItem}>Publicar Nova Vaga</button>
           <button className={styles.menuItem}>Sair</button>
         </nav>

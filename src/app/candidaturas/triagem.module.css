@@ -141,19 +141,17 @@
 }
 
 .cardsContainer {
-  display: flex;
-  gap: 48px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
   padding: 32px 40px;
-  overflow-x: auto;
   overflow-y: auto;
   flex: 1;
   background-color: #f5f5f5;
+  align-content: start;
 }
 
 .bigCard {
-  flex: 1;
-  min-width: 420px;
-  max-width: 450px;
   background-color: #ffffff;
   border-radius: 12px;
   padding: 22px;
