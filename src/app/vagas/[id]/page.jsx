@@ -110,6 +110,7 @@ export default function DetalhesVaga() {
 				company_vision={data?.company_vision}
 				company_values={data?.company_values}
 				address={data?.address}
+				jobTitle={data?.title}
 			/>
 		</main>
 	);
