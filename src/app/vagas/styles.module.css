@@ -5,6 +5,71 @@
   min-height: 100vh;
 }
 
+
+/* How It Works */
+.howItWorks {
+  max-width: 1200px;
+  margin: 36px auto;
+  padding: 10px 20px;
+}
+
+.sectionHeading {
+  margin: 0 0 18px 0;
+  font-size: 1.25rem;
+  color: #004AAD;
+  font-weight: 800;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.stepCard {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 74, 173, 0.04);
+  text-align: center;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 74, 173, 0.08);
+  color: #004AAD;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 74, 173, 0.06);
+}
+
+.stepTitle {
+  margin: 0;
+  font-size: 1rem;
+  color: #003580;
+  font-weight: 700;
+}
+
+.stepDesc {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+
+
 .headerBanner {
   background: linear-gradient(135deg, #004AAD 0%, #003580 100%);
   color: white;
@@ -30,6 +95,191 @@
   opacity: 0.95;
   font-weight: 300;
   letter-spacing: 0.5px;
+}
+
+/* About (alternative, non-card) */
+.aboutAlt {
+  max-width: 1200px;
+  margin: 28px auto;
+  padding: 48px 28px;
+  background: linear-gradient(180deg, #fbfdff 0%, #f3f8ff 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(2, 30, 86, 0.04);
+}
+
+.aboutAltInner {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.aboutAltMedia {
+  flex: 1 1 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aboutArt {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0,74,173,0.12), rgba(0,74,173,0.04));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0,74,173,0.08);
+}
+
+.aboutAltText {
+  flex: 2 1 520px;
+}
+
+.aboutAltTitle {
+  margin: 0 0 8px 0;
+  font-size: 1.6rem;
+  color: #003580;
+  font-weight: 800;
+}
+
+.aboutAltLead {
+  margin: 0;
+  color: #334155;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.aboutAltFeatures {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.aboutAltFeature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0,74,173,0.04);
+  padding: 10px 14px;
+  border-radius: 10px;
+}
+
+.aboutAltFeatureIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: white;
+  color: #004AAD;
+  box-shadow: 0 4px 12px rgba(0,74,173,0.06);
+}
+
+.aboutAltFeatureText {
+  font-size: 0.95rem;
+  color: #08305a;
+  font-weight: 600;
+}
+
+/* Blue info section */
+.infoBlueSection {
+  margin: 28px auto;
+  padding: 40px 28px;
+  max-width: 1200px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #004AAD 0%, #003580 100%);
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 68, 140, 0.12);
+}
+
+.infoBlueInner {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+  align-items: center;
+}
+
+.infoBlueText h3 {
+  margin: 0 0 8px 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.infoBlueText p {
+  margin: 0;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.6;
+}
+
+.infoBlueList {
+  margin-top: 16px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.infoBlueItem {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 12px;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.infoBlueIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+
+.infoBlueStat {
+  font-weight: 800;
+  color: #fff;
+}
+
+.infoBlueAside {
+  background: rgba(255,255,255,0.04);
+  padding: 18px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.infoBlueAside h4 {
+  margin: 0 0 8px 0;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.infoBlueCTA {
+  margin-top: 12px;
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: white;
+  color: #003580;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .infoBlueInner {
+    grid-template-columns: 1fr;
+  }
+
+  .infoBlueAside {
+    order: 2;
+  }
 }
 
 /* Main Container */
@@ -158,6 +408,12 @@
   }
 }
 
+.jobVacancyTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #004AAD;
+}
 /* Loading Container */
 .loadingContainer {
   display: flex;
@@ -261,6 +517,16 @@
   .jobVacancyList {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  /*  responsive rules for About/Stories/Steps */
+  .stepsGrid,
+  .storiesList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .aboutContent {
+    align-items: flex-start;
+  }
 }
 
 @media (max-width: 768px) {
@@ -298,6 +564,158 @@
   .jobVacancyList {
     grid-template-columns: 1fr;
   }
+
+  .aboutContent {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .aboutIcon {
+    margin: 0 auto;
+  }
+
+  .aboutDescription {
+    max-width: 100%;
+  }
+
+  .stepsGrid,
+  .storiesList {
+    grid-template-columns: 1fr;
+  }
+
+  .storyCard {
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .storyAvatar {
+    margin-bottom: 8px;
+  }
+
+  .storiesActions {
+    justify-content: center;
+  }
+}
+
+/* Responsive tweaks for AboutAlt and InfoBlue */
+@media (max-width: 1024px) {
+  .aboutAlt {
+    padding: 40px 22px;
+  }
+
+  .aboutAltInner {
+    grid-template-columns: 1fr 280px;
+  }
+
+  .aboutArt {
+    width: 180px;
+    height: 180px;
+  }
+
+  .aboutAltTitle {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .aboutAlt {
+    padding: 28px 18px;
+  }
+
+  .aboutAltInner {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  .aboutAltMedia {
+    order: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .aboutArt {
+    width: 140px;
+    height: 140px;
+  }
+
+  .aboutAltText {
+    order: 1;
+  }
+
+  .aboutAltFeatures {
+    gap: 10px;
+  }
+
+  .aboutAltFeature {
+    flex: 1 1 calc(50% - 10px);
+  }
+
+  .infoBlueSection {
+    padding: 28px 18px;
+  }
+
+  .infoBlueInner {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .infoBlueAside {
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutAlt {
+    padding: 20px 12px;
+  }
+
+  .aboutAltInner {
+    gap: 12px;
+  }
+
+  .aboutArt {
+    width: 110px;
+    height: 110px;
+  }
+
+  .aboutAltTitle {
+    font-size: 1.2rem;
+  }
+
+  .aboutAltLead {
+    font-size: 0.95rem;
+  }
+
+  .aboutAltFeature {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+  }
+
+  .infoBlueSection {
+    padding: 18px 12px;
+  }
+
+  .infoBlueInner {
+    grid-template-columns: 1fr;
+  }
+
+  .infoBlueItem {
+    width: 100%;
+  }
+
+  .infoBlueAside {
+    margin-top: 8px;
+    padding: 14px;
+  }
+
+  .infoBlueCTA {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 @media (max-width: 480px) {
@@ -324,5 +742,25 @@
 
   .jobVacancyList {
     grid-template-columns: 1fr;
+  }
+
+  .aboutHireUp {
+    padding: 24px 12px;
+  }
+
+  .aboutIcon {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    font-size: 1.6rem;
+  }
+
+  .sectionHeading {
+    font-size: 1.05rem;
+  }
+
+  .stepCard {
+    min-height: auto;
+    padding: 16px;
   }
 }

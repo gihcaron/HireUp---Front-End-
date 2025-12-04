@@ -9,7 +9,7 @@ import Image from "next/image";
 import axios from "axios";
 
 export default function DetalhesVaga() {
-	    const { id } = useParams();
+	const { id } = useParams();
     const [data, setData] = useState(null);
     const [activeTab, setActiveTab] = useState('job');
 
