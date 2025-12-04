@@ -1,10 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from '@/Components/Sidebar';
 import styles from './publicar.module.css';
 
 export default function PublicarVaga() {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formData, setFormData] = useState({
         titulo: '',
         status: '',
@@ -24,10 +27,42 @@ export default function PublicarVaga() {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Form data:', formData);
-        // Aqui você pode adicionar a lógica para enviar os dados
+        
+        // Validação básica
+        if (!formData.titulo || !formData.empresa || !formData.tipo) {
+            toast.error('Por favor, preencha os campos obrigatórios: Título, Empresa e Tipo');
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        try {
+            // Simulação de envio (fictício)
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // Sucesso
+            toast.success('Vaga publicada com sucesso!');
+            
+            // Limpar o formulário
+            setFormData({
+                titulo: '',
+                status: '',
+                descricao: '',
+                salario: '',
+                empresa: '',
+                regiao: '',
+                tipo: '',
+                idRecrutador: ''
+            });
+
+        } catch (error) {
+            console.error('Erro ao publicar vaga:', error);
+            toast.error('Erro ao publicar vaga. Tente novamente.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -46,7 +81,9 @@ export default function PublicarVaga() {
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <div className={styles.formRow}>
                         <div className={styles.formGroup}>
-                            <label htmlFor="titulo" className={styles.label}>Título</label>
+                            <label htmlFor="titulo" className={styles.label}>
+                                Título <span className={styles.required}>*</span>
+                            </label>
                             <input
                                 type="text"
                                 id="titulo"
@@ -55,6 +92,7 @@ export default function PublicarVaga() {
                                 onChange={handleChange}
                                 className={styles.input}
                                 placeholder="Título"
+                                required
                             />
                         </div>
 
@@ -108,7 +146,9 @@ export default function PublicarVaga() {
                         </div>
 
                         <div className={styles.formGroup}>
-                            <label htmlFor="empresa" className={styles.label}>Empresa</label>
+                            <label htmlFor="empresa" className={styles.label}>
+                                Empresa <span className={styles.required}>*</span>
+                            </label>
                             <input
                                 type="text"
                                 id="empresa"
@@ -117,6 +157,7 @@ export default function PublicarVaga() {
                                 onChange={handleChange}
                                 className={styles.input}
                                 placeholder="Empresa"
+                                required
                             />
                         </div>
                     </div>
@@ -136,7 +177,9 @@ export default function PublicarVaga() {
                         </div>
 
                         <div className={styles.formGroup}>
-                            <label htmlFor="tipo" className={styles.label}>Tipo</label>
+                            <label htmlFor="tipo" className={styles.label}>
+                                Tipo <span className={styles.required}>*</span>
+                            </label>
                             <input
                                 type="text"
                                 id="tipo"
@@ -144,7 +187,8 @@ export default function PublicarVaga() {
                                 value={formData.tipo}
                                 onChange={handleChange}
                                 className={styles.input}
-                                placeholder="Tipo"
+                                placeholder="Tipo (ex: CLT, Estágio, PJ)"
+                                required
                             />
                         </div>
                     </div>
@@ -165,12 +209,29 @@ export default function PublicarVaga() {
                     </div>
 
                     <div className={styles.buttonContainer}>
-                        <button type="submit" className={styles.submitButton}>
-                            Publicar Vaga
+                        <button 
+                            type="submit" 
+                            className={styles.submitButton}
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Publicando...' : 'Publicar Vaga'}
                         </button>
                     </div>
                 </form>
             </main>
+
+            <ToastContainer 
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     );
 }
