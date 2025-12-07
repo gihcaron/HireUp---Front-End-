@@ -24,6 +24,12 @@
   gap: 40px;
 }
 
+/* Melhor controle do tamanho das imagens em telas menores */
+.iconImage {
+  width: 24px;
+  height: 24px;
+}
+
 .cardsContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -65,6 +71,11 @@
   font-size: 0.6rem;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+}
+
+.iconImage {
+  display: block;
+  filter: brightness(0) invert(1);
 }
 
 .cardTitle {
@@ -150,6 +161,24 @@
 }
 
 /* Responsividade */
+
+/* Tablets e notebooks pequenos */
+@media (max-width: 1024px) {
+  .empresaCulturaSection {
+    padding: 50px 20px;
+  }
+  
+  .contentGrid {
+    gap: 40px;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+}
+
+/* Tablets em modo retrato */
 @media (max-width: 768px) {
   .empresaCulturaSection {
     padding: 40px 15px;
@@ -164,6 +193,11 @@
     gap: 20px;
   }
   
+  .sectionTitle {
+    font-size: 1.8rem;
+    margin-bottom: 35px;
+  }
+  
   .card {
     padding: 18px;
   }
@@ -173,22 +207,145 @@
     height: 50px;
   }
   
+  .cardTitle {
+    font-size: 0.95rem;
+  }
+  
+  .cardDescription {
+    font-size: 0.8rem;
+  }
+  
   .mapContainer {
     height: 200px;
   }
+  
+  .cardsContainer {
+    gap: 15px;
+  }
+  
+  .iconImage {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .locationTitle {
+    font-size: 1.1rem;
+  }
+  
+  .companyDescription {
+    font-size: 0.85rem;
+  }
 }
 
+/* Celulares grandes */
 @media (max-width: 480px) {
-  .candidateButton {
-    padding: 10px 24px;
-    font-size: 0.9rem;
+  .empresaCulturaSection {
+    padding: 30px 15px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+  }
+  
+  .contentGrid {
+    gap: 25px;
   }
   
   .card {
     padding: 15px;
   }
   
+  .iconCircle {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .cardTitle {
+    font-size: 0.9rem;
+    margin: 8px 0 6px 0;
+  }
+  
+  .cardDescription {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+  
+  .candidateButton {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .callToAction {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
   .mapContainer {
-    height: 220px;
+    min-height: 220px;
+  }
+  
+  .iconImage {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .locationTitle {
+    font-size: 1rem;
+    margin-bottom: 12px;
+  }
+  
+  .companyDescription {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+}
+
+/* Celulares pequenos */
+@media (max-width: 360px) {
+  .empresaCulturaSection {
+    padding: 25px 10px;
+  }
+  
+  .sectionTitle {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    padding: 12px;
+  }
+  
+  .iconCircle {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .cardTitle {
+    font-size: 0.85rem;
+  }
+  
+  .cardDescription {
+    font-size: 0.7rem;
+  }
+  
+  .candidateButton {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
+  
+  .mapContainer {
+    min-height: 200px;
+  }
+  
+  .cardsContainer {
+    gap: 12px;
+  }
+  
+  .iconImage {
+    width: 16px;
+    height: 16px;
   }
 }

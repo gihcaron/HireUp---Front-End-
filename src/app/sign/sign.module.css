@@ -56,8 +56,7 @@
     font-weight: 300;
 }
 
-
-.loginSection {
+.signupSection {
     flex: 1;
     background: white;
     display: flex;
@@ -66,12 +65,12 @@
     padding: 2rem;
 }
 
-.loginContainer {
+.signupContainer {
     width: 100%;
     max-width: 400px;
 }
 
-.loginForm {
+.signupForm {
     width: 100%;
 }
 
@@ -149,7 +148,7 @@
     width: 1rem;
     height: 1rem;
     margin-right: 0.5rem;
-    accent-color: #2563eb;
+    accent-color: #2563eb; /* A cor da checkbox quando selecionada */
 }
 
 .checkboxText {
@@ -157,18 +156,7 @@
     font-size: 0.9rem;
 }
 
-.forgotPassword {
-    color: #2563eb;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.forgotPassword:hover {
-    text-decoration: underline;
-}
-
-.loginButton {
+.signupButton {
     width: 100%;
     background: #2563eb;
     color: white;
@@ -182,27 +170,27 @@
     margin-bottom: 1.5rem;
 }
 
-.loginButton:hover {
+.signupButton:hover {
     background: #1d4ed8;
 }
 
-.signupSection {
+.loginSection {
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-top: 1rem;
 }
 
-.signupText {
+.loginText {
     color: #6b7280;
     margin: 0;
 }
 
-.signupLink {
+.loginLink {
     color: #2563eb;
     text-decoration: none;
     font-weight: 600;
 }
 
-.signupLink:hover {
+.loginLink:hover {
     text-decoration: underline;
 }
 
@@ -334,7 +322,7 @@
         font-size: 1rem;
     }
 
-    .loginSection {
+    .signupSection {
         padding: 1rem;
     }
 

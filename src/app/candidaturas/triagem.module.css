@@ -1,0 +1,537 @@
+.container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f5f5f5;
+}
+
+.sidebar {
+  width: 212px;
+  background-color: #1565c0;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  padding: 20px;
+  text-align: center;
+  background-color: #1565c0;
+}
+
+.userProfile {
+  background-color: #1565c0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: #1565c0;
+}
+
+.userName {
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.userName strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.userName span {
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.menuItem {
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 16px 20px;
+  text-align: left;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: 400;
+}
+
+.menuItem:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menuItem.active {
+  background-color: #1976d2;
+  font-weight: 500;
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  background-color: #fff;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  gap: 40px;
+}
+
+.headerLogo {
+  object-fit: contain;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 600px;
+}
+
+.searchBar label {
+  font-size: 14px;
+  color: #333;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.searchBar input {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.searchBar input:focus {
+  border-color: #1565c0;
+}
+
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 32px 40px;
+  overflow-y: auto;
+  flex: 1;
+  background-color: #f5f5f5;
+  align-content: start;
+}
+
+.bigCard {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+}
+
+.bigCardTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.column {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.columnTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  padding-bottom: 8px;
+}
+
+.cardsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.smallCard {
+  background-color: #fafafa;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s;
+  border: 1px solid #e8e8e8;
+}
+
+.smallCard:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.candidatoNome {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  text-decoration: underline;
+  text-decoration-color: #1565c0;
+  text-underline-offset: 3px;
+}
+
+.badge {
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-transform: none;
+}
+
+.JovemAprendiz {
+  background-color: #1565c0;
+  color: #fff;
+}
+
+.Trainee {
+  background-color: #1565c0;
+  color: #fff;
+}
+
+.Efetivo {
+  background-color: #1565c0;
+  color: #fff;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infoGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1565c0;
+}
+
+.value {
+  font-size: 13px;
+  color: #333;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.verMais {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  color: #1565c0;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 0;
+  transition: opacity 0.2s;
+}
+
+.verMais:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+@media (max-width: 1400px) {
+  .cardsContainer {
+    gap: 20px;
+    padding: 24px 30px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .cardsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .header {
+    padding: 16px 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  .cardsContainer {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .header {
+    padding: 12px 16px;
+    gap: 16px;
+  }
+
+  .searchBar {
+    max-width: 100%;
+  }
+
+  .bigCard {
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .mainContent {
+    overflow-y: auto;
+  }
+
+  .header {
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .headerLogo {
+    width: 120px;
+    height: 40px;
+    align-self: center;
+  }
+
+  .searchBar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .searchBar label {
+    font-size: 13px;
+  }
+
+  .searchBar input {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .cardsContainer {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px;
+    overflow-y: visible;
+  }
+
+  .bigCard {
+    padding: 16px;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .bigCardTitle {
+    font-size: 20px;
+    padding-bottom: 10px;
+  }
+
+  .smallCard {
+    padding: 14px;
+  }
+
+  .candidatoNome {
+    font-size: 15px;
+  }
+
+  .badge {
+    padding: 4px 10px;
+    font-size: 10px;
+  }
+
+  .label {
+    font-size: 12px;
+  }
+
+  .value {
+    font-size: 12px;
+  }
+
+  .verMais {
+    font-size: 12px;
+  }
+}
+
+/* Responsividade para mobile pequeno */
+@media (max-width: 480px) {
+  .header {
+    padding: 10px 12px;
+  }
+
+  .headerLogo {
+    width: 100px;
+    height: 35px;
+  }
+
+  .cardsContainer {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .bigCard {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .bigCardTitle {
+    font-size: 18px;
+  }
+
+  .smallCard {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .cardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .candidatoNome {
+    font-size: 14px;
+  }
+
+  .badge {
+    align-self: flex-start;
+  }
+
+  .infoGroup {
+    gap: 2px;
+  }
+
+  .label {
+    font-size: 11px;
+  }
+
+  .value {
+    font-size: 11px;
+    word-break: break-word;
+  }
+
+  .verMais {
+    font-size: 11px;
+    padding: 6px 0;
+  }
+}
+
+/* Melhorias para sidebar responsiva */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .menu {
+    flex-direction: row;
+    overflow-x: auto;
+    margin-top: 0;
+  }
+
+  .menuItem {
+    white-space: nowrap;
+    padding: 12px 16px;
+    font-size: 12px;
+  }
+
+  .userProfile {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 16px;
+  }
+
+  .userName {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 1200px) {
+  .column {
+    min-width: 100%;
+  }
+}

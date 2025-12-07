@@ -1,0 +1,612 @@
+.page {
+  min-height: 100vh;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background-color: #f8f9fa;
+  position: relative;
+  padding: 0 60px;
+}
+
+.hamburgerButton {
+  position: fixed;
+  top: 36px;
+  left: 20px;
+  z-index: 1001;
+  width: 50px;
+  height: 50px;
+  background: white;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.hamburgerButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.hamburgerLine {
+  width: 25px;
+  height: 3px;
+  background-color: #0052CC;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  background: linear-gradient(180deg, #0052CC 0%, #003a99 100%);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.logoSection {
+  padding: 25px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+  filter: brightness(0) invert(1);
+  margin-bottom: 15px;
+}
+
+.logoTextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoText {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+  letter-spacing: 1px;
+}
+
+.logoSubtext {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+  line-height: 1.2;
+}
+
+
+.userProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 20px;
+}
+
+.userAvatar {
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatarImage {
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  display: block;
+}
+
+.userInfo {
+  color: white;
+  margin-top: 4px;
+}
+
+.userName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: white;
+}
+
+.userRole {
+  font-size: 0.9rem;
+  margin: 4px 0 0 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.navigation {
+  flex: 1;
+}
+
+.menuSection {
+  padding: 20px 20px 10px 20px;
+}
+
+.sectionTitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.menuList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menuItem {
+  width: 100%;
+}
+
+.menuLink {
+  display: block;
+  padding: 15px 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.menuLink:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-left-color: white;
+}
+
+.content {
+  margin-left: 0;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.heroImage {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.workImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px;
+  opacity: 0.8;
+}
+
+.welcomeCard {
+  background: linear-gradient(135deg, #0052CC, #003a99);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.welcomeContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  color: white;
+}
+
+.logoImage {
+  filter: brightness(0) invert(1);
+  margin-bottom: 15px;
+}
+
+.welcomeLogo {
+  filter: brightness(0) invert(1);
+  margin-bottom: 10px;
+}
+
+.welcomeTitle {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 10px 0 5px 0;
+}
+
+.welcomeSubtitle {
+  display: block;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.welcomeText {
+  font-size: 0.9rem;
+  margin: 0 0 5px 0;
+  opacity: 0.9;
+}
+
+.welcomeUser {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.statCard {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+}
+
+.statIcon {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.statNumber {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0052CC;
+  margin-bottom: 10px;
+}
+
+.statLabel {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.searchSection {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.searchTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.searchContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.searchInputWrapper {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px 16px;
+  gap: 12px;
+  width: fit-content;
+}
+
+.searchIcon {
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  font-size: 1rem;
+  background: transparent;
+  min-width: 600px;
+  color: #333;
+}
+
+.searchInput::placeholder {
+  color: #999;
+}
+
+.searchButton {
+  background: #0052CC;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.searchButton:hover {
+  background: #003d99;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #0052CC;
+}
+
+.jobsSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.jobCard {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.jobCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.jobHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.jobTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  flex: 1;
+}
+
+.jobDepartment {
+  background: #f0f4ff;
+  color: #0052CC;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.jobDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.jobSalary {
+  font-weight: 600;
+  color: #28a745;
+  font-size: 0.9rem;
+}
+
+.jobLocation {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.jobsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.jobCard {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.jobCard:hover {
+  transform: translateY(-2px);
+}
+
+.jobHeader {
+  margin-bottom: 16px;
+}
+
+.jobTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+.jobDepartment {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.departmentLabel {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.departmentValue {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.jobFooter {
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+}
+
+.jobSalary {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.salaryLabel {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.salaryValue {
+  font-size: 0.9rem;
+  color: #0052CC;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+  
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 80px 15px 15px 15px;
+  }
+  
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar {
+    width: 280px;
+  }
+  
+  .searchInputWrapper {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .searchInput {
+    min-width: 150px;
+  }
+}
+
+/* Paginação */
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+  padding: 20px;
+}
+
+.paginationContainer :global(.ant-pagination) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.paginationContainer :global(.ant-pagination-item) {
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  min-width: 32px;
+  height: 32px;
+  line-height: 30px;
+  transition: all 0.3s;
+}
+
+.paginationContainer :global(.ant-pagination-item:hover) {
+  border-color: #0052CC;
+}
+
+.paginationContainer :global(.ant-pagination-item-active) {
+  background-color: #0052CC;
+  border-color: #0052CC;
+}
+
+.paginationContainer :global(.ant-pagination-item-active a) {
+  color: white;
+}
+
+.paginationContainer :global(.ant-pagination-prev),
+.paginationContainer :global(.ant-pagination-next) {
+  min-width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.paginationContainer :global(.ant-pagination-options) {
+  margin-left: 16px;
+}
+
+@media (max-width: 768px) {
+  .paginationContainer {
+    margin: 20px 0;
+    padding: 10px;
+  }
+
+  .paginationContainer :global(.ant-pagination) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

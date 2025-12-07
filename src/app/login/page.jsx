@@ -1,8 +1,57 @@
+"use client";
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './login.module.css';
 
 export default function Login() {
+    const router = useRouter();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [userType, setUserType] = useState('candidato'); 
+
+    const handleSubmit = async (e) => {
+        e.preventDefault(); 
+        setError('');
+        setLoading(true);
+
+        try {
+            const response = await fetch('http://localhost:3000/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+
+                localStorage.setItem('token', data.token);
+                localStorage.setItem("userId", data.userId);
+                localStorage.setItem('userRole', data.role);
+                localStorage.setItem('userType', userType); 
+                localStorage.getItem("userId")
+
+                router.push('/home') 
+            } else {
+                setError(data.message || 'Email ou senha incorretos.');
+            }
+
+        } catch (err) {
+            console.error(err);
+            setError('Erro ao conectar com o servidor. O backend está rodando?');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.videoSection}>
@@ -11,9 +60,7 @@ export default function Login() {
                         <Image src="/images/logo.png" alt="HireUp Logo" className={styles.logo} width={100} height={100} />
                     </div>
 
-                    {/* Área reservada para o vídeo */}
                     <div className={styles.videoPlaceholder}>
-                        {/* Aqui será colocado o vídeo da mão e animações */}
                         <div className={styles.videoContent}>
                             <p>Video placeholder - Conectando talentos, criando oportunidades</p>
                         </div>
@@ -27,7 +74,40 @@ export default function Login() {
                         <h1 className={styles.welcomeTitle}>Welcome Back!</h1>
                         <p className={styles.welcomeSubtitle}>Log in to your account</p>
 
-                        <form className={styles.form}>
+                        <div className={styles.userTypeSelector}>
+                            <button
+                                type="button"
+                                className={`${styles.userTypeButton} ${userType === 'candidato' ? styles.active : ''}`}
+                                onClick={() => setUserType('candidato')}
+                            >
+                                <svg className={styles.userTypeIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                Candidato
+                            </button>
+                            <button
+                                type="button"
+                                className={`${styles.userTypeButton} ${userType === 'recrutador' ? styles.active : ''}`}
+                                onClick={() => setUserType('recrutador')}
+                            >
+                                <svg className={styles.userTypeIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                                Recrutador
+                            </button>
+                        </div>
+
+                        {error && (
+                            <div style={{ color: 'red', textAlign: 'center', marginBottom: '1rem', padding: '10px', backgroundColor: '#ffe6e6', borderRadius: '5px' }}>
+                                {error}
+                            </div>
+                        )}
+
+                        <form className={styles.form} onSubmit={handleSubmit}>
                             <div className={styles.inputGroup}>
                                 <div className={styles.inputWrapper}>
                                     <svg className={styles.inputIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -35,9 +115,12 @@ export default function Login() {
                                         <circle cx="12" cy="7" r="4"></circle>
                                     </svg>
                                     <input
-                                        type="text"
-                                        placeholder="Username"
+                                        type="email"
+                                        placeholder="Email Address"
                                         className={styles.input}
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
                                     />
                                 </div>
                             </div>
@@ -53,6 +136,9 @@ export default function Login() {
                                         type="password"
                                         placeholder="Password"
                                         className={styles.input}
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        required
                                     />
                                 </div>
                             </div>
@@ -67,15 +153,15 @@ export default function Login() {
                                 </Link>
                             </div>
 
-                            <button type="submit" className={styles.loginButton}>
-                                Log In
+                            <button type="submit" className={styles.loginButton} disabled={loading}>
+                                {loading ? 'Carregando...' : 'Log In'}
                             </button>
                         </form>
 
                         <div className={styles.signupSection}>
                             <p className={styles.signupText}>
                                 Don&apos;t have an account?
-                                <Link href="/signup" className={styles.signupLink}> Sign Up</Link>
+                                <Link href="/sign" className={styles.signupLink}> Sign Up</Link>
                             </p>
                         </div>
 
@@ -84,10 +170,10 @@ export default function Login() {
                         </div>
 
                         <div className={styles.socialLogin}>
-                            <button className={styles.socialButton}>
+                            <button className={styles.socialButton} type="button">
                                 <Image src="/images/google-icon.png" alt="Google" className={styles.socialIcon} width={24} height={24} />
                             </button>
-                            <button className={styles.socialButton}>
+                            <button className={styles.socialButton} type="button">
                                 <Image src="/images/apple-icon.png" alt="Apple" className={styles.socialIcon} width={24} height={24} />
                             </button>
                         </div>

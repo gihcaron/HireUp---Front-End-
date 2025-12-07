@@ -1,12 +1,14 @@
 import React from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './EmpresaCultura.module.css';
 
-const EmpresaCultura = () => {
+const EmpresaCultura = ({company_mission, company_vision, company_values, address, jobTitle }) => {
   const router = useRouter();
 
   const handleCandidateClick = () => {
-    router.push('/candidaturas/candidatura');
+    const cargo = jobTitle || 'Vaga de Emprego';
+    router.push(`/candidaturas/candidatura?cargo=${encodeURIComponent(cargo)}`);
   };
 
   return (
@@ -15,54 +17,53 @@ const EmpresaCultura = () => {
         <h2 className={styles.sectionTitle}>🏢 Empresa e Cultura</h2>
         
         <div className={styles.contentGrid}>
-          {/* Cards de Missão, Visão e Valores */}
+
           <div className={styles.cardsContainer}>
             <div className={styles.card}>
               <div className={styles.cardIcon}>
                 <div className={styles.iconCircle} style={{backgroundColor: '#4ECDC4'}}>
-                  <span className={styles.iconText}>⭐</span>
+                  <Image src="/images/estrela.png" alt="Estrela" width={24} height={24} className={styles.iconImage} />
                 </div>
               </div>
               <h3 className={styles.cardTitle}>MISSÃO</h3>
               <p className={styles.cardDescription}>
-                Nossa missão é produzir soluções com qualidade e eficiência, valorizando nossos colaboradores e promovendo um ambiente seguro e inovador.
+               {company_mission}
               </p>
             </div>
 
             <div className={styles.card}>
               <div className={styles.cardIcon}>
                 <div className={styles.iconCircle} style={{backgroundColor: '#4A90E2'}}>
-                  <span className={styles.iconText}>👁️</span>
+                  <Image src="/images/olho.png" alt="Olho" width={24} height={24} className={styles.iconImage} />
                 </div>
               </div>
               <h3 className={styles.cardTitle}>VISÃO</h3>
               <p className={styles.cardDescription}>
-                Ser referência no setor, oferecendo produtos confiáveis e contribuindo para o crescimento da indústria brasileira.
+                {company_vision}
               </p>
             </div>
 
             <div className={styles.card}>
               <div className={styles.cardIcon}>
                 <div className={styles.iconCircle} style={{backgroundColor: '#0052CC'}}>
-                  <span className={styles.iconText}>❤️</span>
+                  <Image src="/images/like.png" alt="Like" width={24} height={24} className={styles.iconImage} />
                 </div>
               </div>
               <h3 className={styles.cardTitle}>VALORES</h3>
               <p className={styles.cardDescription}>
-                • Respeito e ética<br/>
-                • Qualidade acima de tudo<br/>
-                • Trabalho em equipe<br/>
-                • Inovação contínua
+                {company_values}
               </p>
             </div>
           </div>
 
-          {/* Área do Mapa e Texto */}
           <div className={styles.mapSection}>
             <div className={styles.textArea}>
               <h4 className={styles.locationTitle}>📍 Localização</h4>
               <p className={styles.companyDescription}>
                 Estamos localizados em uma região de fácil acesso, próxima a linhas de transporte e com estrutura adequada para proporcionar um ambiente de trabalho seguro e confortável.
+              </p>
+              <p className={styles.companyDescription}>
+               {address}
               </p>
             </div>
             
@@ -83,7 +84,7 @@ const EmpresaCultura = () => {
 
         <div className={styles.buttonContainer}>
           <p className={styles.callToAction}>
-            🎯 Interessado na vaga? Clique em "Candidatar-se" e envie seu currículo!
+             Interessado na vaga? Clique em "Candidatar-se" e envie seu currículo!
           </p>
           <button 
             className={styles.candidateButton}

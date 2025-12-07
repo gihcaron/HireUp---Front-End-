@@ -38,8 +38,7 @@ export default function Header() {
               <nav className={styles.navigation}>
                 <ul className={styles.list}>
                   <li className={styles.item}><Link href="/home">Home</Link></li>
-                  <li className={styles.item}><Link href="/profissionais">Vagas</Link></li>
-                  <li className={styles.item}><Link href="/entrevistas">Entrevistas</Link></li>
+                  <li className={styles.item}><Link href="/vagas">Vagas</Link></li>
                   <li className={styles.item}><Link href="/candidaturas">Candidaturas</Link></li>
                   <li className={styles.item}><Link href="/perfil">Perfil</Link></li>
                   <li className={styles.sobreNos}>
@@ -60,6 +59,11 @@ export default function Header() {
               </button>
             )}
 
+            {/* Overlay */}
+            {isMobile && isMenuOpen && (
+              <div className={styles.overlay} onClick={closeMenu}></div>
+            )}
+
             {/* Menu Mobile */}
             {isMobile && (
               <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.open : ""}`}>
@@ -70,23 +74,42 @@ export default function Header() {
                 >
                   ×
                 </button>
-                <nav>
-                  <ul>
-                    <li>
-                      <Link href="/home" onClick={closeMenu}>Home</Link>
+                
+                {/* Perfil do usuário */}
+                <div className={styles.userProfile}>
+                  <div className={styles.userAvatar}>
+                    <Image
+                      src="/images/users/Sarah-Carvalho.jpg"
+                      alt="Avatar"
+                      width={40}
+                      height={40}
+                      className={styles.avatarImage}
+                    />
+                  </div>
+                  <div className={styles.userInfo}>
+                    <h3 className={styles.userName}>Giovanna Caron</h3>
+                    <p className={styles.userRole}>Administrador</p>
+                  </div>
+                </div>
+
+                <nav className={styles.menuNav}>
+                  <ul className={styles.menuList}>
+                    <li className={styles.menuSection}>
+                      <span className={styles.sectionTitle}>Acompanhar Triagem</span>
                     </li>
-                    <li>
-                      <Link href="/profissionais" onClick={closeMenu}>Vagas</Link>
+                    <li className={styles.menuItem}>
+                      <Link href="/gestao" onClick={closeMenu}>
+                        Gestão de Vagas
+                      </Link>
                     </li>
-                    <li>
-                      <Link href="/entrevistas" onClick={closeMenu}>Entrevistas</Link>
+                    <li className={styles.menuItem}>
+                      <Link href="/publicar" onClick={closeMenu}>
+                        Publicar Nova Vaga
+                      </Link>
                     </li>
-                    <li>
-                      <Link href="/candidaturas" onClick={closeMenu}>Candidaturas</Link>
-                    </li>
-                    <li className={styles.contato}>
-                      <Link href="/contato" className={styles.sobreTitle} onClick={closeMenu}>
-                        Nos Contate
+                    <li className={styles.menuItem}>
+                      <Link href="/" onClick={closeMenu}>
+                        Sair
                       </Link>
                     </li>
                   </ul>
