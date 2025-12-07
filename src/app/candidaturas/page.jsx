@@ -4,7 +4,7 @@ import styles from './triagem.module.css';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
+// import axios from 'axios'; // Removido temporariamente até configurar backend
 import Sidebar from '@/Components/Sidebar';
 
 export default function TriagemPage() {
@@ -28,25 +28,60 @@ export default function TriagemPage() {
       try {
         setLoading(true);
         
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
-        console.log('Buscando candidatos de:', `${apiUrl}/candidates`);
+        // Mock de dados para candidaturas
+        const mockCandidates = [
+          {
+            id: 1,
+            nome: "João Silva",
+            email: "joao@email.com",
+            status: "Triagem",
+            vaga: "Auxiliar de Produção",
+            data: new Date().toISOString()
+          },
+          {
+            id: 2,
+            nome: "Maria Santos",
+            email: "maria@email.com",
+            status: "Entrevista",
+            vaga: "Desenvolvedor Frontend",
+            data: new Date().toISOString()
+          },
+          {
+            id: 3,
+            nome: "Pedro Costa",
+            email: "pedro@email.com",
+            status: "Aprovado",
+            vaga: "Estágio em Marketing",
+            data: new Date().toISOString()
+          },
+          {
+            id: 4,
+            nome: "Ana Oliveira",
+            email: "ana@email.com",
+            status: "Rejeitado",
+            vaga: "Analista de RH",
+            data: new Date().toISOString()
+          }
+        ];
         
-        const response = await axios.get(`${apiUrl}/candidates`);
-        console.log('Candidatos recebidos:', response.data);
+        console.log('Candidatos mockados:', mockCandidates);
         
-        const data = response.data;
+        // Simular delay
+        setTimeout(() => {
+          const data = mockCandidates;
       
-        const organizados = {
-          triagem: data.filter(c => c.status === 'Triagem'),
-          entrevista: data.filter(c => c.status === 'Entrevista'),
-          proposta: data.filter(c => c.status === 'Aprovado' || c.status === 'Proposta')
-        };
-        
-        console.log('Candidatos organizados:', organizados);
-        
-        setCandidatos(organizados);
-        setCandidatosOriginais(organizados);
-        setLoading(false);
+          const organizados = {
+            triagem: data.filter(c => c.status === 'Triagem'),
+            entrevista: data.filter(c => c.status === 'Entrevista'),
+            proposta: data.filter(c => c.status === 'Aprovado' || c.status === 'Proposta')
+          };
+          
+          console.log('Candidatos organizados:', organizados);
+          
+          setCandidatos(organizados);
+          setCandidatosOriginais(organizados);
+          setLoading(false);
+        }, 1000);
       } catch (error) {
         console.error('Erro ao buscar candidatos:', error);
         setError(`Erro ao carregar candidatos: ${error.message}`);

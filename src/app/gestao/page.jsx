@@ -2,32 +2,66 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import axios from "axios";
+// import axios from "axios"; // Removido temporariamente até configurar backend
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Pagination } from "antd";
 import JobManagementCard from "@/Components/JobManagementCard";
+import Sidebar from "@/Components/Sidebar";
 import styles from "./gestao.module.css";
 
 export default function GestaoVagas() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(6);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
-
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const { data } = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/jobs`
-        );
-        setJobs(data);
-        setLoading(false);
+        // Mock de dados para gestão de vagas
+        const mockJobs = [
+          {
+            id: 1,
+            title: "Auxiliar de Produção",
+            company: "Empresa ABC",
+            type: "clt",
+            salary: "R$ 2.500,00",
+            location: "São Paulo, SP",
+            status: "ativa",
+            applicants: 15,
+            createdAt: new Date().toISOString()
+          },
+          {
+            id: 2,
+            title: "Desenvolvedor Frontend",
+            company: "Tech Solutions",
+            type: "clt",
+            salary: "R$ 4.500,00",
+            location: "São Paulo, SP",
+            status: "ativa",
+            applicants: 8,
+            createdAt: new Date().toISOString()
+          },
+          {
+            id: 3,
+            title: "Estágio em Marketing",
+            company: "Marketing Pro",
+            type: "estagio",
+            salary: "R$ 1.200,00",
+            location: "Rio de Janeiro, RJ",
+            status: "pausada",
+            applicants: 23,
+            createdAt: new Date().toISOString()
+          }
+        ];
+        
+        // Simular delay de API
+        setTimeout(() => {
+          setJobs(mockJobs);
+          setLoading(false);
+        }, 500);
       } catch (err) {
         console.error("Erro ao buscar oportunidades de trabalho", err);
         toast.error("Erro ao buscar oportunidades de trabalho");
@@ -55,65 +89,10 @@ export default function GestaoVagas() {
   };
 
   return (
-    <main className={styles.page}>
-      <button 
-        className={styles.hamburgerButton}
-        onClick={toggleMenu}
-        aria-label="Abrir menu"
-      >
-        <span className={styles.hamburgerLine}></span>
-        <span className={styles.hamburgerLine}></span>
-        <span className={styles.hamburgerLine}></span>
-      </button>
-
-      {isMenuOpen && (
-        <div className={styles.overlay} onClick={closeMenu}></div>
-      )}
-
-      <div className={`${styles.sidebar} ${isMenuOpen ? styles.open : ""}`}>
-
-        <div className={styles.userProfile}>
-          <div className={styles.userAvatar}>
-            <Image
-              src="/images/users/Sarah-Carvalho.jpg"
-              alt="Avatar"
-              width={50}
-              height={50}
-              className={styles.avatarImage}
-            />
-          </div>
-          <div className={styles.userInfo}>
-            <h3 className={styles.userName}>Giovanna Caron</h3>
-            <p className={styles.userRole}>Administrador</p>
-          </div>
-        </div>
-
-        <nav className={styles.navigation}>
-          <div className={styles.menuSection}>
-            <span className={styles.sectionTitle}>Acompanhar Triagem</span>
-          </div>
-          
-          <ul className={styles.menuList}>
-            <li className={styles.menuItem}>
-              <Link href="/gestao" onClick={closeMenu} className={styles.menuLink}>
-                Gestão de Vagas
-              </Link>
-            </li>
-            <li className={styles.menuItem}>
-              <Link href="/publicar" onClick={closeMenu} className={styles.menuLink}>
-                Publicar Nova Vaga
-              </Link>
-            </li>
-            <li className={styles.menuItem}>
-              <Link href="/" onClick={closeMenu} className={styles.menuLink}>
-                Sair
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-
-      <div className={styles.content}>
+    <div className={styles.layout}>
+      <Sidebar activeMenu="gestao" />
+      
+      <main className={styles.content}>
         <div className={styles.header}>
           <div className={styles.heroImage}>
             <Image
@@ -231,8 +210,8 @@ export default function GestaoVagas() {
           </div>
         )}
 
-          </div>
-      <ToastContainer />
-    </main>
+        <ToastContainer />
+      </main>
+    </div>
   );
 }

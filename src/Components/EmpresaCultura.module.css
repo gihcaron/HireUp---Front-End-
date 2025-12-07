@@ -19,10 +19,9 @@
 }
 
 .contentGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 /* Melhor controle do tamanho das imagens em telas menores */
@@ -32,9 +31,9 @@
 }
 
 .cardsContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
 }
 
 .card {
@@ -98,8 +97,7 @@
 .mapSection {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  height: 100%;
+  gap: 25px;
 }
 
 .textArea {
@@ -123,8 +121,7 @@
 
 .mapContainer {
   position: relative;
-  flex: 1;
-  min-height: 300px;
+  height: 200px;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -187,9 +184,13 @@
     padding: 40px 15px;
   }
   
-  .contentGrid {
+  .cardsContainer {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 20px;
+  }
+  
+  .mapSection {
+    gap: 20px;
   }
   
   .sectionTitle {
@@ -215,7 +216,7 @@
   }
   
   .mapContainer {
-    min-height: 250px;
+    height: 200px;
   }
   
   .cardsContainer {
