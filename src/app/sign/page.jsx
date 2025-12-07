@@ -87,33 +87,6 @@ export default function Signup() {
                         <h1 className={styles.welcomeTitle}>Create Your Account</h1>
                         <p className={styles.welcomeSubtitle}>Sign up to get started</p>
 
-                        <div className={styles.userTypeSelector}>
-                            <button
-                                type="button"
-                                className={`${styles.userTypeButton} ${userType === 'candidato' ? styles.active : ''}`}
-                                onClick={() => setUserType('candidato')}
-                            >
-                                <svg className={styles.userTypeIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="12" cy="7" r="4"></circle>
-                                </svg>
-                                Candidato
-                            </button>
-                            <button
-                                type="button"
-                                className={`${styles.userTypeButton} ${userType === 'recrutador' ? styles.active : ''}`}
-                                onClick={() => setUserType('recrutador')}
-                            >
-                                <svg className={styles.userTypeIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="9" cy="7" r="4"></circle>
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                </svg>
-                                Recrutador
-                            </button>
-                        </div>
-
                         {error && <p className={styles.errorMessage}>{error}</p>}
                         {success && <p className={styles.successMessage}>{success}</p>}
 
