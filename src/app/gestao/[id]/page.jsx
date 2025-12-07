@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import axios from "axios";
@@ -8,204 +7,281 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Pagination } from "antd";
 import styles from "./styles.module.css";
+import { FaMapMarkerAlt, FaDollarSign, FaBriefcase, FaUsers, FaArrowLeft } from "react-icons/fa";
+import Sidebar from "@/Components/Sidebar";
+
 export default function GestaoVagas() {
     const params = useParams();
     const id = params?.id;
 
-    const [vaga, setVaga] = useState(null);
-    const [candidatos, setCandidatos] = useState([]);
-    const [loading, setLoading] = useState(false);
-
+    const [job, setJob] = useState(null);
+    const [applications, setApplications] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
     const pageSize = 6;
 
-    const normalizeJob = (data) => {
-        if (!data) return null;
-        return {
-            id: data.id,
-            title: data.title || data.titulo,
-            description: data.description || data.descricao,
-            company: data.company || data.empresa,
-            city: data.city || data.cidade || data.city,
-            type: data.type || data.tipo,
-            salary: data.salary ?? data.salario,
-            status: data.status,
-            salaryDescription: data.salary_description || data.salaryDescription,
-            summary: data.summary,
-            responsibilities: data.responsibilities || data.responsabilidades,
-            requirements: data.requirements || data.requisitos,
-            companyMission: data.company_mission,
-            companyVision: data.company_vision,
-            companyValues: data.company_values,
-            address: data.address,
-            companyDescription: Array.isArray(data.company_description) ? data.company_description.join("\n\n") : data.company_description,
-            companyOverview: Array.isArray(data.company_overview) ? data.company_overview.join("\n\n") : data.company_overview,
-            logoUrl: data.company_logo || data.logoUrl || data.logo || data.avatar_url || null,
-        };
-    };
-
-    const normalizeCandidates = (arr) => {
-        if (!Array.isArray(arr)) return [];
-        return arr.map((item) => {
-            // se for um registro de application que embute candidate
-            const cand = item.candidate || item.candidates || item;
-            const id = cand.id ?? item.candidate_id ?? item.id;
-            const nome = cand.name || cand.nome || cand.full_name || "";
-            const email = cand.email || "";
-            const avatarUrl = cand.avatar_url || cand.avatarUrl || cand.avatar || null;
-            // possível URL para currículo
-            const curriculoUrl = cand.curriculo_url || cand.cv || cand.resume_url || null;
-            const applicationStatus = item.status || cand.status || null;
-            return {
-                id,
-                nome,
-                email,
-                avatarUrl,
-                curriculoUrl,
-                applicationStatus,
-            };
-        });
-    };
-
     useEffect(() => {
-        if (!id) return;
-
-        const fetchData = async () => {
+        const fetchJobAndCandidates = async () => {
             try {
                 setLoading(true);
+                // Buscar detalhes da vaga
+                const { data: jobData } = await axios.get(
+                    `${process.env.NEXT_PUBLIC_API_URL}/jobs/${id}`
+                );
+                setJob(jobData);
 
-                const vagaRes = await axios.get(`/api/jobs/${id}`);
-                setVaga(normalizeJob(vagaRes.data));
+                // Buscar candidatos da vaga
+                const { data: appData } = await axios.get(
+                    `${process.env.NEXT_PUBLIC_API_URL}/applications?job_id=${id}`
+                );
 
-                let candRes;
-                try {
-                    candRes = await axios.get(`/api/jobs/${id}/applications`);
-                } catch (e) {
-                    try {
-                        candRes = await axios.get(`/api/jobs/${id}/candidates`);
-                    } catch (err) {
-                        candRes = { data: [] };
-                    }
-                }
+                console.log("Applications recebidas:", appData);
 
-                setCandidatos(normalizeCandidates(candRes.data));
-            } catch (err) {
-                console.error(err);
-                toast.error("Erro ao carregar detalhes da vaga.");
+               
+                const filteredApplications = appData.filter(app => app.job_title === jobData.title);
+                console.log("Applications filtradas para esta vaga:", filteredApplications);
+
+                setApplications(filteredApplications || []);
+            } catch (error) {
+                console.error("Erro ao buscar detalhes:", error);
+                toast.error("Erro ao carregar dados");
             } finally {
                 setLoading(false);
             }
         };
-
-        fetchData();
+        if (id) fetchJobAndCandidates();
     }, [id]);
 
-    const onPageChange = (p) => {
-        setPage(p);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+
+    const visibleApplications = applications.slice(
+        (page - 1) * pageSize,
+        page * pageSize
+    );
+
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
     };
 
-    const start = (page - 1) * pageSize;
-    const visibleCandidatos = candidatos.slice(start, start + pageSize);
+    const handleUpdateStatus = async (appId, newStatus) => {
+        try {
+            await axios.patch(
+                `${process.env.NEXT_PUBLIC_API_URL}/applications/${appId}`,
+                { status: newStatus }
+            );
+            setApplications(
+                applications.map((app) =>
+                    app.id === appId ? { ...app, status: newStatus } : app
+                )
+            );
+            toast.success("Status atualizado!");
+        } catch (error) {
+            console.error("Erro ao atualizar status:", error);
+            toast.error("Erro ao atualizar status");
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className={styles.loadingContainer}>
+                <p>Carregando detalhes da vaga...</p>
+            </div>
+        );
+    }
+
+    if (!job) {
+        return (
+            <div className={styles.errorContainer}>
+                <p>Vaga não encontrada</p>
+                <Link href="/gestao" className={styles.backLink}>
+                    <FaArrowLeft /> Voltar à Gestão
+                </Link>
+            </div>
+        );
+    }
+
+    const statusColors = {
+        APPLIED: "#3b82f6",
+        INTERVIEW: "#f59e0b",
+        HIRED: "#10b981",
+        REJECTED: "#ef4444",
+    };
+
 
     return (
-        <div className={styles.container}>
+        <main className={styles.container}>
             <ToastContainer />
-            <div className={styles.header}>
-                <Link href="/gestao" className={styles.back}>
-                    ← Voltar à gestão
-                </Link>
-                <h1>Detalhes da Vaga</h1>
-            </div>
 
-            {loading && <p>Carregando...</p>}
-
-            {!loading && vaga && (
-                <section className={styles.vagaCard}>
-                    <div className={styles.top}>
-                        {vaga.logoUrl ? (
-                            <Image
-                                src={vaga.logoUrl}
-                                alt={vaga.company || "Logo"}
-                                width={80}
-                                height={80}
-                            />
-                        ) : (
-                            <div className={styles.logoFallback}>{(vaga.company && vaga.company[0]) || "V"}</div>
-                        )}
-                        <div className={styles.info}>
-                            <h2>{vaga.title}</h2>
-                            <p className={styles.meta}>
-                                {vaga.company} • {vaga.city} • {vaga.type || "—"}
-                            </p>
-                            {vaga.salary !== undefined && vaga.salary !== null && (
-                                <p className={styles.salario}>Salário: {vaga.salary}</p>
-                            )}
-                            <p className={styles.descricao}>{vaga.description}</p>
+            {/* Main Content */}
+            <div className={styles.mainContent}>
+                {/* Seção de Informações da Vaga */}
+                <div className={styles.jobHeader}>
+                    <div className={styles.jobHeaderContent}>
+                        <h1 className={styles.jobTitle}>{job.title}</h1>
+                        <p className={styles.company}>{job.company}</p>
+                        <div className={styles.metaInfo}>
+                            <span className={styles.metaBadge}>
+                                <FaBriefcase /> {job.type}
+                            </span>
+                            <span className={styles.metaBadge}>
+                                <FaMapMarkerAlt /> {job.city}
+                            </span>
+                            <span className={styles.metaBadge}>
+                                <FaDollarSign /> R$ {job.salary?.toLocaleString("pt-BR") || "A Definir"}
+                            </span>
+                            <span
+                                className={styles.statusBadge}
+                                style={{
+                                    backgroundColor: job.status === "OPEN" ? "#10b981" : "#f59e0b",
+                                }}
+                            >
+                                {job.status === "OPEN" ? "Aberta" : "Entrevistando"}
+                            </span>
                         </div>
                     </div>
+                </div>
 
-                    <div className={styles.footer}>
-                        <span>Status: {vaga.status || "OPEN"}</span>
-                        <span>Candidatos inscritos: {candidatos.length}</span>
-                    </div>
-                </section>
-            )}
+                {/* Content Grid */}
+                <div className={styles.contentGrid}>
+                    {/* Coluna Esquerda - Detalhes da Vaga */}
+                    <article className={styles.jobDetails}>
+                        {/* Descrição */}
+                        <section className={styles.section}>
+                            <h2 className={styles.sectionTitle}>Sobre a Vaga</h2>
+                            <p className={styles.description}>{job.description}</p>
+                            {job.summary && <p className={styles.summary}>{job.summary}</p>}
+                        </section>
 
-            {!loading && !vaga && <div className={styles.empty}>Vaga não encontrada.</div>}
+                        {/* Responsabilidades */}
+                        {job.responsibilities && job.responsibilities.length > 0 && (
+                            <section className={styles.section}>
+                                <h2 className={styles.sectionTitle}>Responsabilidades</h2>
+                                <ul className={styles.list}>
+                                    {job.responsibilities.map((resp, idx) => (
+                                        <li key={idx} className={styles.listItem}>
+                                            {resp}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </section>
+                        )}
 
-            <section className={styles.candidatosSection}>
-                <h3>Candidatos</h3>
+                        {/* Requisitos */}
+                        {job.requirements && job.requirements.length > 0 && (
+                            <section className={styles.section}>
+                                <h2 className={styles.sectionTitle}>Requisitos</h2>
+                                <ul className={styles.list}>
+                                    {job.requirements.map((req, idx) => (
+                                        <li key={idx} className={styles.listItem}>
+                                            {req}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </section>
+                        )}
 
-                {candidatos.length === 0 && <p>Nenhum candidato inscrito nesta vaga.</p>}
-
-                <ul className={styles.candidatosList}>
-                    {visibleCandidatos.map((cand) => (
-                        <li key={cand.id} className={styles.candidatoItem}>
-                            <div className={styles.candLeft}>
-                                {cand.avatarUrl ? (
-                                    <Image src={cand.avatarUrl} alt={cand.nome} width={56} height={56} />
-                                ) : (
-                                    <div className={styles.avatarFallback}>{cand.nome?.[0] || "C"}</div>
+                        {/* Sobre a Empresa */}
+                        {(job.company_mission || job.company_vision || job.company_values) && (
+                            <section className={styles.section}>
+                                <h2 className={styles.sectionTitle}>Sobre {job.company}</h2>
+                                {job.company_mission && (
+                                    <div className={styles.companyInfo}>
+                                        <h3>Missão</h3>
+                                        <p>{job.company_mission}</p>
+                                    </div>
                                 )}
-                                <div>
-                                    <strong>{cand.nome}</strong>
-                                    <div className={styles.email}>{cand.email}</div>
+                                {job.company_vision && (
+                                    <div className={styles.companyInfo}>
+                                        <h3>Visão</h3>
+                                        <p>{job.company_vision}</p>
+                                    </div>
+                                )}
+                                {job.company_values && (
+                                    <div className={styles.companyInfo}>
+                                        <h3>Valores</h3>
+                                        <p>{job.company_values}</p>
+                                    </div>
+                                )}
+                            </section>
+                        )}
+
+                        {/* Localização */}
+                        {job.address && (
+                            <section className={styles.section}>
+                                <h2 className={styles.sectionTitle}>Localização</h2>
+                                <p className={styles.address}>
+                                    <FaMapMarkerAlt /> {job.address}
+                                </p>
+                            </section>
+                        )}
+
+                        {/* Informações Salariais */}
+                        {job.salary_description && (
+                            <section className={styles.section}>
+                                <h2 className={styles.sectionTitle}>Detalhes Salariais</h2>
+                                <p>{job.salary_description}</p>
+                            </section>
+                        )}
+                    </article>
+
+                    {/* Coluna Direita - Candidatos */}
+                    <aside className={styles.sidebar}>
+                        <div className={styles.candidatesCard}>
+                            <h2 className={styles.cardTitle}>
+                                <FaUsers /> Candidatos ({applications.length})
+                            </h2>
+
+                            {applications.length === 0 ? (
+                                <p className={styles.emptyMessage}>Nenhum candidato ainda</p>
+                            ) : (
+                                <div className={styles.candidatesList}>
+                                    {visibleApplications.map((app) => {
+                                        return (
+                                            <div
+                                                key={app.id}
+                                                className={styles.candidateCard}
+                                            >
+                                                <div className={styles.candidateHeader}>
+                                                    <div className={styles.candidateInfo}>
+                                                        <h3 className={styles.candidateName}>
+                                                            {app?.candidate_name || "N/A"}
+                                                        </h3>
+                                                    </div>
+                                                    <span
+                                                        className={styles.statusBadgeSmall}
+                                                        style={{
+                                                            backgroundColor: statusColors[app.status] || "#6b7280",
+                                                        }}
+                                                    >
+                                                        {app.status === "APPLIED" && "Candidatura"}
+                                                        {app.status === "INTERVIEW" && "Entrevista"}
+                                                        {app.status === "HIRED" && "Contratado"}
+                                                        {app.status === "REJECTED" && "Rejeitado"}
+                                                        {!app.status && "N/A"}
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        );
+                                    })}
                                 </div>
-                            </div>
+                            )}
 
-                            <div className={styles.candRight}>
-                                {cand.curriculoUrl && (
-                                    <a
-                                        href={cand.curriculoUrl}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className={styles.cvLink}
-                                    >
-                                        Ver currículo
-                                    </a>
-                                )}
+                            {applications.length > pageSize && (
+                                <div className={styles.paginationContainer}>
+                                    <Pagination
+                                        current={page}
+                                        pageSize={pageSize}
+                                        total={applications.length}
+                                        onChange={handlePageChange}
+                                        showSizeChanger={false}
+                                    />
+                                </div>
+                            )}
+                        </div>
 
-                                <Link href={`/gestao/${id}/candidato/${cand.id}`} className={styles.verPerfil}>
-                                    Ver perfil
-                                </Link>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-
-                {candidatos.length > pageSize && (
-                    <div className={styles.pagination}>
-                        <Pagination
-                            current={page}
-                            pageSize={pageSize}
-                            total={candidatos.length}
-                            onChange={onPageChange}
-                            showSizeChanger={false}
-                        />
-                    </div>
-                )}
-            </section>
-        </div>
+                    </aside>
+                </div>
+            </div>
+        </main>
     );
 }
