@@ -7,6 +7,7 @@ import { Card, Pagination } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { FaLaptopCode, FaBullhorn, FaUsers, FaCogs } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 // Components
 import Header from "../../Components/Header";
@@ -16,6 +17,7 @@ import Testimonials from "../../Components/Testimonials";
 
 export default function Home() {
   const [search, setSearch] = useState("");
+  const router = useRouter();
 
 
   // Job opportunity
@@ -292,6 +294,13 @@ export default function Home() {
         className={styles.button}
         >
         Jovem Aprendiz
+        </button>
+
+        <button
+          onClick={() => router.push('/vagas')}
+          className={styles.button}
+        >
+          Ver todas as vagas
         </button>
 
         <button

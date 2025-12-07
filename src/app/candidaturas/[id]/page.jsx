@@ -4,13 +4,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useParams, useRouter } from 'next/navigation';
 import styles from '../candidaturas.module.css';
-import { verificarAcesso } from "@/src/lib/auth";
 
 export default function DetalhesCandidato() {
-  
-   useEffect(() => {
-    verificarAcessoClient(["recrutador"]);
-  }, []);
 
   const params = useParams();
   const router = useRouter();
