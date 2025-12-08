@@ -61,9 +61,19 @@ export default function Login() {
                     </div>
 
                     <div className={styles.videoPlaceholder}>
-                        <div className={styles.videoContent}>
-                            <p>Video placeholder - Conectando talentos, criando oportunidades</p>
-                        </div>
+                        <video 
+                            className={styles.videoContent}
+                            autoPlay 
+                            loop 
+                            muted
+                            playsInline
+                            controls
+                            style={{ width: '100%', maxWidth: '500px', borderRadius: '20px' }}
+                        >
+                            <source src="/images/Vídeo.mov" type="video/mp4" />
+                            <source src="/images/Vídeo.mov" type="video/quicktime" />
+                            Seu navegador não suporta a tag de vídeo.
+                        </video>
                     </div>
                 </div>
             </div>
