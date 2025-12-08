@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./styles.module.css";
-import axios from "axios"; 
+import axios from "axios";
 import { Pagination, Spin, Empty, Select } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
@@ -32,50 +32,10 @@ export default function Vagas() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        // Mock de dados para página de vagas
-        const mockJobs = [
-          {
-            id: 1,
-            title: "Auxiliar de Produção",
-            company: "Empresa ABC",
-            type: "clt",
-            salary: "R$ 2.500,00",
-            location: "São Paulo, SP",
-            description: "Oportunidade para auxiliar de produção..."
-          },
-          {
-            id: 2,
-            title: "Desenvolvedor Frontend",
-            company: "Tech Solutions",
-            type: "clt",
-            salary: "R$ 4.500,00",
-            location: "São Paulo, SP",
-            description: "Vaga para desenvolvedor frontend..."
-          },
-          {
-            id: 3,
-            title: "Estágio em Marketing",
-            company: "Marketing Pro",
-            type: "estagio",
-            salary: "R$ 1.200,00",
-            location: "Rio de Janeiro, RJ",
-            description: "Estágio em marketing digital..."
-          },
-          {
-            id: 4,
-            title: "Analista de RH",
-            company: "RH Solutions",
-            type: "clt",
-            salary: "R$ 3.200,00",
-            location: "Belo Horizonte, MG",
-            description: "Analista de recursos humanos..."
-          }
-        ];
-        
-        // Simular delay de API
-        setTimeout(() => {
-          setDataJobs({ jobs: mockJobs, loading: false, current: 1, pageSize: 6 });
-        }, 300);
+        const { data: jobs } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs`
+        );
+        setDataJobs({ jobs, loading: false, current: 1, pageSize: 6 });
       } catch (err) {
         console.error("Erro ao buscar oportunidades de trabalho", err);
         toast.error("Erro ao buscar oportunidades de trabalho");

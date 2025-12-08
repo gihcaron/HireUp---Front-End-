@@ -17,7 +17,7 @@ export default function LayoutWrapper({ children }) {
     const isPublicarPage = pathname === '/publicar';
 
     const hideHeader = isLoginPage || isSignPage || isEnviadoPage || isCandidaturasPage || isGestaoPage || isPublicarPage;
-    const hideFooter = isLoginPage || isSignPage || isEnviadoPage || isCandidaturasPage || isPublicarPage || isGestaoPage;
+    const hideFooter = isLoginPage || isSignPage || isEnviadoPage || isCandidaturasPage || isPublicarPage;
 
     return (
         <>
