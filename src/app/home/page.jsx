@@ -2,12 +2,11 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./styles.module.css";
-// import axios from "axios"; // Removido temporariamente até configurar backend
+import axios from "axios";
 import { Card, Pagination } from "antd";
 import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { FaLaptopCode, FaBullhorn, FaUsers, FaCogs } from "react-icons/fa";
-import { useRouter } from "next/navigation";
 
 // Components
 import Header from "../../Components/Header";
@@ -17,7 +16,6 @@ import Testimonials from "../../Components/Testimonials";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const router = useRouter();
 
 
   // Job opportunity
@@ -32,41 +30,13 @@ export default function Home() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        // Mock de dados temporário até configurar o backend
-        const mockJobs = [
-          {
-            id: 1,
-            title: "Auxiliar de Produção",
-            company: "Empresa ABC",
-            type: "clt",
-            salary: "R$ 2.500,00",
-            location: "São Paulo, SP"
-          },
-          {
-            id: 2,
-            title: "Desenvolvedor Frontend",
-            company: "Tech Solutions",
-            type: "clt",
-            salary: "R$ 4.500,00",
-            location: "São Paulo, SP"
-          },
-          {
-            id: 3,
-            title: "Estágio em Marketing",
-            company: "Marketing Pro",
-            type: "estagio",
-            salary: "R$ 1.200,00",
-            location: "Rio de Janeiro, RJ"
-          }
-        ];
-        
-        // Simular delay de API
-        setTimeout(() => {
-          setDataJobs({ jobs: mockJobs, loading: false, current: 1, pageSize: 6 });
-        }, 500);
+        const { data: jobs } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs`
+        );
+        setDataJobs({ jobs, loading: false, current: 1, pageSize: 6 });
       } catch (err) {
-        console.error("Erro ao buscar oportunidades de trabalho", err);
-        toast.error("Erro ao buscar oportunidades de trabalho");
+        console.error("Erro ao buscar oportunidades de tabalho", err);
+        toast.error("Erro ao buscar oportunidades de tabalho");
         setDataJobs((d) => ({ ...d, loading: false }));
       }
     };
@@ -86,43 +56,14 @@ export default function Home() {
     const title = search.trim();
     if (title) {
       try {
-        // Filtrar jobs mockados por título
-        const allJobs = [
-          {
-            id: 1,
-            title: "Auxiliar de Produção",
-            company: "Empresa ABC",
-            type: "clt",
-            salary: "R$ 2.500,00",
-            location: "São Paulo, SP"
-          },
-          {
-            id: 2,
-            title: "Desenvolvedor Frontend",
-            company: "Tech Solutions",
-            type: "clt",
-            salary: "R$ 4.500,00",
-            location: "São Paulo, SP"
-          },
-          {
-            id: 3,
-            title: "Estágio em Marketing",
-            company: "Marketing Pro",
-            type: "estagio",
-            salary: "R$ 1.200,00",
-            location: "Rio de Janeiro, RJ"
-          }
-        ];
-        
-        const filteredJobs = allJobs.filter(job => 
-          job.title.toLowerCase().includes(title.toLowerCase())
+        const { data: jobs } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs?title=${title}`
         );
-        
-        setDataJobs({ jobs: filteredJobs, loading: false, current: 1, pageSize: 4 });
+        setDataJobs({ jobs, loading: false, current: 1, pageSize: 4 });
       } catch (error) {
         console.error("Erro ao buscar jobs:", error);
         toast.error("Erro ao buscar jobs");
-        setDataJobs((d) => ({ ...d, loading: false }));
+        setData((d) => ({ ...d, loading: false }));
       }
     }
   };
@@ -130,37 +71,10 @@ export default function Home() {
   const handleFilter = async (type) => {
     if (type) {
       try {
-        // Filtrar jobs mockados por tipo
-        const allJobs = [
-          {
-            id: 1,
-            title: "Auxiliar de Produção",
-            company: "Empresa ABC",
-            type: "clt",
-            salary: "R$ 2.500,00",
-            location: "São Paulo, SP"
-          },
-          {
-            id: 2,
-            title: "Desenvolvedor Frontend",
-            company: "Tech Solutions",
-            type: "clt",
-            salary: "R$ 4.500,00",
-            location: "São Paulo, SP"
-          },
-          {
-            id: 3,
-            title: "Estágio em Marketing",
-            company: "Marketing Pro",
-            type: "estagio",
-            salary: "R$ 1.200,00",
-            location: "Rio de Janeiro, RJ"
-          }
-        ];
-        
-        const filteredJobs = allJobs.filter(job => job.type === type);
-        
-        setDataJobs({ jobs: filteredJobs, loading: false, current: 1, pageSize: 4 });
+        const { data: jobs } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs?type=${type}`
+        );
+        setDataJobs({ jobs, loading: false, current: 1, pageSize: 4 });
       } catch (error) {
         console.error("Erro ao buscar jobs:", error);
         toast.error("Erro ao buscar jobs");
@@ -378,13 +292,6 @@ export default function Home() {
         className={styles.button}
         >
         Jovem Aprendiz
-        </button>
-
-        <button
-          onClick={() => router.push('/vagas')}
-          className={styles.button}
-        >
-          Ver todas as vagas
         </button>
 
         <button

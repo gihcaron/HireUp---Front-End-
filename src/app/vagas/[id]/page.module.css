@@ -40,14 +40,9 @@
 
 .lead {
   color: #374151;
-<<<<<<< HEAD:src/app/detalhes/page.module.css
-  line-height: 1.6;
-  text-align: justify;
-=======
   width: 100%;
   text-align: justify;
   line-height: 1.6;
->>>>>>> 4732228f68bdc6881ef055961d30c7ef43ab65b3:src/app/vagas/[id]/page.module.css
 }
 
 .salaryCard {
