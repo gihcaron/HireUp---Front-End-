@@ -39,7 +39,7 @@ export default function Login() {
                 localStorage.setItem('userType', userType); 
                 localStorage.getItem("userId")
 
-                router.push('/home') 
+                router.push('/gestao') 
             } else {
                 setError(data.message || 'Email ou senha incorretos.');
             }
@@ -73,33 +73,6 @@ export default function Login() {
                     <div className={styles.loginForm}>
                         <h1 className={styles.welcomeTitle}>Welcome Back!</h1>
                         <p className={styles.welcomeSubtitle}>Log in to your account</p>
-
-                        <div className={styles.userTypeSelector}>
-                            <button
-                                type="button"
-                                className={`${styles.userTypeButton} ${userType === 'candidato' ? styles.active : ''}`}
-                                onClick={() => setUserType('candidato')}
-                            >
-                                <svg className={styles.userTypeIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="12" cy="7" r="4"></circle>
-                                </svg>
-                                Candidato
-                            </button>
-                            <button
-                                type="button"
-                                className={`${styles.userTypeButton} ${userType === 'recrutador' ? styles.active : ''}`}
-                                onClick={() => setUserType('recrutador')}
-                            >
-                                <svg className={styles.userTypeIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="9" cy="7" r="4"></circle>
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                </svg>
-                                Recrutador
-                            </button>
-                        </div>
 
                         {error && (
                             <div style={{ color: 'red', textAlign: 'center', marginBottom: '1rem', padding: '10px', backgroundColor: '#ffe6e6', borderRadius: '5px' }}>
