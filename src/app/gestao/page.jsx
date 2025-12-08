@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
-// import axios from "axios"; // Removido temporariamente até configurar backend
+import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Pagination } from "antd";
@@ -20,48 +19,11 @@ export default function GestaoVagas() {
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        // Mock de dados para gestão de vagas
-        const mockJobs = [
-          {
-            id: 1,
-            title: "Auxiliar de Produção",
-            company: "Empresa ABC",
-            type: "clt",
-            salary: "R$ 2.500,00",
-            location: "São Paulo, SP",
-            status: "ativa",
-            applicants: 15,
-            createdAt: new Date().toISOString()
-          },
-          {
-            id: 2,
-            title: "Desenvolvedor Frontend",
-            company: "Tech Solutions",
-            type: "clt",
-            salary: "R$ 4.500,00",
-            location: "São Paulo, SP",
-            status: "ativa",
-            applicants: 8,
-            createdAt: new Date().toISOString()
-          },
-          {
-            id: 3,
-            title: "Estágio em Marketing",
-            company: "Marketing Pro",
-            type: "estagio",
-            salary: "R$ 1.200,00",
-            location: "Rio de Janeiro, RJ",
-            status: "pausada",
-            applicants: 23,
-            createdAt: new Date().toISOString()
-          }
-        ];
-        
-        // Simular delay de API
-        setTimeout(() => {
-          setJobs(mockJobs);
-          setLoading(false);
-        }, 500);
+        const { data } = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/jobs`
+        );
+        setJobs(data);
+        setLoading(false);
       } catch (err) {
         console.error("Erro ao buscar oportunidades de trabalho", err);
         toast.error("Erro ao buscar oportunidades de trabalho");

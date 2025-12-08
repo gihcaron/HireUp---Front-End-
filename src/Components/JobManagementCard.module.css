@@ -5,11 +5,23 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 140px;
 }
 
 .jobCard:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.jobContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .jobHeader {
@@ -40,10 +52,9 @@
 
 .jobDetails {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .jobSalary {
@@ -68,6 +79,7 @@
 @media (max-width: 768px) {
   .jobCard {
     padding: 16px;
+    min-height: 120px;
   }
 
   .jobTitle {
@@ -75,17 +87,17 @@
   }
 
   .jobHeader {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .jobDepartment {
-    align-self: flex-start;
+    margin-bottom: 12px;
   }
 
   .jobDetails {
-    flex-direction: column;
-    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .editButton {
+    padding: 6px 12px;
+    font-size: 0.85rem;
   }
 }
 
@@ -101,6 +113,8 @@
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-block;
+  align-self: flex-end;
+  margin-top: auto;
 }
 
 .editButton:hover {
